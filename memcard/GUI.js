@@ -10,14 +10,14 @@ class GUI{
 		col.innerText = `registered digimon no. ${index}`
 		table.appendChild(row);
 		row.appendChild(col);
-		table.appendChild(this.getDigiStatsRow("name", digi.name));
-		table.appendChild(this.getDigiStatsRow("id", digimonStats[digi.id].name));
-		table.appendChild(this.getDigiStatsRow("hp", digi.hp));
-		table.appendChild(this.getDigiStatsRow("mp", digi.mp));
-		table.appendChild(this.getDigiStatsRow("off", digi.off));
-		table.appendChild(this.getDigiStatsRow("def", digi.def));
-		table.appendChild(this.getDigiStatsRow("spd", digi.spd));
-		table.appendChild(this.getDigiStatsRow("brn", digi.brn));
+		table.appendChild(this.getDigiStatsRow("Name", digi.name));
+		table.appendChild(this.getDigiStatsRow("Type", digimonStats[digi.id].name));
+		table.appendChild(this.getDigiStatsRow("HP", digi.hp));
+		table.appendChild(this.getDigiStatsRow("MP", digi.mp));
+		table.appendChild(this.getDigiStatsRow("Offense", digi.off));
+		table.appendChild(this.getDigiStatsRow("Defense", digi.def));
+		table.appendChild(this.getDigiStatsRow("Speed", digi.spd));
+		table.appendChild(this.getDigiStatsRow("Brains", digi.brn));
 		table.appendChild(this.getMoveStatRow(digi.move1Id , 1, digi.id));
 		table.appendChild(this.getMoveStatRow(digi.move2Id , 2, digi.id));
 		table.appendChild(this.getMoveStatRow(digi.move3Id , 3, digi.id));
@@ -30,7 +30,7 @@ class GUI{
 		}else{
 			name = digimonStats[digiId].moves[moveId-0x2E];
 		}
-		return this.getDigiStatsRow("move " + index, name);
+		return this.getDigiStatsRow(`Move ${index}`, name);
 	}
 	getDigiStatsRow(statName, value){
 		let row = document.createElement("TR");
