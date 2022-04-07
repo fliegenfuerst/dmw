@@ -53,7 +53,7 @@ class MemoryCardModel{
 				digi.brn = this.readShort(offset + 0xA);
 				digi.name = this.readString(offset + 0xE, 14);
 				digi.id = this.readByte(offset + 0x1C);
-				digi.move1Id = this.readByte(offset + 0x1D) & 0xFF;
+				digi.move1Id = this.readByte(offset + 0x1D);
 				digi.move2Id = this.readByte(offset + 0x1E);
 				digi.move3Id = this.readByte(offset + 0x1F);
 				digis.push(digi);
