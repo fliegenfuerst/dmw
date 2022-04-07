@@ -10,20 +10,20 @@ class MemoryCardModel{
 	}
 	readString(offset, length){
 		let name = "";
-    	let character;
-    	for(let i = -1; i < length; i += 2) {
-    		character = this.readByte(offset+i);
-    		if(character == 64) {
-    			name += " ";
-    		}else if(character != 0){
-    			if(character > 128) {
-        			name += String.fromCharCode(character - 32);
-    			}else {
-    				name += String.fromCharCode(character - 31);
-    			}
-    		}
-    	}
-    	return name;
+		let character;
+		for(let i = -1; i < length; i += 2) {
+			character = this.readByte(offset+i);
+			if(character == 64) {
+				name += " ";
+			}else if(character != 0){
+				if(character > 128) {
+					name += String.fromCharCode(character - 32);
+				}else {
+					name += String.fromCharCode(character - 31);
+				}
+			}
+		}
+		return name;
 	}
 	calculateChecksum(){
 		let checksum = 0;
