@@ -5,13 +5,10 @@
 <body>
 <input type="file" onchange="readFile(this)">
 <div id="container"></div>
-
-<script type="text/javascript" src="data.js"></script>
 <script type="text/javascript" src="digimonStats.js"></script>
 <script type="text/javascript" src="GUI.js"></script>
 <script type="text/javascript" src="MemoryCardModel.js"></script>
 <script>
-
 const gui = new GUI();
 
 function readFile(input) {
@@ -19,8 +16,8 @@ function readFile(input) {
 	let reader = new FileReader();
 	reader.readAsArrayBuffer(file);
 	reader.onload = function() {
-		let memcardModel2 = new MemoryCardModel(reader.result);
-		let digis = memcardModel2.getRegisteredDigimonData();
+		let memcardModel = new MemoryCardModel(reader.result);
+		let digis = memcardModel.getRegisteredDigimonData();
 		for(let i = 0; i < digis.length; i++){
 			document.getElementById("container").appendChild(gui.getRegisteredDigiTable(digis[i], i+1));
 		}
