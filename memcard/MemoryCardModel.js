@@ -4,7 +4,7 @@ class MemoryCardModel{
 		this.viewer = new DataView(memcardData);
 	}
 	readByte(offset){
-		return this.viewer.getUint8(offset);//this.readBuffer[offset];
+		return this.viewer.getUint8(offset);
 	}
 	readShort(offset){
 		return this.viewer.getUint16(offset, true);
@@ -61,8 +61,6 @@ class MemoryCardModel{
 				digis.push(digi);
 				offset += 0x40;
 				temp = this.readShort(offset);
-				console.log(temp);
-				console.log(offset);
 			}
 		}
 		return digis;
