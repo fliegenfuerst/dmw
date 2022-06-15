@@ -1,10 +1,3 @@
-class MoveRule{
-	constructor(minStats, maxStats){
-		this.minStats = minStats;
-		this.maxStats = maxStats;
-	}
-}
-const effects = ["FLAT", "POISON", "STUN", "CONFUSE"];//, "", "",
 const minStats = {hp: 500, mp: 500, offense: 50, defense: 50, speed: 50, brains: 50};
 const maxStats = {hp: 65535, mp: 65535, offense: 65535, defense: 65535, speed: 65535, brains: 65535};
 const bannedMoves = ["Counter"];
