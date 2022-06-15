@@ -196,7 +196,7 @@ class RuleChecker{
 				retArr.push("you may not have an empty move slot without foregoing equipping a buff move");
 				this.isValid = false;
 			}else if(this.checkDoesDigimonHaveBuffmove(digiStats)){
-				this.minimumIndividualStats.speed = 270;
+				this.minimumIndividualStats.brains = 270;
 			}
 		}else if(emptyCounter > 1){
 			retArr.push("you have too many empty move slots");
