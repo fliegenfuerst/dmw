@@ -4,27 +4,14 @@ const bannedMoves = ["Counter"];
 const restrictedMoves = [
 	{name: "Muscle Charge", minStats: [["brains", 165]], maxStats: []},
 	{name: "Full Potential", minStats: [["brains", 270]], maxStats: []},
-	//{name: "", minStats: [["brains", 165]], maxStats: []},
 	{name: "Ice Statue", minStats: [], maxStats: [["speed", 225], ["offense", 900]]},
 	{name: "Megalo Spark", minStats: [], maxStats: [["speed", 215], ["offense", 900]]},
 	{name: "Bug", minStats: [], maxStats: [["speed", 175], ["offense", 860]]},
 	{name: "Meltdown", minStats: [], maxStats: [["speed", 260]]},
 	{name: "Insect Plague", minStats: [], maxStats: [["speed", 135], ["defense", 670]]},
 	{name: "Poison Powder", minStats: [], maxStats: [["speed", 235], ["defense", 79]]},
-	//{name: "", minStats: [], maxStats: [["speed", 225, offense", 900]]},
 	{name: "Thunder Justice", minStats: [], maxStats: [["speed", 270]]}
 ];
-
-/*Muscle Charge	165 or more Brains
-Full Potential	270 or more Brains
-Ice Statue		225 or less Speed, 900 or less Offense
-Megalo Spark	215 or less Speed, 900 or less Offense
-Bug			175 or less Speed, 860 or less Offense
-Meltdown		260 or less Speed
-Insect Plague	135 or less Speed, 670 or less Defense
-Poison Powder	235 or less Speed, 790 or less Defense
-Thunder Justice	270 or less Speed
-*/
 class RuleChecker{
 	constructor(maximumCombinedStats, minimumIndividualStats, bannedMoves){
 		this.maximumCombinedStats = 3600;//maximumCombinedStats;
