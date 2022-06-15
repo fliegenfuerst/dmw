@@ -1,0 +1,10 @@
+customElements.define("name-input", NameInput, {extends:"input"});
+customElements.define("screen-name-input", ScreenNameInput, {extends:"input"});
+customElements.define("number-input", NumberInput, {extends:"input"});
+customElements.define("digimon-select", DigimonSelect, {extends:"select"});
+customElements.define("digimon-option", DigimonOption, {extends:"option"});
+customElements.define("move-select", MoveSelect, {extends:"select"});
+customElements.define("move-option", MoveOption, {extends:"option"});
+customElements.define("name-table", NameTable, {extends:"table"});
+customElements.define("registered-digimon-table", RegisteredDigimonTable, {extends:"table"});
+customElements.define("rule-checker-div", RuleCheckerDiv, {extends:"div"});
