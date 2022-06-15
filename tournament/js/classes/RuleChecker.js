@@ -79,13 +79,23 @@ class RuleChecker{
 	checkBrainsSpeedRule(digi){
 		let difference = digi.speed.value/2 - digi.brains.value;
 		if(difference > 0){
-			return `you have to put ${Math.round(difference)} more points into brains or reduce speed by ${Math.abs(difference) * 2}`;
 			this.isValid = false;
+			return `you have to put ${Math.round(difference)} more points into brains or reduce speed by ${Math.abs(difference) * 2}`;
 		}else if(difference < 0){
-			return `you are allowed to put ${Math.round(Math.abs(difference*2))} more points into your speed stat`;
+			let freePoints = this.maximumCombinedStats - this.combinedStats;
+			if(this.maximumIndividualStats.speed > (digi.brains.value * 2)){
+				if(freePoints <= Math.abs(difference * 2)){
+					return `you are allowed to put ${freePoints} more points into your speed stat`;
+				}else{
+					return "";
+				}
+			}else{
+				return `you are allowed to put ${this.maximumIndividualStats.speed - digi.speed.value} more points into your speed stat`;
+			}
 		}else{
 			return `your brains and speed stats match the current rules`;
 		}
+		return "";
 	}
 	checkMinMaxSettings(move){
 		for(let i = 0; i < restrictedMoves.length; i++){
@@ -103,7 +113,6 @@ class RuleChecker{
 				break;
 			}
 		}
-		//return `${this.checkMaximumIndividualStats(digi)}<br>${this.checkMinimumIndividualStats(digi)}`;
 	}
 	checkDoesDigimonHaveBuffmove(digiStats){
 		let tempMove;
@@ -209,7 +218,7 @@ class RuleChecker{
 	check(index){
 		this.isValid = true;
 		let digi = memcardReader.saveSlots[0].registeredDigimon[index];
-		let retStr = `${this.checkMaxCombinedStats(digi)}<br>${this.checkBrainsSpeedRule(digi)}<br><br>${this.checkMoves(digi)}<br><br>`;
+		let retStr = `${this.checkMaxCombinedStats(digi)}<br><br>${this.checkMoves(digi)}<br>${this.checkBrainsSpeedRule(digi)}<br><br>`;
 		if(this.checkHasBeyondBoundaryStat(digi)){
 			retStr += "your stats are out of bounds, problems might occur, but not necessarily<br><br>";
 		}
