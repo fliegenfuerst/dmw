@@ -17,11 +17,11 @@ class GUI{
 	}
 	updateRuleCheckerDiv(str, isValid){
 		this.ruleCheckerDiv.updateRuleText(str);
-		if(isValid){
+		/*if(isValid){
 			this.ruleCheckerDiv.style.backgroundColor = "LightGreen";
 		}else{
 			this.ruleCheckerDiv.style.backgroundColor = "Coral";
-		}
+		}*/
 	}
 }
 
