@@ -1,0 +1,31 @@
+<!Doctype html>
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head>
+<title>Digimon World Memory Card Data Viewer</title>
+<body>
+<div>Please select a local Memory Card file</div>
+<input type="file" accept=".mcr" onchange="readFile(this)" style="width:400px;">
+<button onclick="saveFile(this)">download memorycard</button>
+<div id="container"></div>
+<script type="text/javascript" src="js/data/digimonStats.js"></script>
+<script type="text/javascript" src="js/data/moves.js"></script>
+<script type="text/javascript" src="js/data/items.js"></script>
+<script type="text/javascript" src="js/data/triggerNames.js"></script>
+<script type="text/javascript" src="js/data/gameStates.js"></script>
+<script type="text/javascript" src="js/data/mapDetails.js"></script>
+<script type="text/javascript" src="js/data/recycleShopItemNames.js"></script>
+<script type="text/javascript" src="js/data/cards.js"></script>
+<script type="text/javascript" src="js/data/digimonAlphabetical.js"></script>
+<script type="text/javascript" src="js/classes/Helper.js"></script>
+<script type="text/javascript" src="js/classes/DigimonSave.js"></script>
+<script type="text/javascript" src="js/classes/MemoryCardReader.js"></script>
+<script type="text/javascript" src="js/classes/customElements.js"></script>
+<script type="text/javascript" src="js/registerCustomElements.js"></script>
+<script type="text/javascript" src="js/classes/BlobBuilder.js"></script>
+<script type="text/javascript" src="js/classes/GUI.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
