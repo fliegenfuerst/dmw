@@ -43,10 +43,15 @@ class Helper{
 	}
 	valueToSaveArraySigned(value, numberOfBytes){
 		let arr = value.toString(16).padStart(numberOfBytes * 2, '0').match(/../g).reverse();
-		for(let i = 0; i < numberOfBytes; i++){
-			arr[i] = 0xFF - parseInt(arr[i], 16);
+		
+		if(value < 0){
+			for(let i = 0; i < numberOfBytes; i++){
+				arr[i] = 0xFF - parseInt(arr[i], 16);
+			}
+				arr[0] += 1;
+		}else{
+			return this.valueToSaveArray(value, numberOfBytes);
 		}
-		arr[0] += 1;
 		return arr;
 	}
 	getEmptyMemoryCardArray(){
