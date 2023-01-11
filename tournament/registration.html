@@ -6,8 +6,19 @@
 </head>
 <title>Digimon World VS Registration Tool</title>
 <body>
-<div><div><button onclick="saveFile(this)">download memorycard</button></div>
-<div id="container"></div></div>
+<div>
+	<button id="downloadButton" onclick="saveFile(this)" disabled="true">download memorycard</button>
+	<div id="container"></div>
+	<div id="bottom-div">
+		<div>Digimon that are marked with a <span style="background-color:coral">red</span> background are not normally available to play and may cause issues</div>
+		<div>Regular raisable Digimon are marked with a <span style="background-color:lightgreen">green</span> background</div>
+	</div>
+</div>
+<footer>1.0.1</footer>
+<script>
+var screenName = "";
+var maxCombinedStats = 0;
+</script>
 <script type="text/javascript" src="js/data/digimonStats.js"></script>
 <script type="text/javascript" src="js/data/digimonAlphabetical.js"></script>
 <script type="text/javascript" src="js/data/moves.js"></script>
