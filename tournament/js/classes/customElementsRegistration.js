@@ -28,7 +28,38 @@ class NumberInput extends HTMLInputElement{
 	}
 	applyChange(){
 		this.targetValue.value = this.valueAsNumber;
-		ruleChecker.check(0);
+		ruleChecker.check();
+	}
+}
+class MaxCombinedStatsNumberInput extends HTMLInputElement{
+	constructor(){
+		super();
+		this.type = "number";
+		this.value = maxCombinedStats;
+		this.min = 0;
+		this.max = 65535;
+		this.step = 1;
+		this.style.float = "right";
+		this.onkeypress = this.isNumberKey;
+		this.onkeyup = this.checkMax;
+		this.onchange = this.applyChange;
+	}
+	isNumberKey(event){
+		let charCode = (event.which) ? event.which : event.keyCode;
+		if (47 < charCode && charCode < 58)
+			return true;
+		return false;
+	}
+	checkMax(event){
+		if(this.min < this.valueAsNumber){
+			if(this.valueAsNumber > this.max){
+				this.value = this.max;
+			}
+		}
+	}
+	applyChange(){
+		maxCombinedStats = this.valueAsNumber;
+		ruleChecker.check();
 	}
 }
 class ScreenNameInput extends HTMLInputElement{
@@ -45,6 +76,7 @@ class ScreenNameInput extends HTMLInputElement{
 		this.oninput = this.applyChange;
 		this.onpaste = this.applyChange;
 		this.onchange = this.applyChange;
+		this.isSet = false;
 	}
 	isAllowedKey(event){
 		let charCode = (event.which) ? event.which : event.keyCode;
@@ -54,6 +86,10 @@ class ScreenNameInput extends HTMLInputElement{
 	}
 	applyChange(){
 		screenName = this.value;
+		if(screenName.length > 1){
+			this.isSet = true;
+		}
+		ruleChecker.check();
 	}
 }
 class NameInput extends HTMLInputElement{
@@ -109,6 +145,7 @@ class DigimonOption extends HTMLOptionElement{
 	constructor(value){
 		super();
 		this.id = `digimonOption-${value.id}`;
+		this.className = value.name;
 		this.value = value.id;
 		this.innerHTML = value.name;
 		if(value.id < 66 && value.id != 62){
@@ -136,7 +173,6 @@ class MoveSelect extends HTMLSelectElement{
 		while(this.options.length > 0){
 			this.remove(0);
 		}
-		//this.selectedMoveIndexes = [0x0, 0xD1, 0xD1];
 		this.selectedMoveIndexes = [this.digi.move1.value - 0x2E, this.digi.move2.value - 0x2E, this.digi.move3.value - 0x2E];
 		if((this.digi.move1.value + this.digi.move2.value + this.digi.move3.value) > 0x1FE){
 			this.selectedMoveIndexes.push(this.moveOptions.length - 1);
@@ -194,8 +230,6 @@ class CustomTable extends HTMLTableElement{
 		col.innerText = name;
 		row.appendChild(col);
 		col = document.createElement("TD");
-		console.log(propertyName);
-		console.log(this.model[propertyName]);
 		col.appendChild(new NameInput(`${propertyName}-${this.index}`, this.model[propertyName]));
 		row.appendChild(col);
 		return row;
@@ -205,7 +239,7 @@ class CustomTable extends HTMLTableElement{
 		let col = document.createElement("TD");
 		let propertyName = helper.guiNameToPropertyName(name);
 		let input = new NumberInput(minValue, maxValue, `${propertyName}-${this.index}`, this.model[propertyName]);
-		col.innerText = name;
+		col.innerHTML = name;
 		row.appendChild(col);
 		col = document.createElement("TD");
 		col.appendChild(input);
@@ -220,10 +254,20 @@ class NameTable extends CustomTable{
 		let col = document.createElement("TD");
 		col.innerText = "User Name";
 		row.appendChild(col);
-		row.appendChild(new ScreenNameInput());
+		col = document.createElement("TD");
+		col.appendChild(new ScreenNameInput());
+		row.appendChild(col);
 		this.appendChild(row);
 		this.appendChild(this.getNameRow("Tamer Name"));
-		this.style.width = "227px";
+		row = document.createElement("TR");
+		col = document.createElement("TD");
+		col.innerText = "Max Combined Stats";
+		row.appendChild(col);
+		col = document.createElement("TD");
+		col.appendChild(new MaxCombinedStatsNumberInput());
+		row.appendChild(col);
+		this.appendChild(row);
+		this.style.width = "293px";
 		this.style.margin = "auto";
 	}
 }
@@ -237,12 +281,12 @@ class DigimonTable extends CustomTable{
 		this.moveSelects = [];
 		this.appendChild(this.getNameRow("Name"));
 		this.appendChild(this.getTypeRow("Type"));
-		this.appendChild(this.getNumberRow("Max HP", 0, 65535));
-		this.appendChild(this.getNumberRow("Max MP", 0, 65535));
-		this.appendChild(this.getNumberRow("Offense", 0, 65535));
-		this.appendChild(this.getNumberRow("Defense", 0, 65535));
-		this.appendChild(this.getNumberRow("Speed", 0, 65535));
-		this.appendChild(this.getNumberRow("Brains", 0, 65535));
+		this.appendChild(this.getNumberRow("HP", 0, 9999));
+		this.appendChild(this.getNumberRow("MP", 0, 9999));
+		this.appendChild(this.getNumberRow("Offense", 0, 999));
+		this.appendChild(this.getNumberRow("Defense", 0, 999));
+		this.appendChild(this.getNumberRow("Speed", 0, 999));
+		this.appendChild(this.getNumberRow("Brains", 0, 999));
 		this.getMovesStatRows();
 		this.style.width = "227px";
 		this.style.margin = "auto";
@@ -316,7 +360,6 @@ class RuleCheckerDiv extends HTMLDivElement{
 		this.style.margin = "auto";
 		this.style.width = "400px";
 		this.style.textAlign = "center";
-		//this.style.float = "right";
 	}
 	updateRuleText(str){
 		this.innerHTML = str;
