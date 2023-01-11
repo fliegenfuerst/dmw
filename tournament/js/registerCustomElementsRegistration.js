@@ -1,6 +1,7 @@
 customElements.define("name-input", NameInput, {extends:"input"});
 customElements.define("screen-name-input", ScreenNameInput, {extends:"input"});
 customElements.define("number-input", NumberInput, {extends:"input"});
+customElements.define("max-combined-stats-number-input", MaxCombinedStatsNumberInput, {extends:"input"});
 customElements.define("digimon-select", DigimonSelect, {extends:"select"});
 customElements.define("digimon-option", DigimonOption, {extends:"option"});
 customElements.define("move-select", MoveSelect, {extends:"select"});
