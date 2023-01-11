@@ -1,9 +1,7 @@
-var screenName = "Contender";
 const memcardReader = new MemoryCardReader();
 const gui = new GUI(memcardReader, document.getElementById("container"));
-//processBlob(memcardReader.loadGenericMemoryCardData());
-console.log(ruleChecker);
 processBlob(helper.getGenericMemoryCardBlob())
+ruleChecker.check();
 async function processBlob(blob){
 	await memcardReader.loadMemoryCardData(blob);
 	gui.showRegisteredDigimonView();
