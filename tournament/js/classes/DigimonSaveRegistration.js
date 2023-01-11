@@ -10,6 +10,7 @@ class DigimonSave{
 		this.viewer = new DataView(arrayBuffer);
 		this.saveArray = Array.from(new Uint8Array(arrayBuffer));
 		this.registeredDigimon = this.getRegisteredDigimonData();
+		this.getCurrentDigimonData();
 		this.name = this.readStringExclusive(0x0, 0x1E);
 		this.createRegisteredDigimon();
 		this.tamerName = new Value(0x667, this.readString(0x667, 14), "string");
@@ -33,7 +34,8 @@ class DigimonSave{
 				this.writeEmptyRegisteredSlot(i);
 			}
 		}
-		//this.writeData(this.registeredDigimon[0]);
+		this.updateCurrentDigimon()
+		this.writeData(this.currentDigimon);
 		this.updateChecksum();
 		return this.saveArray;
 	}
@@ -42,6 +44,9 @@ class DigimonSave{
 	}
 	readShort(offset){
 		return this.viewer.getUint16(offset, true);
+	}
+	readSignedShort(offset){
+		return this.viewer.getInt16(offset, true);
 	}
 	readInt(offset){
 		return this.viewer.getUint32(offset, true);
@@ -173,9 +178,9 @@ class DigimonSave{
 		if(count < 40){
 			let offset = 0x700 + count * 0x40;
 			let digi = {};
-			digi.maxHp = new Value(offset, 500, "short");
+			digi.hp = new Value(offset, 500, "short");
 			offset += 0x2;
-			digi.maxMp = new Value(offset, 500, "short");
+			digi.mp = new Value(offset, 500, "short");
 			offset += 0x2;
 			digi.offense = new Value(offset, 50, "short");
 			offset += 0x2;
@@ -211,19 +216,166 @@ class DigimonSave{
 		let propertyNames = Object.getOwnPropertyNames(data);
 		for(let i = 0; i < propertyNames.length; i++){
 			switch(data[propertyNames[i]].type){
-				case "byte":
-					if(propertyNames[i].indexOf("move") != -1){
-						this.setLearnedMove(digimonStats[data.type.value].moves[data[propertyNames[i]].value - 0x2E]);
-					}
-					this.writeByte(data[propertyNames[i]].offset, data[propertyNames[i]].value);
-					break;
-				case "short":
-					this.writeBytes(data[propertyNames[i]].offset, helper.valueToSaveArray(data[propertyNames[i]].value, 2));
-					break;
-				case "string":
-					this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 6);
-					break;
-			}
+					case "firstNibble":
+						this.writeNibble(data[propertyNames[i]].offset, data[propertyNames[i]].value, true);
+						break;
+					case "secondNibble":
+						this.writeNibble(data[propertyNames[i]].offset, data[propertyNames[i]].value, false);
+						break;
+					case "byte":
+						if(propertyNames[i].indexOf("move") != -1){
+							this.setLearnedMove(digimonStats[data.type.value].moves[data[propertyNames[i]].value - 0x2E]);
+						}
+						this.writeByte(data[propertyNames[i]].offset, data[propertyNames[i]].value);
+						break;
+					case "short":
+						this.writeBytes(data[propertyNames[i]].offset, helper.valueToSaveArray(data[propertyNames[i]].value, 2));
+						break;
+					case "signedShort":
+						this.writeBytes(data[propertyNames[i]].offset, helper.valueToSaveArraySigned(data[propertyNames[i]].value, 2));
+						break;
+					case "string":
+						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 6);
+						break;
+				}
 		}
+	}
+	getCurrentDigimonData(){
+		let offset = 0x3B8;
+		this.currentDigimon = {};
+		this.currentDigimon.type= new Value(offset, this.readByte(offset), "byte");
+		offset = 0x3E0;
+		let conditionByte = this.readByte(offset);
+		this.currentDigimon.conditionFlags = new Value(offset, this.readByte(offset), "byte");
+		offset += 0x4;
+		this.currentDigimon.sleepyHour = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sleepyMinute = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.wakeUpHour = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.wakeUpMinute = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.standardAwakeTime = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.standardSleepTime = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.awakeTimeThisDay = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sicknessCounter = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.missedSleepHours = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.tirednessSleepTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.poopLevel = new Value(offset, this.readShort(offset), "short");
+		offset += 0x6;
+		this.currentDigimon.virusBar = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.poopingTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.tiredness = new Value(offset, this.readShort(offset), "short");
+		offset += 0x4;
+		this.currentDigimon.tirednessHungerTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.discipline = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.happiness = new Value(offset, this.readSignedShort(offset), "signedShort");
+		offset += 0xA;
+		this.currentDigimon.areaEffectTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sicknessTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x6;
+		this.currentDigimon.saturation = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.foodTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.starvationTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.weight = new Value(offset, this.readByte(offset), "byte");
+		offset += 0x6;
+		this.currentDigimon.remainingLifetime = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.age = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.trainingBoostFlag = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.trainingBoostMultiplier = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.trainingBoostTimer = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.careMistakes = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.battles = new Value(offset, this.readShort(offset), "short");
+		offset += 0xA;
+		this.currentDigimon.fishCaught = new Value(offset, this.readShort(offset), "short");
+		offset += 0x8;
+		this.currentDigimon.upgradeCounterHp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.upgradeCounterMp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.upgradeCounterOffense = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.upgradeCounterBrainsBugged = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.upgradeCounterDefense = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.upgradeCounterSpeed = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.upgradeCounterBrainsUnused = new Value(offset, this.readShort(offset), "short");
+		offset += 0x4;
+		this.currentDigimon.sukamonBackupHp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sukamonBackupMp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sukamonBackupOffense = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sukamonBackupDefense = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sukamonBackupSpeed = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.sukamonBackupBrains = new Value(offset, this.readShort(offset), "short");
+		offset = 0x470;//stats start
+		this.currentDigimon.offense = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.defense = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.speed = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.brains = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.movePriorities = new Value(offset, this.readShort(offset), "short");
+		offset += 0x4;
+		this.currentDigimon.move1 = new Value(offset, this.readByte(offset++), "byte");
+		this.currentDigimon.move2 = new Value(offset, this.readByte(offset++), "byte");
+		this.currentDigimon.move3 = new Value(offset, this.readByte(offset), "byte");
+		offset += 0x2;
+		this.currentDigimon.maxHp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.maxMp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.currentHp = new Value(offset, this.readShort(offset), "short");
+		offset += 0x2;
+		this.currentDigimon.currentMp = new Value(offset, this.readShort(offset), "short");
+		offset = 0x67B;
+		this.currentDigimon.name = new Value(offset, this.readString(offset, 14), "string");
+		offset = 0x68F;
+		this.currentDigimon.livesLeft = new Value(offset, this.readByte(offset), "byte");
+	}
+	updateCurrentDigimon(){
+		let digi = this.registeredDigimon[0];
+		this.currentDigimon.type.name = digi.type.name;
+		this.currentDigimon.type.value = digi.type.value;
+		this.currentDigimon.maxHp.value = digi.hp.value;
+		this.currentDigimon.maxMp.value = digi.mp.value;
+		this.currentDigimon.currentHp.value = digi.hp.value;
+		this.currentDigimon.currentMp.value = digi.mp.value;
+		this.currentDigimon.offense.value = digi.offense.value;
+		this.currentDigimon.defense.value = digi.defense.value;
+		this.currentDigimon.speed.value = digi.speed.value;
+		this.currentDigimon.brains.value = digi.brains.value;
+		this.currentDigimon.move1.value = digi.move1.value;
+		this.currentDigimon.move2.value = digi.move2.value;
+		this.currentDigimon.move3.value = digi.move3.value;
 	}
 }
