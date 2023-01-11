@@ -12,11 +12,19 @@ button{
 	left: 50%;
 	transform: translate(-50%,0);
 }
+#bottom-div{
+	position:fixed;
+	bottom:17px;
+	left: 50%;
+	transform: translate(-50%,0);
+	text-align: center;
+}
 #container{
 	position: absolute;
 	top: 40px;
 	left: 50%;
 	transform: translate(-50%,0);
+	background-color: rgba(0,0,0,0.25);
 }
 .obtainable{
 	background-color: LightGreen;
@@ -36,14 +44,9 @@ input[type="number"]{
 	background-position: 1px 0px;
 	padding-left: 18px;
 }
-/*table{
-	border: 8px solid transparent;
-	border-image: url(img/border.png) 4 4 repeat;
-	background:#2d3840;
+footer{
+	position:fixed;
+	bottom:0;
+	left: 50%;
+	transform: translate(-50%,0);
 }
-tr:nth-child(1) > * {
-  float: left;
-}
-tr:nth-child(2) > * {
-  float: right;
-}*/
