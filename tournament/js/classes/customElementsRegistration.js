@@ -148,7 +148,7 @@ class DigimonOption extends HTMLOptionElement{
 		this.className = value.name;
 		this.value = value.id;
 		this.innerHTML = value.name;
-		if(value.id < 66 && value.id != 62 && value.id != 0){
+		if(value.id > 0 && value.id < 66 && value.id != 62){
 			this.classList.add("obtainable");
 		}else{
 			this.classList.add("unobtainable");
