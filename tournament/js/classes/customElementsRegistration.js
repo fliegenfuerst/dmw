@@ -281,12 +281,12 @@ class DigimonTable extends CustomTable{
 		this.moveSelects = [];
 		this.appendChild(this.getNameRow("Name"));
 		this.appendChild(this.getTypeRow("Type"));
-		this.appendChild(this.getNumberRow("HP", 0, 9999));
-		this.appendChild(this.getNumberRow("MP", 0, 9999));
-		this.appendChild(this.getNumberRow("Offense", 0, 999));
-		this.appendChild(this.getNumberRow("Defense", 0, 999));
-		this.appendChild(this.getNumberRow("Speed", 0, 999));
-		this.appendChild(this.getNumberRow("Brains", 0, 999));
+		this.appendChild(this.getNumberRow("HP", 0, 65535));
+		this.appendChild(this.getNumberRow("MP", 0, 65535));
+		this.appendChild(this.getNumberRow("Offense", 0, 65535));
+		this.appendChild(this.getNumberRow("Defense", 0, 65535));
+		this.appendChild(this.getNumberRow("Speed", 0, 65535));
+		this.appendChild(this.getNumberRow("Brains", 0, 65535));
 		this.getMovesStatRows();
 		this.style.width = "227px";
 		this.style.margin = "auto";
