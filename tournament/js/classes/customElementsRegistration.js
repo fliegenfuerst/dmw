@@ -27,6 +27,9 @@ class NumberInput extends HTMLInputElement{
 		}
 	}
 	applyChange(){
+		if(this.value == ""){
+			this.value = 0;
+		}
 		this.targetValue.value = this.valueAsNumber;
 		ruleChecker.check();
 	}
