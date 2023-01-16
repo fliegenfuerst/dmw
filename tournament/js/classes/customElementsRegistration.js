@@ -1,3 +1,5 @@
+const babyDigimon = ["Yuramon", "Tsunomon", "Tokomon", "Tanemon", "Punimon", "Poyomon", "Koromon", "Botamon"];
+const unplayable = ["WereGarurumon", "Tinmon", "ShogunGekomon", "Master Tyrannomon", "Market Manager", "King of Sukamon", "Jijimon", "Hiro", "Hagurumon", "DemiMeramon", "Cherrymon", "Brachiomon", "Analogman", ""];
 class NumberInput extends HTMLInputElement{
 	constructor(minValue, maxValue, id, targetValue){
 		super();
