@@ -18,7 +18,7 @@ class GUI{
 	updateRuleCheckerDiv(str, isValid){
 		this.ruleCheckerDiv.updateRuleText(str);
 		if(isValid){
-			this.ruleCheckerDiv.style.backgroundColor = "LightGreen";
+			//this.ruleCheckerDiv.style.backgroundColor = "LightGreen";
 		}else{
 			this.ruleCheckerDiv.style.backgroundColor = "Coral";
 		}
