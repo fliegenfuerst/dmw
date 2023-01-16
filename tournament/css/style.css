@@ -33,7 +33,16 @@ button{
 	background-color: Coral;
 }
 .unplayable{
-	background-color: Red;
+	background-color: Black;
+	color: Red;
+}
+.baby{
+	background-color: Black;
+	color: White;
+}
+.otamamon{
+	background-color: LightGreen;
+	color: Blue;
 }
 input[type="number"]{
 	width: 72px;
