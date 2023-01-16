@@ -148,8 +148,14 @@ class DigimonOption extends HTMLOptionElement{
 		this.className = value.name;
 		this.value = value.id;
 		this.innerHTML = value.name;
-		if(value.id > 0 && value.id < 66 && value.id != 62){
+		if(babyDigimon.indexOf(value.name) != -1){
+			this.classList.add("baby");
+		}else if(value.id > 0 && value.id < 66 && value.id != 62){
 			this.classList.add("obtainable");
+		}else if(unplayable.indexOf(value.name) != -1){
+			this.classList.add("unplayable");
+		}else if(value.name == "Otamamon"){
+			this.classList.add("otamamon");
 		}else{
 			this.classList.add("unobtainable");
 		}
