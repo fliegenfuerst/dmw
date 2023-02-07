@@ -1,0 +1,128 @@
+*{
+	font-family: inherit;
+	font-size: inherit;
+}	
+body {
+	image-rendering:optimizeSpeed;
+	image-rendering:-moz-crisp-edges;
+	image-rendering:-o-crisp-edges;
+	image-rendering:-webkit-optimize-contrast;
+	image-rendering:pixelated;
+	image-rendering:optimize-contrast;
+	-ms-interpolation-mode:nearest-neighbor;
+	font-family: Roboto, sans-serif;
+	font-size: 14px;
+	background-color: grey;
+}
+button{
+	text-rendering: auto;
+}
+#downloadButton{
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+#container, #bottom-div, footer{
+	left: 50%;
+	transform: translate(-50%,0);
+	background-color: lightgrey;
+}
+#container{
+	position: absolute;
+	top: 40px;
+	/*background-color: rgba(0,0,0,0.25);*/
+}
+#bottom-div{
+	position:fixed;
+	bottom:17px;
+	text-align: center;
+}
+footer{
+	position:fixed;
+	bottom:0;
+}
+.obtainable{
+	background-color: LightGreen;
+}
+.unobtainable{
+	background-color: Coral;
+}
+.unplayable{
+	background-color: Black;
+	color: Red;
+}
+.baby{
+	background-color: Black;
+	color: White;
+}
+.otamamon{
+	background-color: LightGreen;
+	color: Blue;
+}
+input[type="number"]{
+	width: 72px;
+	text-align: right;
+}
+.digimon-sprite{
+	background-repeat: no-repeat;
+	background-position: 1px 0px;
+	padding-left: 18px;
+}
+/*table{
+	border: 8px solid transparent;
+	border-image: url(img/border.png) 4 4 repeat;
+	background:#2d3840;
+}
+tr:nth-child(1) > * {
+  float: left;
+}
+tr:nth-child(2) > * {
+  float: right;
+}*/
+.sprite{
+	height:18px;
+	width:18px;
+	overflow:hidden;
+	/*background-color: White;*/
+}
+.sprite>.imgContainer{
+	display: block;
+	pointer-events:none;
+	height:16px;
+	width:16px;
+	padding-top:1px;
+	padding-left:1px;
+	overflow:hidden;
+}
+.sprite>.imgContainer>img{
+	height:16px;
+	width:16px;
+	object-fit:cover;
+}
+.is-tooltip{
+	position: absolute;
+	z-index: 99;
+	display: none;
+	background-color: grey;
+	border: 1px solid #363636;
+	border-radius: 4px;
+	color: white;
+	margin-top: -40px;
+	margin-left: 154px;
+	pointer-events: none;
+	width: 130px;
+	padding: 4px;
+	text-align: center;
+	/*visibility: hidden;*/
+}
+.has-tooltip:hover .is-tooltip{
+	display: block;
+	/*visibility: visible;*/
+	z-index: 99;
+}
+.effect-img{
+	position: absolute;
+	right: 16px;
+	top: 3px;
+	pointer-events: none;
+}

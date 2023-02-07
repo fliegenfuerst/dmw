@@ -1,0 +1,88 @@
+.image-select-list{
+	padding-left: 0px;
+}
+
+.image-select-list>li{
+	position: relative;
+	list-style: none;
+	height: 18px;
+	background-color: lightgrey;
+}
+
+.image-select-list>li:hover{
+	background-color: #F4F3F3;
+	pointer: arrow;
+}
+
+.list-item-div{
+	width:100%;
+	height:100%;
+}
+
+.list-item-div>span{
+	position: absolute;
+	pointer-events: none;
+}
+
+.list-item-div>.sprite{
+	left: 1px;
+}
+
+.list-item-div>.name-span{
+	left: 20px;
+	height: 18px;
+	text-align: left;
+	padding-left: 2px;
+	padding-top: 2px;
+}
+
+.image-select-list-container{
+	position: absolute;
+	z-index: 99;
+	top: 30px;
+	left: -20px;
+	border: 1px solid #767676;
+}
+
+.image-select-button{
+	position: relative;
+	margin-top: 10px;
+	height: 21px;
+	border-radius: 2px;
+	background-color: #fff;
+	border: 1px solid #767676;
+	width: 170px;
+}
+.image-select-button:after {
+	content: '>';
+	font: 18px "Consolas", monospace;
+	color: #333;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
+	right: 2px;
+	top: -1px;
+	font-weight: bold;
+	position: absolute;
+	pointer-events: none;
+}
+
+.image-select-button:hover{
+	border: 1px solid #000;
+}
+
+.image-select-button:focus{
+	outline:none;
+}
+
+.image-select-button>div>.name-span{
+	padding-top: 0;
+	height: 17px;
+}
+
+.image-select{
+	position: relative;
+	width: 150px;
+	float: right;
+}
