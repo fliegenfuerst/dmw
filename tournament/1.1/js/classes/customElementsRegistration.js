@@ -513,6 +513,15 @@ function decorateSelects(){
 				anySelectOpen = this;
 			}
 		}
+		imageSelectButton.onkeypress = function(event){
+			for(let i = 0; i < digimonAlphabetical.length; i++){
+				if(digimonAlphabetical[i].name.charAt(0).toLowerCase() == event.key.toLowerCase()){
+					imageSelect.selectedIndex = i;
+					imageSelectListContainerDiv.scrollTop = i * 18;
+					break;
+				}
+			}
+		}
 		for(let style of imageSelect.style){
 			imageSelectButton.style[style] = imageSelect.style[style];
 		}
