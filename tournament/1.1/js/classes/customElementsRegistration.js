@@ -1,4 +1,3 @@
-var imageSelectList = [];
 const babyDigimon = ["Yuramon", "Tsunomon", "Tokomon", "Tanemon", "Punimon", "Poyomon", "Koromon", "Botamon"];
 const unplayable = ["WereGarurumon", "Tinmon", "ShogunGekomon", "Master Tyrannomon", "Market Manager", "King of Sukamon", "Jijimon", "Hiro", "Hagurumon", "DemiMeramon", "Cherrymon", "Brachiomon", "Analogman", ""];
 class NumberInput extends HTMLInputElement{
@@ -28,6 +27,7 @@ class NumberInput extends HTMLInputElement{
 				this.value = this.max;
 			}
 		}
+		this.applyChange();
 	}
 	applyChange(){
 		if(this.value == ""){
@@ -66,6 +66,9 @@ class MaxCombinedStatsNumberInput extends HTMLInputElement{
 		this.applyChange();
 	}
 	applyChange(){
+		if(this.value == ""){
+			this.value = 0;
+		}
 		if(this.value != ""){
 			this.style.backgroundColor = "";
 		}else{
@@ -157,7 +160,6 @@ class DigimonSelect extends HTMLSelectElement{
 			}
 		}
 		this.getOptionDiv = getDigimonOptionDiv;
-		//imageSelectList.push(this);
 	}
 	applyChange(){
 		this.digi[this.statName].value = parseInt(this.selectedOptions[0].value);
@@ -186,7 +188,7 @@ function getBasicOptionDiv(width, imgSrc){
 	return listItemDiv;
 }
 function getDigimonOptionDiv(width){
-	let listItemDiv = getBasicOptionDiv(width, "1.1/css/digisprites.png");
+	let listItemDiv = getBasicOptionDiv(width, "css/digisprites.png");
 	listItemDiv.update = function(id, name){
 		this.index = id;
 		this.name = name;
@@ -279,20 +281,21 @@ class MoveSelect extends HTMLSelectElement{
 }
 const specialities = {"FIRE": 0, "AIR": 1, "ICE": 2, "MECH": 3, "EARTH": 4, "BATTLE": 5, "FILTH": 6};
 function getMoveOptionDiv(width){
-	let listItemDiv = getBasicOptionDiv(width, "1.1/css/specialities.png");
+	let listItemDiv = getBasicOptionDiv(width, "css/specialities.png");
 	listItemDiv.update = function(id, name){
 		let move = findMoveByName(name);
 		let specialityId = 7;
-		if(name != "empty"){
+		if(name != "empty" && name != "Bubble"){
 			specialityId = specialities[move.speciality];
 			if(move.effect != undefined){
 				this.classList.add('has-tooltip');
 				let toolTipDiv = document.createElement("DIV");
 				toolTipDiv.classList.add('is-tooltip');
+				toolTipDiv.classList.add('move-tooltip');
 				toolTipDiv.innerText = `${move.effect.chance}% chance to cause ${move.effect.type.toLowerCase()} effect`;
 				this.appendChild(toolTipDiv);
 				let effectImg = document.createElement("IMG");
-				effectImg.src = `1.1/css/${move.effect.type}.png`;
+				effectImg.src = `css/${move.effect.type}.png`;
 				effectImg.classList.add('effect-img');
 				this.appendChild(effectImg);
 			}
@@ -358,6 +361,12 @@ class NameTable extends CustomTable{
 		row.appendChild(col);
 		col = document.createElement("TD");
 		col.appendChild(new ScreenNameInput());
+		col.classList.add('has-tooltip');
+		let toolTipDiv = document.createElement("DIV");
+		toolTipDiv.classList.add('is-tooltip');
+		toolTipDiv.classList.add('screenname-tooltip');
+		toolTipDiv.innerText = "Name that will be used for the tournament";
+		col.appendChild(toolTipDiv);
 		row.appendChild(col);
 		this.appendChild(row);
 		this.appendChild(this.getNameRow("Tamer Name"));
@@ -369,7 +378,6 @@ class NameTable extends CustomTable{
 		col.appendChild(new MaxCombinedStatsNumberInput());
 		row.appendChild(col);
 		this.appendChild(row);
-		//this.style.width = "293px";
 		this.style.margin = "auto";
 	}
 }
@@ -457,7 +465,7 @@ class DigimonTable extends CustomTable{
 				availableMoves.push([digiStats.moves[i],i]);
 			}
 		}
-		availableMoves.push(["empty", 0xFF]);
+		availableMoves.push(["empty", availableMoves.length]);
 		this.finisherCell.innerText = digiStats.finisher;
 		this.moveSelects[0].setOptions(availableMoves);
 		this.moveSelects[1].setOptions(availableMoves);
@@ -511,6 +519,7 @@ function decorateSelects(){
 				hideAllSelectListContainers();
 				imageSelectListContainerDiv.toggle();
 				anySelectOpen = this;
+				imageSelectListContainerDiv.scrollTop = imageSelect.selectedIndex * 18;
 			}
 		}
 		imageSelectButton.onkeypress = function(event){
@@ -561,13 +570,13 @@ function decorateSelects(){
 			listItem.appendChild(imageSelectOption.listItemDiv);
 			imageSelectListDiv.appendChild(listItem);
 			if(imageSelectOption.listItemDiv.disabled){
-				//imageSelectOption.listItemDiv.style.pointerEvents = imageSelectOption.style.pointerEvents = "none";
 				imageSelectOption.listItemDiv.style.cursor = imageSelectOption.style.cursor = "not-allowed";
 				imageSelectOption.listItemDiv.style.color = "grey";
 			}else{
 				imageSelectOption.listItemDiv.onclick = function(){
 					imageSelectButton.firstChild.update(this.index, this.name);
 					imageSelectListContainerDiv.toggle();
+					imageSelect.selectedIndex = imageSelectOption.index;
 					imageSelect.selectedOptions[0].value = imageSelectOption.value;
 					imageSelect.selectedOptions[0].innerText = imageSelectOption.innerText;
 					imageSelect.applyChange();
@@ -578,7 +587,6 @@ function decorateSelects(){
 			}
 		}
 		imageSelect.style.display = "none";
-		//imageSelect.style.zIndex = "-1";
 	}
 	
 }
