@@ -18,17 +18,23 @@ function readFile(input) {
 		console.log(reader.error);
 	};
 }
-function downloadBlob(blob){
+function downloadBlob(blob, filename){
 	let link = document.createElement('a');
 	link.style.display = 'none';
 	document.body.appendChild(link);
 	link.href = URL.createObjectURL(blob);
-	link.download = `${new Date().toISOString().slice(0, 10).replaceAll("-", "")}_${screenName}.mcr`;
+	link.download = filename;
 	link.click();
 	document.body.removeChild(link);
 }
 function saveFile(){
-	downloadBlob(memcardReader.getDigimonSavesBlob());
+	let filename = `${new Date().toISOString().slice(0, 10).replaceAll("-", "")}_${screenName}`;
+	downloadBlob(memcardReader.getDigimonSavesBlob(), `${filename}.mcr`);
+	html2canvas(document.querySelector('#container')).then(canvas => {
+		canvas.toBlob(function(blob) {			
+			downloadBlob(blob, `${filename}.png`);
+		});
+	});
 }
 var animatedSprites = document.getElementsByClassName("animated-sprite");
 var idleState = 0;
