@@ -192,9 +192,9 @@ class DigimonSave{
 			offset += 0x2;
 			digi.discipline = new Value(offset, 100, "short");
 			offset += 0x2;
-			digi.name = new Value(offset, "Savior", "string");
+			digi.name = new Value(offset, "Daioh", "string");
 			offset += 0xE;
-			digi.type = new Value(offset++, 0x11, "byte");
+			digi.type = new Value(offset++, 0xA, "byte");
 			digi.move1 = new Value(offset++, 0x2E, "byte");
 			digi.move2 = new Value(offset++, 0xFF, "byte");
 			digi.move3 = new Value(offset, 0xFF, "byte");
