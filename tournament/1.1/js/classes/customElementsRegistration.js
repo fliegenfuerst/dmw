@@ -69,7 +69,7 @@ class MaxCombinedStatsNumberInput extends HTMLInputElement{
 		if(this.value == ""){
 			this.value = 0;
 		}
-		if(this.value != ""){
+		if(this.value != "" && this.value != 0){
 			this.style.backgroundColor = "";
 		}else{
 			this.style.backgroundColor = "coral";
