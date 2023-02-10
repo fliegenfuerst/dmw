@@ -6,7 +6,7 @@
 	position: relative;
 	list-style: none;
 	height: 18px;
-	background-color: lightgrey;
+	background-color: LightGrey;
 }
 
 .image-select-list>li:hover{
@@ -46,13 +46,13 @@
 
 .image-select-button{
 	position: relative;
-	margin-top: 10px;
 	height: 21px;
 	border-radius: 2px;
 	background-color: #fff;
 	border: 1px solid #767676;
 	width: 170px;
 }
+
 .image-select-button:after {
 	content: '>';
 	font: 18px "Consolas", monospace;
