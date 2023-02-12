@@ -1,0 +1,152 @@
+<html>
+<head>
+<title> time zoner </title>
+</head>
+<body>
+<div id="background-container"></div>
+<div id="container"></div>
+<script type="text/javascript" src="js/data/timezones.js"></script>
+<script>
+const chars="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
+function intToUrl(value){
+	let digit;
+	let residual = value;
+	let result = '';
+	while(true){
+		digit = residual % 64;
+		result = chars.charAt(digit) + result;
+		residual = Math.floor(residual / 64);
+		if (residual == 0)
+			break;
+	}
+	return result;
+}
+function urlToInt(url){
+	let result = 0;
+	for(let h = 0; h < url.length; h++){
+		result += chars.indexOf(url[h]) * Math.pow(64, (url.length-h-1));
+	}
+	return result;
+}
+function base64url(str) {
+    return btoa(str).replace(/=+$/, '').replace(/\+/g,'-').replace(/\//g, '_');
+}
+function unbase64url(str) {
+    return atob(str.replace(/-/g, '+').replace(/_/g, '/'));
+}
+function shortenTimeString(timestring){
+	return parseInt(timestring.replace("-", "").replace("-", "").replace("T", "").replace(":", ""));
+}
+function lengthenTimeString(timestring){
+	return timestring.slice(0, 4) + "-" + timestring.slice(4, 6) + "-" + timestring.slice(6, 8) + "T" + timestring.slice(8, 10) + ":" + timestring.slice(10, 12);
+}
+class URL{
+	constructor(){
+		this.timezoneIndex = 0;
+		this.descriptionText = '';
+		this.dateInt = '';
+		this.currentHash = '';
+		this.temp;
+	}
+	updateDate(date){
+		let newDate = new Date(date);
+		newDate.setMinutes(newDate.getMinutes() - offset);
+		this.dateInt = shortenTimeString(newDate.toISOString().slice(0, 16));
+		this.updateUrl();
+	}
+	updateTimezoneIndex(index){
+		this.timezoneIndex = index;
+		this.updateUrl();
+	}
+	updateDescriptionText(descriptionText){
+		this.descriptionText = descriptionText;
+		this.updateUrl();
+	}
+	updateUrl(){
+		window.location.hash= "!" + intToUrl(this.dateInt) + "/" + intToUrl(this.timezoneIndex) + "/" + base64url(this.descriptionText);
+		this.currentHash = window.location.hash;
+	}
+	checkHash(){
+		if(window.location.hash != ''){
+			if(window.location.hash != this.currentHash){
+				this.temp = window.location.hash.substr(2, window.location.hash.length).split("/");
+				this.dateInt = urlToInt(this.temp[0]);
+				setDateInput.value = lengthenTimeString(this.dateInt.toString());
+				this.timezoneIndex = timezoneSelect.selectedIndex = urlToInt(this.temp[1]);
+				descriptionTextInput.value = unbase64url(this.temp[2]);
+				this.currentHash = window.location.hash;
+			}
+		}
+	}
+}
+const url = new URL();
+timezones.sort((firstTimezone, secondTimezone) => firstTimezone.value.localeCompare(secondTimezone.value));
+const containerDiv = document.getElementById("container");
+const descriptionTextInput = document.createElement("INPUT");
+descriptionTextInput.oninput = descriptionTextInput.onpaste = descriptionTextInput.onchange = function(){
+	url.updateDescriptionText(this.value);
+}
+containerDiv.appendChild(descriptionTextInput);
+var offset = 0;
+const setDateInput = document.createElement("INPUT");
+setDateInput.onchange = function(){
+	url.updateDate(this.value);
+};
+setDateInput.type = "datetime-local";
+let date = new Date();
+offset = date.getTimezoneOffset();
+date.setMinutes(date.getMinutes() - offset);
+date = date.toISOString().slice(0, 16);
+setDateInput.value = date;
+setDateInput.min = date;
+url.updateDate(date);
+containerDiv.appendChild(setDateInput);
+
+const timezoneSelect = document.createElement("SELECT");
+timezoneSelect.onchange = function(){
+	url.updateTimezoneIndex(this.selectedIndex);
+	offset = parseInt(this.selectedOptions[0].value) * 60;
+	let date = new Date();
+	date.setMinutes(date.getMinutes() + offset);
+	setDateInput.value = setDateInput.min = date.toISOString().slice(0, 16);
+};
+let tempOption;
+for(let tZ of timezones){
+	tempOption = document.createElement("OPTION");
+	tempOption.value = tZ.offset;
+	tempOption.innerHTML = tZ.value + " - " + tZ.text;
+	timezoneSelect.appendChild(tempOption);
+}
+let detectedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+let timezoneText = "";
+for(let i = 0; i < timezones.length; i++){
+	if(timezones[i].utc.indexOf(detectedTimezone) != -1){
+		timezoneText = timezones[i].text;
+		timezoneSelect.selectedIndex = i;
+		url.updateTimezoneIndex(i);
+		break;
+	}
+}
+
+containerDiv.appendChild(timezoneSelect);
+setInterval(function() {
+	url.checkHash();
+}, 300);
+/*
+if no link adage open create date mode
+
+if link adage open view date mode with 'create date' button at the top
+
+copy link button
+
+all data stored in link as well as localdata
+
+
+timezone dropdown in create date mode to change utc value stored in link/localstorage
+
+timezone dropdown in view mode in case the 
+
+*/
+</script>
+</body>
+</html>
