@@ -7,6 +7,7 @@
 <div id="container"></div>
 <script type="text/javascript" src="js/data/timezones.js"></script>
 <script>
+var hasLoaded = false;
 const chars="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
 function intToUrl(value){
 	let digit;
@@ -63,8 +64,10 @@ class URL{
 		this.updateUrl();
 	}
 	updateUrl(){
-		window.location.hash= "!" + intToUrl(this.dateInt) + "/" + intToUrl(this.timezoneIndex) + "/" + base64url(this.descriptionText);
-		this.currentHash = window.location.hash;
+		if(hasLoaded){
+			window.location.hash= "!" + intToUrl(this.dateInt) + "/" + intToUrl(this.timezoneIndex) + "/" + base64url(this.descriptionText);
+			this.currentHash = window.location.hash;
+		}
 	}
 	checkHash(){
 		if(window.location.hash != ''){
@@ -132,21 +135,11 @@ containerDiv.appendChild(timezoneSelect);
 setInterval(function() {
 	url.checkHash();
 }, 300);
-/*
-if no link adage open create date mode
-
-if link adage open view date mode with 'create date' button at the top
-
-copy link button
-
-all data stored in link as well as localdata
-
-
-timezone dropdown in create date mode to change utc value stored in link/localstorage
-
-timezone dropdown in view mode in case the 
-
-*/
+window.addEventListener("load", setLoaded);
+function setLoaded(){
+	hasLoaded = true;
+	url.checkHash();
+}
 </script>
 </body>
 </html>
