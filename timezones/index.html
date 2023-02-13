@@ -93,7 +93,7 @@ const containerDiv = document.getElementById("container");
 
 const descriptionTextInputDiv = document.createElement("DIV");
 const descriptionTextInputTitle = document.createElement("H3");
-descriptionTextInputTitle.innerText = 'please describe the even you want to schedule';
+descriptionTextInputTitle.innerText = 'please describe the event you want to schedule';
 const descriptionTextInput = document.createElement("TEXTAREA");
 descriptionTextInput.oninput = descriptionTextInput.onpaste = descriptionTextInput.onchange = function(){
 	url.updateDescriptionText(this.value);
