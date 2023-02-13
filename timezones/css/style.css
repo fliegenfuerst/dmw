@@ -1,0 +1,46 @@
+
+body {
+	image-rendering: optimizeSpeed;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: pixelated;
+	image-rendering: optimize-contrast;
+	-ms-interpolation-mode: nearest-neighbor;
+	font-family: Roboto, sans-serif;
+	font-size: 14px;
+	background-color: Grey;
+}
+button{
+	text-rendering: auto;
+}
+#container{
+	position: fixed;
+	left: 50%;
+	transform: translate(0);
+	top: 50%;
+	transform: translate(-50%,-50%);
+	background-color: LightGrey;
+	width: 90%;
+	text-align: center;
+	padding: 3px;
+}
+textarea {
+  resize: vertical;
+  width: 90%;
+}
+h3{
+	margin: 3px;
+}
+div{
+	margin: 6px;
+}
+#container>*{
+	margin: 0 auto;
+}
+.description-text{
+	padding: 3px;
+	border: 1px solid #363636;
+	border-radius: 4px;
+	width: 90%;
+}
