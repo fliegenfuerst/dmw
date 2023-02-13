@@ -1,0 +1,142 @@
+<html>
+<head>
+<title> time zoner </title>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head>
+<body>
+<div id="background-container"></div>
+<div id="container"></div>
+<script type="text/javascript" src="js/data/timezones.js"></script>
+<script>
+timezones.sort((firstTimezone, secondTimezone) => firstTimezone.value.localeCompare(secondTimezone.value));
+function getLocalTimezoneIndex(){
+	let detectedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+	for(let i = 0; i < timezones.length; i++){
+		if(timezones[i].utc.indexOf(detectedTimezone) != -1){
+			return i;
+		}
+	}
+}
+const chars="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
+function urlToInt(url){
+	let result = 0;
+	for(let h = 0; h < url.length; h++){
+		result += chars.indexOf(url[h]) * Math.pow(64, (url.length-h-1));
+	}
+	return result;
+}
+function unbase64url(str) {
+    return atob(str.replace(/-/g, '+').replace(/_/g, '/'));
+}
+function lengthenTimeString(timestring){
+	timestring = timestring.toString();
+	return timestring.slice(0, 4) + "-" + timestring.slice(4, 6) + "-" + timestring.slice(6, 8) + "T" + timestring.slice(8, 10) + ":" + timestring.slice(10, 12);
+}
+function dateToString(date){
+    let hours = date.getHours();
+	let hours24 = hours < 10 ? '0' + hours : hours;//add leading 0
+    let days = date.getDay();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';//get AM/PM
+    hours = hours % 12;// convert hours to 12 hours for AM/PM
+    hours = hours ? hours : 12; // convert '0' should be '12' for AM/PM
+    hours = hours < 10 ? '0' + hours : hours;//add leading 0
+    minutes = minutes < 10 ? '0' + minutes : minutes;//add leading 0
+    let time = hours + ':' + minutes + ' ' + ampm;
+    let time24 = hours24 + ':' + minutes;
+    let match = date.toString().match(/\w{3} \w{3} \d{1,2} \d{4}/);
+    return match[0] + ' ' + time + ' / ' + time24;
+}
+
+var hasLoaded = false;
+var utcDateString;
+var utcDate;
+var creatorTimeZoneIndex;
+var localTimeZoneIndex = getLocalTimezoneIndex();
+var descriptionText;
+
+const containerDiv = document.getElementById("container");
+const descriptionDivTitle = document.createElement("H3");
+descriptionDivTitle.innerText = 'event description:';
+const descriptionDiv = document.createElement("DIV");
+descriptionDiv.classList.add("description-text");
+const dateDiv = document.createElement("DIV");
+const creatorDateDivTitle = document.createElement("H3");
+creatorDateDivTitle.innerText = "event date in creator's local time:";
+const creatorDateDiv = document.createElement("DIV");
+const localDateDivTitle = document.createElement("H3");
+localDateDivTitle.innerHTML = 'event date in your local time<br>(change if auto-selection is incorrect):';
+const localDateDiv = document.createElement("DIV");
+
+const timezoneSelect = document.createElement("SELECT");
+timezoneSelect.onchange = function(){
+	localTimeZoneIndex = this.selectedIndex;
+	updatePage();
+};
+let tempOption;
+for(let tZ of timezones){
+	tempOption = document.createElement("OPTION");
+	tempOption.value = tZ.offset - 1;
+	tempOption.innerHTML = tZ.value + " - " + tZ.text;
+	timezoneSelect.appendChild(tempOption);
+}
+timezoneSelect.selectedIndex = localTimeZoneIndex;
+
+containerDiv.appendChild(descriptionDivTitle);
+containerDiv.appendChild(descriptionDiv);
+dateDiv.appendChild(creatorDateDivTitle);
+dateDiv.appendChild(creatorDateDiv);
+dateDiv.appendChild(localDateDivTitle);
+dateDiv.appendChild(localDateDiv);
+dateDiv.appendChild(timezoneSelect);
+containerDiv.appendChild(descriptionDiv);
+containerDiv.appendChild(dateDiv);
+
+function getDataFromLink(){
+	let temp = window.location.hash.substr(2, window.location.hash.length).split("/");
+	if(temp.length != 3){
+		return false;
+	}
+	try{
+		utcDateString = lengthenTimeString(urlToInt(temp[0]));
+	}catch(error){
+		console.log(error);
+		return false;
+	}
+	try{
+		creatorTimeZoneIndex = urlToInt(temp[1]);
+	}catch(error){
+		console.log(error);
+		return false;
+	}
+	try{
+		descriptionText = unbase64url(temp[2]);
+	}catch(error){
+		console.log(error);
+		return false;
+	}
+	return true;
+}
+function updatePage(){
+	if(getDataFromLink()){
+		let date = new Date(utcDateString);
+		date.setMinutes(date.getMinutes() + (timezones[creatorTimeZoneIndex].offset - 1) * 60);
+		descriptionDiv.innerHTML = descriptionText;
+		creatorDateDiv.innerHTML = dateToString(date) + '<br>' + timezones[creatorTimeZoneIndex].value + ' ' + timezones[creatorTimeZoneIndex].text;
+		date = new Date(utcDateString);
+		date.setMinutes(date.getMinutes() + (timezones[localTimeZoneIndex].offset - 1) * 60);
+		localDateDiv.innerHTML = dateToString(date);
+		
+	}else{
+		containerDiv.innerHTML = "this link is invalid";
+	}
+	const createLinkButton = document.createElement("BUTTON");
+	createLinkButton.innerText = "create scheduled event";
+	createLinkButton.onclick = function(){window.open("index.html", "_blank");};
+	containerDiv.appendChild(createLinkButton);
+}
+updatePage();
+</script>
+</body>
+</html>
