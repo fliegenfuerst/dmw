@@ -1,6 +1,8 @@
 <html>
 <head>
 <title> time zoner </title>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
 </head>
 <body>
 <div id="background-container"></div>
@@ -50,8 +52,8 @@ class URL{
 		this.temp;
 	}
 	updateDate(date){
-		let newDate = new Date(date);
-		newDate.setMinutes(newDate.getMinutes() - offset);
+		let newDate = new Date(date + ':00.0000z');
+		newDate.setMinutes(newDate.getMinutes() + offset);
 		this.dateInt = shortenTimeString(newDate.toISOString().slice(0, 16));
 		this.updateUrl();
 	}
@@ -67,6 +69,8 @@ class URL{
 		if(hasLoaded){
 			window.location.hash= "!" + intToUrl(this.dateInt) + "/" + intToUrl(this.timezoneIndex) + "/" + base64url(this.descriptionText);
 			this.currentHash = window.location.hash;
+			shareLink.href = "share.html" + window.location.hash;
+			shareLinkButton.disabled = false;
 		}
 	}
 	checkHash(){
@@ -79,18 +83,28 @@ class URL{
 				descriptionTextInput.value = unbase64url(this.temp[2]);
 				this.currentHash = window.location.hash;
 			}
+			shareLinkButton.disabled = false;
 		}
 	}
 }
 const url = new URL();
 timezones.sort((firstTimezone, secondTimezone) => firstTimezone.value.localeCompare(secondTimezone.value));
 const containerDiv = document.getElementById("container");
-const descriptionTextInput = document.createElement("INPUT");
+
+const descriptionTextInputDiv = document.createElement("DIV");
+const descriptionTextInputTitle = document.createElement("H3");
+descriptionTextInputTitle.innerText = 'please describe the even you want to schedule';
+const descriptionTextInput = document.createElement("TEXTAREA");
 descriptionTextInput.oninput = descriptionTextInput.onpaste = descriptionTextInput.onchange = function(){
 	url.updateDescriptionText(this.value);
 }
-containerDiv.appendChild(descriptionTextInput);
+descriptionTextInputDiv.appendChild(descriptionTextInputTitle);
+descriptionTextInputDiv.appendChild(descriptionTextInput);
+containerDiv.appendChild(descriptionTextInputDiv);
 var offset = 0;
+const setDateInputDiv = document.createElement("DIV");
+const setDateInputTitle = document.createElement("H3");
+setDateInputTitle.innerText = 'please select a date and time';
 const setDateInput = document.createElement("INPUT");
 setDateInput.onchange = function(){
 	url.updateDate(this.value);
@@ -103,8 +117,13 @@ date = date.toISOString().slice(0, 16);
 setDateInput.value = date;
 setDateInput.min = date;
 url.updateDate(date);
-containerDiv.appendChild(setDateInput);
+setDateInputDiv.appendChild(setDateInputTitle);
+setDateInputDiv.appendChild(setDateInput);
+containerDiv.appendChild(setDateInputDiv);
 
+const timezoneSelectDiv = document.createElement("DIV");
+const timezoneSelectTitle = document.createElement("H3");
+timezoneSelectTitle.innerText = 'please select the timezone your event is hosted in';
 const timezoneSelect = document.createElement("SELECT");
 timezoneSelect.onchange = function(){
 	url.updateTimezoneIndex(this.selectedIndex);
@@ -116,7 +135,7 @@ timezoneSelect.onchange = function(){
 let tempOption;
 for(let tZ of timezones){
 	tempOption = document.createElement("OPTION");
-	tempOption.value = tZ.offset;
+	tempOption.value = tZ.offset - 1;
 	tempOption.innerHTML = tZ.value + " - " + tZ.text;
 	timezoneSelect.appendChild(tempOption);
 }
@@ -131,15 +150,25 @@ for(let i = 0; i < timezones.length; i++){
 	}
 }
 
-containerDiv.appendChild(timezoneSelect);
-setInterval(function() {
-	url.checkHash();
-}, 300);
+timezoneSelectDiv.appendChild(timezoneSelectTitle);
+timezoneSelectDiv.appendChild(timezoneSelect);
+containerDiv.appendChild(timezoneSelectDiv);
+const shareLinkButtonDiv = document.createElement("DIV");
+const shareLinkButton = document.createElement("BUTTON");
+shareLinkButton.innerText = "share";
+shareLinkButton.disabled = true;
+shareLinkButton.onclick = function(){window.open("share.html" + window.location.hash, "_blank");};
+shareLinkButtonDiv.appendChild(shareLinkButton);
+containerDiv.appendChild(shareLinkButtonDiv);
+
 window.addEventListener("load", setLoaded);
 function setLoaded(){
 	hasLoaded = true;
 	url.checkHash();
 }
+setInterval(function() {
+	url.checkHash();
+}, 300);
 </script>
 </body>
 </html>
