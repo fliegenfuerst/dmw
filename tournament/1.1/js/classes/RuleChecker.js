@@ -16,13 +16,13 @@ class RuleChecker{
 		let fullPotentialUsed = false;
 		let buffMultiplier = 1;
 		let digiStats = digimonStats[digi.type.value];
-		if(digi.brains.value > 250 && digi.brains.value <= 500){
+		/*if(digi.brains.value > 250 && digi.brains.value <= 500){
 			buffMultiplier = 2;
 		}else if(digi.brains.value > 500 && digi.brains.value <= 750){
 			buffMultiplier = 3;
 		}else if(digi.brains.value > 750){
 			buffMultiplier = 4;
-		}
+		}*/
 		for(let i = 1; i < 4; i++){
 			if(digiStats.moves[digi[`move${i}`].value - 0x2E] == "Muscle Charge"){
 				muscleChargeUsed = true;
@@ -39,19 +39,19 @@ class RuleChecker{
 
 		if(muscleChargeUsed){
 			tempMaxStats -= 160 * buffMultiplier;
-			if(buffMultiplier > 1){
-				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160} x${buffMultiplier} (${160*buffMultiplier})`);
-			}else{
-				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160}`);
-			}
+			/*if(buffMultiplier > 1){
+				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by 160.${160} x${buffMultiplier} (${160*buffMultiplier})`);
+			}else{*/
+				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by 160`);
+			//}
 		}
 		if(fullPotentialUsed){
 			tempMaxStats -= 250 * buffMultiplier;
-			if(buffMultiplier > 1){
+			/*if(buffMultiplier > 1){
 				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250} x${buffMultiplier} (${250*buffMultiplier})`);
-			}else{
-				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250}`);
-			}
+			}else{*/
+				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by 250`);
+			//}
 		}
 		
 		sum = tempMaxStats - sum;
