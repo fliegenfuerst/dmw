@@ -9,6 +9,7 @@
 <body>
 <div>
 	<button id="downloadButton" onclick="saveFile(this)" disabled="true">download memorycard</button>
+	<input type="checkbox" onclick="setDownloadScreenshot(this)" checked>download screenshot</input>
 	<div id="container"></div>
 	<div id="bottom-div">
 		<div>Digimon that are marked with a <span style="background-color:coral">red</span> background are not normally available to play and may cause issues</div>
@@ -22,6 +23,7 @@
 <script>
 var screenName = "";
 var maxCombinedStats = 0;
+var downloadScreenshot = true;
 </script>
 <script type="text/javascript" src="js/data/digimonStats.js"></script>
 <script type="text/javascript" src="js/data/digimonAlphabetical.js"></script>
