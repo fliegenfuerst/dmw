@@ -11,7 +11,7 @@ class RuleChecker{
 	checkMaxCombinedStats(digi){
 		let tempMaxStats = maxCombinedStats;
 		let retStr;
-		let buffStr = '';
+		let buffStr = [];
 		let muscleChargeUsed = false;
 		let fullPotentialUsed = false;
 		let buffMultiplier = 1;
