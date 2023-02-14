@@ -64,7 +64,7 @@ class RuleChecker{
 			retStr = `your combined stats match the maximum as per the current rules`;
 		}
 		if(buffStr.length != 0){
-			return retStr + '<p style="margin:0; border: solid white;">' + buffStr.join("<br>") + '</p>';
+			return retStr + '<p style="margin:0; border: solid red;">' + buffStr.join("<br>") + '</p>';
 		}else{
 			return retStr;
 		}
