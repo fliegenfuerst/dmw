@@ -40,7 +40,7 @@ class RuleChecker{
 		if(muscleChargeUsed){
 			tempMaxStats -= 160 * buffMultiplier;
 			if(buffMultiplier > 1){
-				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160} x${buffMultiplier}`);
+				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160} x${buffMultiplier} (${160*buffMultiplier})`);
 			}else{
 				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160}`);
 			}
@@ -48,7 +48,7 @@ class RuleChecker{
 		if(fullPotentialUsed){
 			tempMaxStats -= 250 * buffMultiplier;
 			if(buffMultiplier > 1){
-				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250} x${buffMultiplier}`);
+				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250} x${buffMultiplier} (${250*buffMultiplier})`);
 			}else{
 				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250}`);
 			}
