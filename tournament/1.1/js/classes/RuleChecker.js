@@ -9,21 +9,53 @@ class RuleChecker{
 		this.check();
 	}
 	checkMaxCombinedStats(digi){
-		let sum = Math.round(digi.hp.value/10);
-		sum += Math.round(digi.mp.value/10);
+		let tempMaxStats = maxCombinedStats;
+		let retStr;
+		let buffStr = '';
+		let muscleChargeUsed = false;
+		let fullPotentialUsed = false;
+		let buffMultiplier = 1;
+		let digiStats = digimonStats[digi.type.value];
+		if(digi.brains.value > 250 && digi.brains.value <= 500){
+			buffMultiplier = 2;
+		}else if(digi.brains.value > 500 && digi.brains.value <= 750){
+			buffMultiplier = 3;
+		}else if(digi.brains.value > 750 && digi.brains.value <= 1000){
+			buffMultiplier = 4;
+		}
+		for(let i = 1; i < 4; i++){
+			if(digiStats.moves[digi[`move${i}`].value - 0x2E] == "Muscle Charge"){
+				muscleChargeUsed = true;
+			}else if(digiStats.moves[digi[`move${i}`].value - 0x2E] == "Full Potential"){
+				fullPotentialUsed = true;
+			}
+		}
+		let sum = Math.round(digi.hp.value / 10);
+		sum += Math.round(digi.mp.value / 10);
 		sum += Math.round(digi.offense.value);
 		sum += Math.round(digi.defense.value);
 		sum += Math.round(digi.speed.value);
 		sum += Math.round(digi.brains.value);
-		sum = maxCombinedStats - sum;
-		if(sum > 0){
-			return `you can still use ${sum} more points in your stats`;
-		}else if(sum < 0){
-			return `you need to reduce the points you put in your stats by ${Math.abs(sum)}`;
-			this.isValid = false;
-		}else{
-			return `your combined stats match the maximum as per the current rules`;
+
+		if(muscleChargeUsed){
+			tempMaxStats -= 160 * buffMultiplier;
+			buffStr +=`<br>due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160 * buffMultiplier}`;
 		}
+		if(fullPotentialUsed){
+			tempMaxStats -= 250 * buffMultiplier;
+			buffStr += `<br>due to your selection of Full Potential, your Stat Point Limit is reduced by ${250 * buffMultiplier}`;
+		}
+		
+		sum = tempMaxStats - sum;
+		if(sum > 0){
+			retStr = `you can still use ${sum} more points in your stats`;
+		}else if(sum < 0){
+			retStr = `you need to reduce the points you put in your stats by ${Math.abs(sum)}`;
+			//this.isValid = false;
+		}else{
+			retStr = `your combined stats match the maximum as per the current rules`;
+		}
+		return retStr + buffStr;
 	}
 	checkIsGameBreaking(digiStats){
 		let moves = [];
