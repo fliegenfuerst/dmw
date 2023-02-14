@@ -38,6 +38,9 @@ function saveFile(){
 		});
 	}
 }
+function setDownloadScreenshot(event){
+	downloadScreenshot = event.checked;
+}
 var animatedSprites = document.getElementsByClassName("animated-sprite");
 var idleState = 0;
 
