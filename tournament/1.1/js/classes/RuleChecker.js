@@ -20,7 +20,7 @@ class RuleChecker{
 			buffMultiplier = 2;
 		}else if(digi.brains.value > 500 && digi.brains.value <= 750){
 			buffMultiplier = 3;
-		}else if(digi.brains.value > 750 && digi.brains.value <= 1000){
+		}else if(digi.brains.value > 750){
 			buffMultiplier = 4;
 		}
 		for(let i = 1; i < 4; i++){
