@@ -39,11 +39,19 @@ class RuleChecker{
 
 		if(muscleChargeUsed){
 			tempMaxStats -= 160 * buffMultiplier;
-			buffStr +=`<br>due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160} x${buffMultiplier}`;
+			if(buffMultiplier > 1){
+				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160} x${buffMultiplier}`);
+			}else{
+				buffStr.push(`due to your selection of Muscle Charge, your Stat Point Limit is reduced by ${160}`);
+			}
 		}
 		if(fullPotentialUsed){
 			tempMaxStats -= 250 * buffMultiplier;
-			buffStr += `<br>due to your selection of Full Potential, your Stat Point Limit is reduced by ${250} x${buffMultiplier}`;
+			if(buffMultiplier > 1){
+				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250} x${buffMultiplier}`);
+			}else{
+				buffStr.push(`due to your selection of Full Potential, your Stat Point Limit is reduced by ${250}`);
+			}
 		}
 		
 		sum = tempMaxStats - sum;
@@ -55,19 +63,11 @@ class RuleChecker{
 		}else{
 			retStr = `your combined stats match the maximum as per the current rules`;
 		}
-		return retStr + buffStr;
-	}
-	checkIsGameBreaking(digiStats){
-		let moves = [];
-		for(let i = 0; i < digiStats.moves.length; i++){
-			if(moves.indexOf(digiStats.moves[i]) == -1){
-				moves.push(digiStats.moves[i]);
-			}
+		if(buffStr.length != 0){
+			return retStr + '<p style="margin:0; border: solid white;">' + buffStr.join("<br>") + '</p>';
+		}else{
+			return retStr;
 		}
-		if(moves.length < 3){
-			return true;
-		}
-		return false;
 	}
 	check(){
 		this.retStr = [];
