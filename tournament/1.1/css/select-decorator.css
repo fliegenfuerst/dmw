@@ -39,7 +39,7 @@
 .image-select-list-container{
 	position: absolute;
 	z-index: 99;
-	top: 30px;
+	top: 20px;
 	left: -20px;
 	border: 1px solid #767676;
 }
