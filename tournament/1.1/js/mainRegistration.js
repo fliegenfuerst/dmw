@@ -30,11 +30,13 @@ function downloadBlob(blob, filename){
 function saveFile(){
 	let filename = `${new Date().toISOString().slice(0, 10).replaceAll("-", "")}_${screenName}`;
 	downloadBlob(memcardReader.getDigimonSavesBlob(), `${filename}.mcr`);
-	html2canvas(document.querySelector('#container')).then(canvas => {
-		canvas.toBlob(function(blob) {			
-			downloadBlob(blob, `${filename}.png`);
+	if(downloadScreenshot){
+		html2canvas(document.querySelector('#container')).then(canvas => {
+			canvas.toBlob(function(blob) {			
+				downloadBlob(blob, `${filename}.png`);
+			});
 		});
-	});
+	}
 }
 var animatedSprites = document.getElementsByClassName("animated-sprite");
 var idleState = 0;
