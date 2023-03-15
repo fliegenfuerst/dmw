@@ -1,0 +1,55 @@
+<!Doctype html>
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+<link rel="stylesheet" href="css/select-decorator.css" type="text/css"/>
+<title>Digimon World VS Registration Tool</title>
+<meta content="Tournament Entry Creator" property="og:title" />
+<meta content="A simple and fast way to create a memory card with a dw1 save for tournaments." property="og:description" />
+<meta content="https://fliegenfuerst.github.io/dmw/tournament/beta/" property="og:url" />
+<meta content="https://fliegenfuerst.github.io/dmw/tournament/beta/css/preview.png" property="og:image" />
+<meta content="#526e83" data-react-helmet="true" name="theme-color" />
+</head>
+<title>Digimon World VS Registration Tool</title>
+<body>
+<div>
+	<div id="buttonDiv">
+		<button id="downloadButton" onclick="saveFile(this)" disabled="true">download memorycard</button>
+		<button id="getEntryButton" onclick="downloadEntry(this)" disabled="true">get entry</button>
+	</div>
+	<span id="linkCopiedToClipboardAlert" class="hidden">link copied to clipboard</span>
+	<div id="onMouseOverTooltip" class="hidden"></div>
+	<div id="container"></div>
+	<div id="bottom-div">
+		<div>Digimon that are marked with a <span style="background-color:coral">red</span> background are not normally available to play and may cause issues</div>
+		<div>Regular raisable Digimon are marked with a <span style="background-color:lightgreen">green</span> background</div>
+		<div>Baby Digimon are marked with a <span class="baby">white on black</span> text</div>
+		<div>Digimon without attack animations are marked with a <span class="unplayable">red on black</span> text.</div>
+		<div>Digimon with only two attacks are marked with a <span class="otamamon">blue on green</span> text.</div>
+	</div>
+</div>
+<footer>version 1.3.beta</footer>
+<script>
+var screenName = "";
+var maxCombinedStats = 0;
+var animatedSprites = [];
+</script>
+<script type="text/javascript" src="js/data/digimonStats.js"></script>
+<script type="text/javascript" src="js/data/digimonAlphabetical.js"></script>
+<script type="text/javascript" src="js/data/digimonSpecialities.js"></script>
+<script type="text/javascript" src="js/data/moves.js"></script>
+<script type="text/javascript" src="js/data/movesFull.js"></script>
+<script type="text/javascript" src="js/classes/Helper.js"></script>
+<script type="text/javascript" src="js/classes/RuleChecker.js"></script>
+<script type="text/javascript" src="js/classes/BlobBuilder.js"></script>
+<script type="text/javascript" src="js/classes/DigimonSaveRegistration.js"></script>
+<script type="text/javascript" src="js/classes/MemoryCardReader.js"></script>
+<script type="text/javascript" src="js/classes/customElementsRegistration.js"></script>
+<script type="text/javascript" src="js/registerCustomElementsRegistration.js"></script>
+<script type="text/javascript" src="js/classes/GUIRegistration.js"></script>
+<script type="text/javascript" src="js/classes/HashManager.js"></script>
+<script type="text/javascript" src="js/external/html2canvas.js"></script>
+<script type="text/javascript" src="js/mainRegistration.js"></script>
+</body>
+</html>
