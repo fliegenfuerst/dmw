@@ -529,7 +529,7 @@ class DigimonTable extends CustomTable{
 		let col = document.createElement("TD");
 		let propertyName = helper.guiNameToPropertyName(name);
 		let input = new NumberInput(minValue, maxValue, `${propertyName}-${this.index}`, this.model[propertyName]);
-		col.innerHTML = `<img src="css/${name}.png" /> ${name}`;
+		col.innerHTML = `<img src="css/${name.toLowerCase()}.png" /> ${name}`;
 		row.appendChild(col);
 		col = document.createElement("TD");
 		col.appendChild(input);
