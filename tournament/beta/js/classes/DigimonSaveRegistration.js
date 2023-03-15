@@ -13,14 +13,14 @@ class DigimonSave{
 		this.getCurrentDigimonData();
 		this.name = this.readStringExclusive(0x0, 0x1E);
 		this.createRegisteredDigimon();
-		this.tamerName = new Value(0x667, this.readString(0x667, 18), "string");
+		this.tamerName = new Value(0x667, this.readString(0x667, 14), "string");
 	}
 	getSaveArray(){
 		if(this.tamerName.value == "Tamer"){
-			this.tamerName.value = screenName.slice(0, 9);
+			this.tamerName.value = screenName.slice(0, 6);
 		}
 		this.writeString(0x12, this.tamerName.value, 6);
-		this.writeString(this.tamerName.offset, this.tamerName.value, 9);
+		this.writeString(this.tamerName.offset, this.tamerName.value, 6);
 		let name = digimonStats[this.registeredDigimon[0].type.value].name;
 		let temp = helper.getZeroArray(17);
 		for(let i = 0; i < name.length; i++){
@@ -104,115 +104,21 @@ class DigimonSave{
 	}
 	writeString(offset, string, length){
 		let charCode;
-		//console.log(UTF8ToJIS(string));
 		let arr = [];
-		/*for(let i = 0; i < length; i++){
+		for(let i = 0; i < length; i++){
 			if(i < string.length){
 				charCode = string.charCodeAt(i);
-				if(charCode == 32){
-					arr.push(129);
-					arr.push(64);
-				}else if(charCode > 96){
-					arr.push(130);
+				arr.push(130);
+				if(charCode > 96){
 					arr.push(charCode + 32);
 				}else{
-					arr.push(130);
 					arr.push(charCode + 31);
 				}
 			}else{
 				arr.push(0);
 			}
-		}*/
-		console.log(inGameAllowedCharacters);
-		console.log(string);
-		console.log(string.length);
-		for(let i = 0; i < string.length; i++){
-			console.log(i);
-			console.log(string.charCodeAt(i));
-			console.log(string.charAt(i));
-			arr.push(...inGameAllowedCharacters[string.charCodeAt(i)]['in_game']);
-		}
-		for(let i = 0; i < 18 - string.length; i++){
-			arr.push(0);
 		}
 		this.writeBytes(offset, arr);
-/*
-arr.push(129);//whitespace
-arr.push(64);//whitespace
-arr.push(129);//.
-arr.push(66);//.
-arr.push(129);//,
-arr.push(67);//,
-arr.push(129);//:
-arr.push(70);//:
-arr.push(129);//;
-arr.push(71);//;
-arr.push(129);//?
-arr.push(72);//?
-arr.push(129);//!
-arr.push(73);//!
-arr.push(129);//	\
-arr.push(95);//	\
-arr.push(129);//'
-arr.push(117);//'
-arr.push(129);//"
-arr.push(118);//"
-arr.push(129);//=
-arr.push(129);//=
-arr.push(129);//circle
-arr.push(155);//circle
-arr.push(129);//triangle?
-arr.push(158);//triangle?
-arr.push(129);//square
-arr.push(160);//square
-arr.push(129);//cross
-arr.push(162);//cross
-
-129 120 129 121 129 122 129 123 129 124 129 125
-XXX+-X
-
-129 150 129 151 129 152 129 153 129 154 129 155 
-XXXXXcircle
-
-129 156 129 157 129 158 129 159 129 160 129 161
-XXXXsquareX
-
-129 162 129 163 129 164 129 165 129 166 129 167
-crossXXXXX
-
-
-
-
-130 79 130 80 130 81 130 82 130 83 130 84 130 85 130 86 130 87 130 88
-012345678956789
-130 96 130 97 130 98 130 99 130 100 130 101 130 102 130 103 130 104 130 105 130 106 130 107 130 108 130 109 130 110 130 111 130 112 130 113 130 114 130 115 130 116 130 117 130 118 130 119 130 120 130 121
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz
-
-G-L
-
-M-R
-
-S-X
- 130 122 130 123 130 124 130 125
-YZ----
-130 96 130 97 130 98 130 99 130 100 130 101 130 102 130 103 130 104 130 105 130 106 130 107 130 108 130 109 130 110 130 111 130 112 130 113 130 114 130 115 130 116 130 117 130 118 130 119 130 120 130 121 130 129 130 130 130 131 130 132 130 133 130 134 130 135 130 136 130 137 130 138 130 139 130 140 130 141 130 142 130 143 130 144 130 145 130 146 130 147 130 148 130 149 130 150 130 151 130 152 130 153 130 154
-abcefghijklmnopqrstuvwxyz
-
-d-i
-
-j-o
-
-p-u
-130 150 130 151 130 152 130 153 130 154
-vwxyz-
-
-
-130 246 130 247 130 248 130 249 130 252 130 253 130 254 130 255
-*/
-
-
-
-
 	}
 	updateChecksum(){
 		this.writeBytes(0x6FC, [0, 0, 0, 0]);
@@ -329,7 +235,7 @@ vwxyz-
 						this.writeBytes(data[propertyNames[i]].offset, helper.valueToSaveArraySigned(data[propertyNames[i]].value, 2));
 						break;
 					case "string":
-						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 14);
+						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 6);
 						break;
 				}
 		}
@@ -452,7 +358,7 @@ vwxyz-
 		offset += 0x2;
 		this.currentDigimon.currentMp = new Value(offset, this.readShort(offset), "short");
 		offset = 0x67B;
-		this.currentDigimon.name = new Value(offset, this.readString(offset, 18), "string");
+		this.currentDigimon.name = new Value(offset, this.readString(offset, 14), "string");
 		offset = 0x68F;
 		this.currentDigimon.livesLeft = new Value(offset, this.readByte(offset), "byte");
 	}
