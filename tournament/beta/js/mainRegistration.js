@@ -33,13 +33,6 @@ function saveFile(){
 function getFilename(){
 	return `${new Date().toISOString().slice(0, 16).replaceAll("-", "").replaceAll("T", "").replaceAll(":", "")}_${screenName}`;
 }
-function downloadScreenshot(filename){
-	html2canvas(document.querySelector('#container')).then(canvas => {
-		canvas.toBlob(function(blob) {			
-			downloadBlob(blob, `${filename}.png`);
-		});
-	});
-}
 function copyURLToClipBoard(){
 	navigator.clipboard.writeText(window.location.href);	
 }
@@ -50,7 +43,6 @@ function downloadEntry(){
 	setTimeout(function(){
 		linkCopiedToClipboardAlert.classList.remove("fade-out");
 		linkCopiedToClipboardAlert.classList.add("hidden");
-		downloadScreenshot(getFilename());
 	}, 3000);
 }
 animatedSprites = document.getElementsByClassName("animated-sprite");
