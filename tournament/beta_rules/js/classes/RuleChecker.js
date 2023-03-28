@@ -246,7 +246,7 @@ class Rules{
 				retArr.push(`you are not allowed to equip more than two status effect moves`);
 				this.isValid = false;
 			}else if(this.nonPoisonEffectMovesEquipped[0].effect.type != this.nonPoisonEffectMovesEquipped[1].effect.type){
-				retArr.push(`you are not allowed to equip multiple moves with different nonpoison status effects, unequip either ${helper.getOrSentenceFromMoveArr(this.nonPoisonEffectMovesEquipped)}`);
+				retArr.push(`you are not allowed to equip multiple moves with different non-poison status effects, unequip either ${helper.getOrSentenceFromMoveArr(this.nonPoisonEffectMovesEquipped)}`);
 				this.isValid = false;
 			}
 		}
@@ -255,7 +255,7 @@ class Rules{
 			if(this.effectChanceCeilingReason != false){
 				tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
 				if(this.poisonEffectMovesEquipped.length > 0){
-					tempStr += `, the nonpoison moves must have an effectchance of ${this.effectChanceCeiling}% or less`;
+					tempStr += `, the non-poison moves must have an effectchance of ${this.effectChanceCeiling}% or less`;
 				}
 			}
 			retArr.push(tempStr);
