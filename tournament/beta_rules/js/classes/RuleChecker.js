@@ -175,7 +175,7 @@ class Rules{
 		this.checkRules(digi);
 		let retArr = [];
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
-		if(brainsSpeedRule != "ruleFulfilled){
+		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
 		}
 		let tempStr = "";
