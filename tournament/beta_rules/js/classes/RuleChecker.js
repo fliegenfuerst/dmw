@@ -71,7 +71,7 @@ function filterPoisonEffectMoves(moves){
 function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 	let aboveCeilingMoves = [];
 	for(let move of moves){
-		if(move.effect != undefined && move.effect != "POISON" && move.effect.chance > ceiling){
+		if(move.effect != undefined && move.effect.type != "POISON" && move.effect.chance > ceiling){
 			aboveCeilingMoves.push(move);
 		}
 	}
