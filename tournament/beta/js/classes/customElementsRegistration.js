@@ -30,7 +30,7 @@ class NumberInput extends HTMLInputElement{
 				this.value = this.max;
 			}
 		}
-		updateValue();
+		this.updateValue();
 	}
 	setValue(value){
 		this.value = value;
