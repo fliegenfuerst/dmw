@@ -12,7 +12,7 @@ function countCombinedStats(digi){
 	return sum;
 }
 function checkBrainsToSpeedRatio(digi){
-	let difference = Math.round(digi.speed.value/2) - digi.brains.value;
+	let difference = Math.round(digi.speed.value / 2) - digi.brains.value;
 	if(difference <= 0){
 		return "ruleFulfilled";
 	}else if(difference > 0){
