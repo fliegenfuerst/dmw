@@ -218,7 +218,7 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.speed.value > this.maxSpeed){
-			tempStr = `you need to lower your offense to ${this.maxSpeed}`;
+			tempStr = `you need to lower your speed to ${this.maxSpeed}`;
 			if(this.maxSpeedReason != false){
 				tempStr += ` because you have ${this.maxSpeedReason} equipped`;
 			}
