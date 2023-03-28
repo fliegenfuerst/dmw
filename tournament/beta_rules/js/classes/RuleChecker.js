@@ -238,7 +238,7 @@ class Rules{
 			this.isValid = false;
 		}else if(this.poisonEffectMovesEquipped.length == 1){
 			if(this.nonPoisonEffectMovesEquipped.length > 1){
-				retArr.push(`you need to unequip either ${helper.getOrSentenceFromMoveArr(this.nonPoisonEffectMovesEquipped)} because you already have a poison move equipped`);
+				retArr.push(`you need to unequip either ${helper.getOrSentenceFromMoveArr(this.nonPoisonEffectMovesEquipped)} because you have a poison move equipped`);
 				this.isValid = false;
 			}
 		}else if(this.nonPoisonEffectMovesEquipped.length >= this.maxNonPoisonEffectMoves){
