@@ -252,6 +252,9 @@ class Rules{
 			tempStr = `you need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
 			if(this.effectChanceCeilingReason != false){
 				tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
+				if(this.poisonEffectMovesEquipped.length > 0){
+					tempStr += `, the nonpoison moves must have an effectchance under ${this.effectChanceCeiling}%`;
+				}
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
