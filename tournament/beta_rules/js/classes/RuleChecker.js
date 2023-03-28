@@ -255,7 +255,7 @@ class Rules{
 			if(this.effectChanceCeilingReason != false){
 				tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
 				if(this.poisonEffectMovesEquipped.length > 0){
-					tempStr += `, the non-poison moves must have an effectchance of ${this.effectChanceCeiling}% or less`;
+					tempStr += `, the non-poison moves must have an effect-chance of ${this.effectChanceCeiling}% or less`;
 				}
 			}
 			retArr.push(tempStr);
