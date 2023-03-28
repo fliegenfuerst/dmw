@@ -1,0 +1,197 @@
+*{
+	font-family: inherit;
+	font-size: inherit;
+}	
+body {
+	image-rendering: optimizeSpeed;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -o-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: pixelated;
+	image-rendering: optimize-contrast;
+	-ms-interpolation-mode: nearest-neighbor;
+	font-family: Roboto, sans-serif;
+	font-size: 14px;
+	background-color: grey;
+}
+button{
+	text-rendering: auto;
+}
+#buttonDiv, #container, #bottom-div, #linkCopiedToClipboardAlert{
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+#container, #bottom-div{
+	background-color: LightGrey;
+}
+#container{
+	top: 40px;
+}
+#bottom-div{
+	bottom: 0;
+	text-align: center;
+}
+footer{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+.obtainable{
+	background-color: LightGreen;
+}
+.unobtainable{
+	background-color: Coral;
+}
+.unplayable{
+	background-color: Black;
+	color: Red;
+}
+.baby{
+	background-color: Black;
+	color: White;
+}
+.otamamon{
+	background-color: LightGreen;
+	color: Blue;
+}
+input[type="number"]{
+	width: 72px;
+	text-align: right;
+}
+.sprite{
+	display: block;
+	height: 18px;
+	width: 18px;
+	overflow: hidden;
+}
+.sprite>.imgContainer{
+	display: block;
+	pointer-events: none;
+	height: 16px;
+	width: 16px;
+	padding-top: 1px;
+	padding-left: 1px;
+	overflow: hidden;
+}
+.sprite>.imgContainer>img{
+	height: 16px;
+	width: 16px;
+	object-fit: cover;
+}
+.is-tooltip, #onMouseOverTooltip{
+	position: absolute;
+	background-color: Grey;
+	border: 1px solid #363636;
+	border-radius: 4px;
+	color: white;
+	pointer-events: none;
+	padding: 4px;
+	text-align: center;
+	z-index: 99;
+}
+.is-tooltip{
+	display: none;
+	visibility: hidden;
+}
+.screenname-tooltip{
+	margin-top: -43px;
+	margin-left: 129px;
+	width: 206px;
+}
+.move-tooltip{
+	margin-top: -40px;
+	margin-left: 154px;
+	width: 130px;
+}
+.has-tooltip:hover .is-tooltip{
+	display: block;
+	visibility: visible;
+}
+.speciality-tooltip{
+	/*display: block;
+	position: fixed;*/
+	margin-top: -40px;
+	margin-left: 154px;
+	width: 130px;
+}
+.effect-img{
+	position: absolute;
+	right: 16px;
+	top: 3px;
+	pointer-events: none;
+}
+#linkCopiedToClipboardAlert{
+	padding: 15px;
+	top: 50px;
+	background-color: LightGreen;
+	z-index:99;
+	border: 1px solid Green;
+	border-radius: 20px;
+}
+.hidden{
+	visibility: hidden;
+	display: none;
+}
+.fade-out{
+	animation: fadeOut 3s;
+	-webkit-animation: fadeOut 3s;
+	-moz-animation: fadeOut 3s;
+	-o-animation: fadeOut 3s;
+	-ms-animation: fadeOut 3s;
+}
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@-webkit-keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@-moz-keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@-o-keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@-ms-keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
