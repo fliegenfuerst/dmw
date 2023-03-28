@@ -149,7 +149,7 @@ class Rules{
 		for(let move of this.moves){
 			for(let moveRule of moveRules){
 				if(move.name == moveRule.name){
-					for(let simpleRuleType in simpleRuleTypes){
+					for(let simpleRuleType of simpleRuleTypes){
 						if(moveRule[simpleRuleType] != undefined){
 							if(this[simpleRuleType] > moveRule[simpleRuleType]){
 								this[simpleRuleType] = moveRule[simpleRuleType];
