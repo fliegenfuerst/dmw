@@ -561,7 +561,6 @@ class DigimonTable extends CustomTable{
 		this.finisherCell.style.float = "right";
 		row.appendChild(this.finisherCell);
 		this.finisherCell.onmouseenter = function(){
-			console.log(this);
 			let rect = this.getBoundingClientRect();
 			onMouseOverTooltip.classList.remove("hidden");
 			onMouseOverTooltip.appendChild(this.toolTipDiv);
