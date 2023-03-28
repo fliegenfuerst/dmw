@@ -225,7 +225,7 @@ class Rules{
 			retArr.push(tempStr);
 			this.isValid = false;
 		}
-		for(let bannedMove in this.bannedMoves){
+		for(let bannedMove of this.bannedMoves){
 			retArr.push(`you need to unequip ${bannedMove} for it is banned`);
 			this.isValid = false;
 		}
