@@ -5,10 +5,10 @@ const simpleRuleTypes = ["maxOffense", "maxDefense", "maxSpeed", "maxBuffMoves",
 function countCombinedStats(digi){
 	let sum = Math.round(digi.hp.value / 10);
 	sum += Math.round(digi.mp.value / 10);
-	sum += Math.round(digi.offense.value);
-	sum += Math.round(digi.defense.value);
-	sum += Math.round(digi.speed.value);
-	sum += Math.round(digi.brains.value);
+	sum += digi.offense.value;
+	sum += digi.defense.value;
+	sum += digi.speed.value;
+	sum += digi.brains.value;
 	return sum;
 }
 function checkBrainsToSpeedRatio(digi){
