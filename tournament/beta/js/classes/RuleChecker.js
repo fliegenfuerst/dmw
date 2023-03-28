@@ -147,7 +147,7 @@ class Rules{
 		this.nonPoisonEffectMovesEquipped = filterNonPoisonEffectMoves(this.moves);
 		this.buffMovesEquipped = filterBuffMoves(this.moves);
 		for(let move of this.moves){
-			for(let moveRule in moveRules){
+			for(let moveRule of moveRules){
 				if(move.name == moveRule.name){
 					for(let simpleRuleType in simpleRuleTypes){
 						if(moveRule[simpleRuleType] != undefined){
