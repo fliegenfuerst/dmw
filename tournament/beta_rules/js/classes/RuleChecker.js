@@ -183,6 +183,8 @@ class Rules{
 		if(statsDifference < 0){
 			retArr.push(`your entry is ${Math.abs(statsDifference)} ${(statsDifference == -1) ? "point" : "points"} over the stat point limit`);
 			this.isValid = false;
+		}else if(statsDifference != 0){
+			retArr.push(`you may still use ${Math.abs(statsDifference)} ${(statsDifference == -1) ? "point" : "points"} more for your entry`);
 		}
 		if(this.reduceTotalStatsBy != 0){
 			retArr.push(`your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${this.reduceTotalStatsByReason} equipped`);
