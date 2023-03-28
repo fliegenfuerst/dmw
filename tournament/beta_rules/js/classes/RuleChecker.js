@@ -172,7 +172,6 @@ class Rules{
 		this.aboveCeilingMoves = filterNonPoisonAboveEffectChanceCeilingMoves(this.moves, this.effectChanceCeiling);
 	}
 	getRulesString(digi){
-		console.log(this);
 		this.checkRules(digi);
 		let retArr = [];
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
