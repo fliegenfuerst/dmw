@@ -12,7 +12,7 @@ function countCombinedStats(digi){
 	return sum;
 }
 function checkBrainsToSpeedRatio(digi){
-	let difference = Math.round(digi.speed.value / 2) - digi.brains.value;
+	let difference = Math.round(digi.speed.value/2) - digi.brains.value;
 	if(difference <= 0){
 		return "ruleFulfilled";
 	}else if(difference > 0){
@@ -293,7 +293,7 @@ class RuleChecker{
 			downloadButton.disabled = true;
 			getEntryButton.disabled = true;
 		}
-		gui.updateRuleCheckerDiv(this.retStr.join("<br>"), this.isValid);
+		gui.updateRuleCheckerDiv(`<li>${this.retStr.join("</li><li>")}</li>`, this.isValid);
 	}
 }
 const ruleChecker = new RuleChecker();
