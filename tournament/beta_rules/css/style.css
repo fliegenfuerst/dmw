@@ -17,6 +17,11 @@ body {
 button{
 	text-rendering: auto;
 }
+li{
+	text-align: left;
+	padding-left: 3px;
+	padding-right: 3px;
+}
 #buttonDiv, #container, #bottom-div, #linkCopiedToClipboardAlert{
 	position: fixed;
 	left: 50%;
