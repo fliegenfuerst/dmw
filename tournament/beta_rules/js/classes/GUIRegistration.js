@@ -4,7 +4,7 @@ class GUI{
 		this.contentDiv = document.createElement("DIV");
 		this.contentDiv.style = "clear: both;";
 		this.container.appendChild(this.contentDiv);
-		this.ruleCheckerDiv = new RuleCheckerDiv();
+		this.ruleCheckerDiv = new RuleCheckerUL();
 	}
 	showRegisteredDigimonView(){
 		this.contentDiv.innerHTML = "";
@@ -26,4 +26,3 @@ class GUI{
 		}
 	}
 }
-
