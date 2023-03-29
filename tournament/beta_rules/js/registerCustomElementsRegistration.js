@@ -8,7 +8,4 @@ customElements.define("move-select", MoveSelect, {extends:"select"});
 customElements.define("move-option", MoveOption, {extends:"option"});
 customElements.define("name-table", NameTable, {extends:"table"});
 customElements.define("registered-digimon-table", RegisteredDigimonTable, {extends:"table"});
-customElements.define("rule-checker-div", RuleCheckerDiv, {extends:"div"});
-/*customElements.define("digimon-select-wrapper-div", DigimonSelectWrapper, {extends:"div"});
-customElements.define("digimon-option-wrapper-div", DigimonOptionWrapper, {extends:"div"});
-customElements.define("digimon-options-wrapper-div", DigimonOptionsWrapper, {extends:"div"});*/
+customElements.define("rule-checker-ul", RuleCheckerUL, {extends:"ul"});
