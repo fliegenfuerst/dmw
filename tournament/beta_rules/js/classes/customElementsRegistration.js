@@ -661,7 +661,7 @@ class RegisteredDigimonTable extends DigimonTable{
 		super(digi, index);
 	}
 }
-class RuleCheckerDiv extends HTMLDivElement{
+class RuleCheckerUL extends HTMLUListElement{
 	constructor(){
 		super();
 		this.style.margin = "auto";
