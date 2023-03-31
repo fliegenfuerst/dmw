@@ -78,10 +78,13 @@ function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 	return aboveCeilingMoves;
 }
 const moveRules = [
+{"name": "Aqua Magic", "reduceTotalStatsBy": 45},
+{"name": "Mass Morph", "reduceTotalStatsBy": 65},
+{"name": "War Cry", "reduceTotalStatsBy": 50},
 {"name": "Muscle Charge", "maxDefense": 955, "reduceTotalStatsBy": 150, "maxBuffMoves": 1},
 {"name": "Full Potential", "maxOffense": 840, "maxDefense": 840, "maxSpeed": 840, "reduceTotalStatsBy": 225, "maxBuffMoves": 1},
-{"name": "Ice Statue", "maxOffense": 840, "maxSpeed": 190, "effectChanceCeiling": 40},
-{"name": "Megalo Spark", "maxOffense": 850, "maxSpeed": 240},
+{"name": "Ice Statue", "maxOffense": 910, "maxSpeed": 190, "effectChanceCeiling": 40},
+{"name": "Megalo Spark", "maxOffense": 925, "maxSpeed": 240},
 {"name": "Insect Plague", "maxDefense": 910, "maxSpeed": 200},
 {"name": "Poison Powder", "maxDefense": 940, "maxSpeed": 250},
 {"name": "Thunder Justice", "maxOffense": 900, "maxSpeed": 275},
@@ -158,10 +161,8 @@ class Rules{
 						}
 					}
 					if(moveRule.reduceTotalStatsBy != undefined){
-						if(this.reduceTotalStatsBy < moveRule.reduceTotalStatsBy){
-							this.reduceTotalStatsBy += moveRule.reduceTotalStatsBy;
-							this.reduceTotalStatsByReason.push(moveRule.name);
-						}
+						this.reduceTotalStatsBy += moveRule.reduceTotalStatsBy;
+						this.reduceTotalStatsByReason.push(moveRule.name);
 					}
 					if(moveRule.isBanned != undefined){
 						this.bannedMoves.push(moveRule.name);
@@ -175,11 +176,16 @@ class Rules{
 		this.checkRules(digi);
 		let retArr = [];
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
+		let brainsBuffReduction = 0;
+		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
+			this.reduceTotalStatsBy += 50 * Math.round(digi.brains.value/100);
+			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains`);
+		}
 		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
 		}
 		let tempStr = "";
-		let statsDifference = (maxCombinedStats - this.reduceTotalStatsBy) - countCombinedStats(digi);
+		let statsDifference = maxCombinedStats - this.reduceTotalStatsBy - countCombinedStats(digi);
 		if(statsDifference < 0){
 			retArr.push(`your entry is ${Math.abs(statsDifference)} ${(statsDifference == -1) ? "point" : "points"} over the stat point limit`);
 			this.isValid = false;
@@ -187,7 +193,7 @@ class Rules{
 			retArr.push(`you may still use ${Math.abs(statsDifference)} ${(statsDifference == -1) ? "point" : "points"} more for your entry`);
 		}
 		if(this.reduceTotalStatsBy != 0){
-			retArr.push(`your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${this.reduceTotalStatsByReason} equipped`);
+			retArr.push(`your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped`);
 		}
 		if(this.moves.length == 1){
 			retArr.push(`you need to equip at least one more move`);
