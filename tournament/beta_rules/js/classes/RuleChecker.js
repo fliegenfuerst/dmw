@@ -293,10 +293,8 @@ class RuleChecker{
 			this.retStr.push("please enter the maximum combined stats value for the given tournament.");
 		}
 		if(this.isValid){
-			downloadButton.disabled = false;
 			getEntryButton.disabled = false;
 		}else{
-			downloadButton.disabled = true;
 			getEntryButton.disabled = true;
 		}
 		gui.updateRuleCheckerDiv(`<li>${this.retStr.join("</li><li>")}</li>`, this.isValid);
