@@ -152,6 +152,17 @@ class Helper{
 		};
 		xhr.send();
 	}
+	getAndSentenceFromStringArr(arr){
+		if(arr.length == 1){
+			return arr[0];
+		}else{
+			let temp = [];
+			for(let i = 0; i < arr.length - 1; i++){
+				temp.push(arr[i]);
+			}
+			return `${temp.join(", ")} and ${arr[arr.length - 1]}`;
+		}
+	}
 	getAndSentenceFromMoveArr(arr){
 		if(arr.length == 1){
 			return arr[0].name;
