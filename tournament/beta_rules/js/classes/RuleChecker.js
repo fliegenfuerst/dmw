@@ -153,7 +153,7 @@ class Rules{
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
 		let brainsBuffReduction = 0;
 		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
-			this.reduceTotalStatsBy += 50 * Math.round(digi.brains.value / 100);
+			this.reduceTotalStatsBy += 50 * Math.floor(digi.brains.value / 100);
 			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
