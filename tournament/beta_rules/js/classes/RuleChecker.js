@@ -12,7 +12,7 @@ function countCombinedStats(digi){
 	return sum;
 }
 function checkBrainsToSpeedRatio(digi){
-	let difference = Math.round(digi.speed.value/2) - digi.brains.value;
+	let difference = Math.round(digi.speed.value / 2) - digi.brains.value;
 	if(difference <= 0){
 		return "ruleFulfilled";
 	}else if(difference > 0){
@@ -28,18 +28,6 @@ function checkMinimumStats(digi){
 	}
 	return retArr;
 }
-function countEmptySlots(digi){
-	let counter = 0;
-	for(let i = 1; i < 4; i++){
-		if(digi[`move${i}`].value == digi[`move${i}`].length - 1){
-			counter++;
-		}
-	}
-	return counter;
-}
-function getMoveList(digi){
-	
-}
 const buffMoveNames = ["Aqua Magic", "Full Potential", "Mass Morph", "Muscle Charge", "War Cry"];
 function filterBuffMoves(moves){
 	let buffMoves = [];
@@ -50,16 +38,7 @@ function filterBuffMoves(moves){
 	}
 	return buffMoves;
 }
-function filterNonPoisonEffectMoves(moves){
-	let nonPoisonEffectMoves = [];
-	for(let move of moves){
-		if(move.effect != undefined && move.effect.type != "POISON"){
-			nonPoisonEffectMoves.push(move);;
-		}
-	}
-	return nonPoisonEffectMoves;
-}
-function filterEffects(moves){
+function filterStatusEffects(moves){
 	let effects = {};
 	for(let move of moves){
 		if(move.effect != undefined){
@@ -71,15 +50,6 @@ function filterEffects(moves){
 		}
 	}
 	return effects;
-}
-function filterPoisonEffectMoves(moves){
-	let poisonEffectMoves = [];
-	for(let move of moves){
-		if(move.effect != undefined && move.effect.type == "POISON"){
-			poisonEffectMoves.push(move);;
-		}
-	}
-	return poisonEffectMoves;
 }
 function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 	let aboveCeilingMoves = [];
@@ -123,20 +93,14 @@ class Rules{
 		this.minBrainsReason = false;
 		this.maxBuffMoves = 2;
 		this.maxBuffMovesReason = "you cannot equip more than two buff moves";
-		this.maxPoisonMoves = 1;
-		this.maxNonPoisonEffectMoves = 2;
-		this.maxNonPoisonEffectMovesReason = false;
 		this.effectChanceCeiling = 100;
 		this.effectChanceCeilingReason = false;
 		this.reduceTotalStatsBy = 0;
 		this.reduceTotalStatsByReason = [];
-		this.bannedMoves = [];
-		this.poisonEffectMovesEquipped = [];
-		this.nonPoisonEffectMovesEquipped = [];
-		this.buffMovesEquipped = [];
-		this.amountOfEmptyMoveSlots = 0;
-		this.aboveCeilingMoves = [];
 		this.moves = [];
+		this.bannedMoves = [];
+		this.buffMovesEquipped = [];
+		this.aboveCeilingMoves = [];
 		this.statusEffects = 0;
 	}
 	checkRules(digi){
@@ -154,15 +118,11 @@ class Rules{
 			this.maxBuffMoves = 0;
 			this.maxBuffMovesReason = "only two moves";
 		}
-		this.poisonEffectMovesEquipped = filterPoisonEffectMoves(this.moves);
-		this.statusEffects = filterEffects(this.moves);
-		if(this.poisonEffectMovesEquipped.length > 0){
+		this.statusEffects = filterStatusEffects(this.moves);
+		if(this.statusEffects.POISON != undefined){
 			this.effectChanceCeiling = 30;
 			this.effectChanceCeilingReason = "a poison move";
-			this.maxNonPoisonEffectMoves = 1;
-			this.maxNonPoisonEffectMovesReason = "a poison move";
 		}
-		this.nonPoisonEffectMovesEquipped = filterNonPoisonEffectMoves(this.moves);
 		this.buffMovesEquipped = filterBuffMoves(this.moves);
 		for(let move of this.moves){
 			for(let moveRule of moveRules){
@@ -193,7 +153,7 @@ class Rules{
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
 		let brainsBuffReduction = 0;
 		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
-			this.reduceTotalStatsBy += 50 * Math.round(digi.brains.value/100);
+			this.reduceTotalStatsBy += 50 * Math.round(digi.brains.value / 100);
 			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
@@ -269,7 +229,7 @@ class Rules{
 			tempStr = `you need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
 			if(this.effectChanceCeilingReason != false){
 				tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
-				if(this.poisonEffectMovesEquipped.length > 0){
+				if(this.statusEffects.POISON != undefined){
 					tempStr += `, the non-poison moves must have an effect-chance of ${this.effectChanceCeiling}% or less`;
 				}else{
 					tempStr += `, other status effect moves must have an effect-chance of ${this.effectChanceCeiling}% or less`;
