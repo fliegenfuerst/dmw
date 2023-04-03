@@ -59,6 +59,19 @@ function filterNonPoisonEffectMoves(moves){
 	}
 	return nonPoisonEffectMoves;
 }
+function filterEffects(moves){
+	let effects = {};
+	for(let move of moves){
+		if(move.effect != undefined){
+			if(effects[move.effect.type] == undefined){
+				effects[move.effect.type] = 1;
+			}else{
+				effects[move.effect.type]++;
+			}
+		}
+	}
+	return effects;
+}
 function filterPoisonEffectMoves(moves){
 	let poisonEffectMoves = [];
 	for(let move of moves){
@@ -124,6 +137,7 @@ class Rules{
 		this.amountOfEmptyMoveSlots = 0;
 		this.aboveCeilingMoves = [];
 		this.moves = [];
+		this.statusEffects = 0;
 	}
 	checkRules(digi){
 		this.reset();
@@ -141,6 +155,7 @@ class Rules{
 			this.maxBuffMovesReason = "only two moves";
 		}
 		this.poisonEffectMovesEquipped = filterPoisonEffectMoves(this.moves);
+		this.statusEffects = filterEffects(this.moves);
 		if(this.poisonEffectMovesEquipped.length > 0){
 			this.effectChanceCeiling = 30;
 			this.effectChanceCeilingReason = "a poison move";
@@ -239,21 +254,15 @@ class Rules{
 			retArr.push(`you need to reduce the amount of equipped buff moves to ${this.maxBuffMoves} because you have ${this.maxBuffMovesReason} equipped`);
 			this.isValid = false;
 		}
-		if(this.poisonEffectMovesEquipped.length > 1){
-			retArr.push(`you need to unequip all but one poison effect moves, you may only equip one poison move`);
-			this.isValid = false;
-		}else if(this.poisonEffectMovesEquipped.length == 1){
-			if(this.nonPoisonEffectMovesEquipped.length > 1){
-				retArr.push(`you need to unequip either ${helper.getOrSentenceFromMoveArr(this.nonPoisonEffectMovesEquipped)} because you have a poison move equipped`);
+		if(Object.keys(this.statusEffects).length != 0){
+			if(Object.keys(this.statusEffects).length == 3){
+				retArr.push(`you need to unequip one status effect move, you may only equip two different types of status effect`);
 				this.isValid = false;
-			}
-		}else if(this.nonPoisonEffectMovesEquipped.length >= this.maxNonPoisonEffectMoves){
-			if(this.nonPoisonEffectMovesEquipped.length == 3){
-				retArr.push(`you are not allowed to equip more than two status effect moves`);
-				this.isValid = false;
-			}else if(this.nonPoisonEffectMovesEquipped[0].effect.type != this.nonPoisonEffectMovesEquipped[1].effect.type){
-				retArr.push(`you are not allowed to equip multiple moves with different non-poison status effects, unequip either ${helper.getOrSentenceFromMoveArr(this.nonPoisonEffectMovesEquipped)}`);
-				this.isValid = false;
+			}else if(this.statusEffects.POISON != undefined){
+				if(this.statusEffects.POISON == 3){
+					retArr.push(`you need to unequip one poison effect move, you may only equip two poison moves`);
+					this.isValid = false;
+				}
 			}
 		}
 		if(this.aboveCeilingMoves.length != 0){
