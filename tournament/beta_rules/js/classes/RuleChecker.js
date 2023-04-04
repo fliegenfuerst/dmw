@@ -137,7 +137,7 @@ class Rules{
 					}
 					if(moveRule.reduceTotalStatsBy != undefined){
 						this.reduceTotalStatsBy += moveRule.reduceTotalStatsBy;
-						this.reduceTotalStatsByReason.push(moveRule.name);
+						this.reduceTotalStatsByReason.push(`${moveRule.name} (reduced by ${moveRule.reduceTotalStatsBy})`);
 					}
 					if(moveRule.isBanned != undefined){
 						this.bannedMoves.push(moveRule.name);
@@ -154,7 +154,7 @@ class Rules{
 		let brainsBuffReduction = 0;
 		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
 			this.reduceTotalStatsBy += 50 * Math.floor(digi.brains.value / 100);
-			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains`);
+			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (reduced by ${50 * Math.floor(digi.brains.value / 100)})`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
@@ -168,7 +168,7 @@ class Rules{
 			retArr.push(`you may still use ${Math.abs(statsDifference)} ${(statsDifference == 1) ? "point" : "points"} more for your entry`);
 		}
 		if(this.reduceTotalStatsBy != 0){
-			retArr.push(`your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped`);
+			retArr.push(`<div style="margin-left: -6px; padding-left: 3px;border: solid; border-color: red">your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped</div>`);
 		}
 		if(this.moves.length == 1){
 			retArr.push(`you need to equip at least one more move`);
