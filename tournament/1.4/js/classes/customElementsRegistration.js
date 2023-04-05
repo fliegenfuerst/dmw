@@ -16,7 +16,7 @@ class NumberInput extends HTMLInputElement{
 		this.onkeypress = this.isNumberKey;
 		this.onkeyup = this.checkMax;
 		this.oninput = this.onchange = this.updateValue;
-		hashManager.registerSegment(this, "number");
+		hashManager.registerSegment(this, "number", false);
 	}
 	isNumberKey(event){
 		let charCode = (event.which) ? event.which : event.keyCode;
@@ -62,7 +62,7 @@ class MaxCombinedStatsNumberInput extends HTMLInputElement{
 		this.onkeypress = this.isNumberKey;
 		this.onkeyup = this.checkMax;
 		this.onchange = this.updateValue;
-		hashManager.registerSegment(this, "number");
+		hashManager.registerSegment(this, "number", false);
 	}
 	isNumberKey(event){
 		let charCode = (event.which) ? event.which : event.keyCode;
@@ -113,7 +113,7 @@ class ScreenNameInput extends HTMLInputElement{
 		this.onkeypress = this.isAllowedKey;
 		this.oninput = this.onpaste = this.onchange = this.updateValue;
 		this.isSet = false;
-		hashManager.registerSegment(this, "string");
+		hashManager.registerSegment(this, "string", true);
 	}
 	isAllowedKey(event){
 		let charCode = (event.which) ? event.which : event.keyCode;
@@ -157,7 +157,7 @@ class NameInput extends HTMLInputElement{
 		this.style.textAlign = "center";
 		this.onkeypress = this.isAllowedKey;
 		this.oninput = this.onpaste = this.onchange = this.updateValue;
-		hashManager.registerSegment(this, "string");
+		hashManager.registerSegment(this, "string", false);
 	}
 	isAllowedKey(event){
 		let charCode = (event.which) ? event.which : event.keyCode;
@@ -195,7 +195,7 @@ class DigimonSelect extends HTMLSelectElement{
 			}
 		}
 		this.getOptionDiv = getDigimonOptionDiv;
-		hashManager.registerSegment(this, "select");
+		hashManager.registerSegment(this, "select", false);
 	}
 	setValue(value){
 		this.selectedIndex = value;
@@ -332,7 +332,7 @@ class MoveSelect extends HTMLSelectElement{
 		this.selectedMoveIndexes = [this.digi.move1.value - 0x2E, this.digi.move2.value - 0x2E, this.digi.move3.value - 0x2E];
 		this.updateOptions();
 		this.getOptionDiv = getMoveOptionDiv;
-		hashManager.registerSegment(this, "select");
+		hashManager.registerSegment(this, "select", false);
 	}
 	clearOptions(){
 		while(this.options.length > 0){
