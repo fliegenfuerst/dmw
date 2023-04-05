@@ -33,8 +33,18 @@ class NumberInput extends HTMLInputElement{
 		this.updateValue();
 	}
 	setValue(value){
+		let isInvalid = false;
 		this.value = value;
+		if(value > this.max){
+			this.value = this.max;
+			isInvalid = true;
+		}
+		if(value < this.min){
+			this.value = this.min;
+			isInvalid = true;
+		}
 		this.applyChange();
+		return isInvalid;
 	}
 	updateValue(){
 		this.applyChange();
@@ -79,8 +89,18 @@ class MaxCombinedStatsNumberInput extends HTMLInputElement{
 		this.updateValue();
 	}
 	setValue(value){
+		let isInvalid = false;
 		this.value = value;
+		if(this.value > this.max){
+			this.value = this.max;
+			isInvalid = true;
+		}
+		if(this.value < this.min){
+			this.value = this.min;
+			isInvalid = true;
+		}
 		this.applyChange();
+		return isInvalid;
 	}
 	updateValue(){
 		this.applyChange();
@@ -116,14 +136,24 @@ class ScreenNameInput extends HTMLInputElement{
 		hashManager.registerSegment(this, "string", true);
 	}
 	isAllowedKey(event){
-		let charCode = (event.which) ? event.which : event.keyCode;
+		return helper.isAllowedCharacter((event.which) ? event.which : event.keyCode);
+		/*let charCode = (event.which) ? event.which : event.keyCode;
 		if (charCode == 48 || (47 < charCode && charCode < 58) || (64 < charCode && charCode < 91) || (96 < charCode && charCode < 123))
 			return true;
-		return false;
+		return false;*/
 	}
 	setValue(value){
-		this.value = value;
+		let isInvalid = false;
+		this.value = helper.isAllowedCharacterString(value);
+		if(this.value != value){
+			isInvalid = true;
+		}
+		if(this.value.length > this.maxLength){
+			this.value = this.value.substring(0, this.maxLength);
+			isInvalid = true;
+		}
 		this.applyChange();
+		return isInvalid;
 	}
 	updateValue(){
 		this.applyChange();
@@ -160,14 +190,24 @@ class NameInput extends HTMLInputElement{
 		hashManager.registerSegment(this, "string", false);
 	}
 	isAllowedKey(event){
-		let charCode = (event.which) ? event.which : event.keyCode;
+		return helper.isAllowedCharacter((event.which) ? event.which : event.keyCode);
+		/*let charCode = (event.which) ? event.which : event.keyCode;
 		if (charCode == 48 || (47 < charCode && charCode < 58) || (64 < charCode && charCode < 91) || (96 < charCode && charCode < 123))
 			return true;
-		return false;
+		return false;*/
 	}
 	setValue(value){
-		this.value = value;
+		let isInvalid = false;
+		this.value = helper.isAllowedCharacterString(value);
+		if(this.value != value){
+			isInvalid = true;
+		}
+		if(this.value.length > this.maxLength){
+			this.value = this.value.substring(0, this.maxLength);
+			isInvalid = true;
+		}
 		this.applyChange();
+		return isInvalid;
 	}
 	updateValue(){
 		this.applyChange();
