@@ -16,14 +16,14 @@ function checkBrainsToSpeedRatio(digi){
 	if(difference <= 0){
 		return "ruleFulfilled";
 	}else if(difference > 0){
-		return `put at least ${difference} more points into your brains stat to have this much speed`;
+		return `Put at least ${difference} more points into your brains stat to have this much speed.`;
 	}
 }
 function checkMinimumStats(digi){
 	let retArr = [];
 	for(let statName in statNames){
 		if(digi[statName] < minimumStats[statName].value){
-			retArr.push(`put at least ${minimumStats[statName] - digi[statName].value} points into your ${statName} stat`);
+			retArr.push(`Put at least ${minimumStats[statName] - digi[statName].value} points into your ${statName} stat.`);
 		}
 	}
 	return retArr;
@@ -137,7 +137,7 @@ class Rules{
 					}
 					if(moveRule.reduceTotalStatsBy != undefined){
 						this.reduceTotalStatsBy += moveRule.reduceTotalStatsBy;
-						this.reduceTotalStatsByReason.push(`${moveRule.name} (reduced by ${moveRule.reduceTotalStatsBy})`);
+						this.reduceTotalStatsByReason.push(`${moveRule.name} (reduced by ${moveRule.reduceTotalStatsBy}).`);
 					}
 					if(moveRule.isBanned != undefined){
 						this.bannedMoves.push(moveRule.name);
@@ -162,20 +162,20 @@ class Rules{
 		let tempStr = "";
 		let statsDifference = maxCombinedStats - this.reduceTotalStatsBy - countCombinedStats(digi);
 		if(statsDifference < 0){
-			retArr.push(`your entry is ${Math.abs(statsDifference)} ${(statsDifference == -1) ? "point" : "points"} over the stat point limit`);
+			retArr.push(`Your entry is ${Math.abs(statsDifference)} ${(statsDifference == -1) ? "point" : "points"} over the stat point limit.`);
 			this.isValid = false;
 		}else if(statsDifference != 0){
-			retArr.push(`you may still use ${Math.abs(statsDifference)} ${(statsDifference == 1) ? "point" : "points"} more for your entry`);
+			retArr.push(`You may still use ${Math.abs(statsDifference)} ${(statsDifference == 1) ? "point" : "points"} more for your entry.`);
 		}
 		if(this.reduceTotalStatsBy != 0){
 			retArr.push(`<div style="margin-left: -6px; padding-left: 3px;border: solid; border-color: red">your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped</div>`);
 		}
 		if(this.moves.length == 1){
-			retArr.push(`you need to equip at least one more move`);
+			retArr.push(`You need to equip at least one more move.`);
 			this.isValid = false;
 		}
 		if(digi.brains.value < this.minBrains){
-			tempStr = `you need to raise your brains to ${this.minBrains}`;
+			tempStr = `You need to raise your brains to ${this.minBrains}.`;
 			if(this.minBrainsReason != false){
 				tempStr += ` because you have ${this.minBrainsReason} equipped`;
 			}
@@ -183,7 +183,7 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.offense.value > this.maxOffense){
-			tempStr = `you need to lower your offense to ${this.maxOffense}`;
+			tempStr = `You need to lower your offense to ${this.maxOffense}.`;
 			if(this.maxOffenseReason != false){
 				tempStr += ` because you have ${this.maxOffenseReason} equipped`;
 			}
@@ -191,48 +191,48 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.defense.value > this.maxDefense){
-			tempStr = `you need to lower your defense to ${this.maxDefense}`;
+			tempStr = `You need to lower your defense to ${this.maxDefense}`;
 			if(this.maxDefenseReason != false){
-				tempStr += ` because you have ${this.maxDefenseReason} equipped`;
+				tempStr += ` because you have ${this.maxDefenseReason} equipped.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
 		}
 		if(digi.speed.value > this.maxSpeed){
-			tempStr = `you need to lower your speed to ${this.maxSpeed}`;
+			tempStr = `You need to lower your speed to ${this.maxSpeed}`;
 			if(this.maxSpeedReason != false){
-				tempStr += ` because you have ${this.maxSpeedReason} equipped`;
+				tempStr += ` because you have ${this.maxSpeedReason} equipped.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
 		}
 		for(let bannedMove of this.bannedMoves){
-			retArr.push(`you need to unequip ${bannedMove} for it is banned`);
+			retArr.push(`You need to unequip ${bannedMove} for it is banned.`);
 			this.isValid = false;
 		}
 		if(this.buffMovesEquipped.length > this.maxBuffMoves){
-			retArr.push(`you need to reduce the amount of equipped buff moves to ${this.maxBuffMoves} because you have ${this.maxBuffMovesReason} equipped`);
+			retArr.push(`You need to reduce the amount of equipped buff moves to ${this.maxBuffMoves} because you have ${this.maxBuffMovesReason} equipped.`);
 			this.isValid = false;
 		}
 		if(Object.keys(this.statusEffects).length != 0){
 			if(Object.keys(this.statusEffects).length == 3){
-				retArr.push(`you need to unequip one status effect move, you may only equip two different types of status effect`);
+				retArr.push(`You need to unequip one status effect move, you may only equip two different types of status effect.`);
 				this.isValid = false;
 			}else if(this.statusEffects.POISON != undefined){
 				if(this.statusEffects.POISON == 3){
-					retArr.push(`you need to unequip one poison effect move, you may only equip two poison moves`);
+					retArr.push(`You need to unequip one poison effect move, you may only equip two poison moves.`);
 					this.isValid = false;
 				}
 			}
 		}
 		if(this.aboveCeilingMoves.length != 0){
-			tempStr = `you need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
+			tempStr = `You need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
 			if(this.effectChanceCeilingReason != false){
 				tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
 				if(this.statusEffects.POISON != undefined){
-					tempStr += `, the non-poison moves must have an effect-chance of ${this.effectChanceCeiling}% or less`;
+					tempStr += `, the non-poison moves must have an effect-chance of ${this.effectChanceCeiling}% or less.`;
 				}else{
-					tempStr += `, other status effect moves must have an effect-chance of ${this.effectChanceCeiling}% or less`;
+					tempStr += `, other status effect moves must have an effect-chance of ${this.effectChanceCeiling}% or less.`;
 				}
 			}
 			retArr.push(tempStr);
@@ -252,14 +252,14 @@ class RuleChecker{
 		this.isValid = true;
 		if(screenName.length < 2){
 			this.isValid = false;
-			this.retStr.push("please enter a screen name with at least two characters");
+			this.retStr.push("Please enter a screen name with at least two characters.");
 		}
 		if(maxCombinedStats != 0){
 			this.retStr.push(...this.rules.getRulesString(memcardReader.saveSlots[0].registeredDigimon[0]));
 			this.isValid = this.rules.isValid;
 		}else{
 			this.isValid = false;
-			this.retStr.push("please enter the maximum combined stats value for the given tournament.");
+			this.retStr.push("Please enter the maximum combined stats value for the given tournament.");
 		}
 		if(this.isValid){
 			getEntryButton.disabled = false;
@@ -267,7 +267,7 @@ class RuleChecker{
 			getEntryButton.disabled = true;
 		}
 		if(this.retStr.length == 0){
-			gui.updateRuleCheckerDiv("your entry is valid", this.isValid);
+			gui.updateRuleCheckerDiv("Your entry is valid.", this.isValid);
 		}else{
 			gui.updateRuleCheckerDiv(`<li>${this.retStr.join("</li><li>")}</li>`, this.isValid);
 		}
