@@ -178,6 +178,8 @@ class Rules{
 			tempStr = `You need to raise your brains to ${this.minBrains}`;
 			if(this.minBrainsReason != false){
 				tempStr += ` because you have ${this.minBrainsReason} equipped.`;
+			} else {
+				tempStr += `.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
