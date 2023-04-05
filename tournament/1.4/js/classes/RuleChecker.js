@@ -92,7 +92,7 @@ class Rules{
 		this.minBrains = 50;
 		this.minBrainsReason = false;
 		this.maxBuffMoves = 2;
-		this.maxBuffMovesReason = "you cannot equip more than two buff moves";
+		this.maxBuffMovesReason = "You cannot equip more than two buff moves.";
 		this.effectChanceCeiling = 100;
 		this.effectChanceCeilingReason = false;
 		this.reduceTotalStatsBy = 0;
@@ -214,16 +214,9 @@ class Rules{
 			retArr.push(`You need to reduce the amount of equipped buff moves to ${this.maxBuffMoves} because you have ${this.maxBuffMovesReason} equipped.`);
 			this.isValid = false;
 		}
-		if(Object.keys(this.statusEffects).length != 0){
-			if(Object.keys(this.statusEffects).length == 3){
+		if(Object.keys(this.statusEffects).length == 3){
 				retArr.push(`You need to unequip one status effect move, you may only equip two different types of status effect.`);
 				this.isValid = false;
-			}else if(this.statusEffects.POISON != undefined){
-				if(this.statusEffects.POISON == 3){
-					retArr.push(`You need to unequip one poison effect move, you may only equip two poison moves.`);
-					this.isValid = false;
-				}
-			}
 		}
 		if(this.aboveCeilingMoves.length != 0){
 			tempStr = `You need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
