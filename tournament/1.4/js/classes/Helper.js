@@ -185,5 +185,19 @@ class Helper{
 			return temp.join(" or ");
 		}
 	}
+	isAllowedCharacter(charCode){
+		if (charCode == 48 || (47 < charCode && charCode < 58) || (64 < charCode && charCode < 91) || (96 < charCode && charCode < 123))
+			return true;
+		return false;
+	}
+	isAllowedCharacterString(str){
+		let retStr = "";
+		for(let i = 0; i < str.length; i++){
+			if(this.isAllowedCharacter(str.charCodeAt(i))){
+				retStr += str.charAt(i);
+			}
+		}
+		return retStr;
+	}
 }
 const helper = new Helper();
