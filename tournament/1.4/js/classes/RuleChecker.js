@@ -215,8 +215,8 @@ class Rules{
 			this.isValid = false;
 		}
 		if(Object.keys(this.statusEffects).length == 3){
-				retArr.push(`You need to unequip one status effect move, you may only equip two different types of status effect.`);
-				this.isValid = false;
+			retArr.push(`You need to unequip one status effect move, you may only equip two different types of status effect.`);
+			this.isValid = false;
 		}
 		if(this.aboveCeilingMoves.length != 0){
 			tempStr = `You need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
