@@ -57,24 +57,25 @@ class Segment{
 		if(this.isClear){
 			switch(this.type){
 				case "string":
-					this.segmentTarget.setValue(urlSegment);
+					return this.segmentTarget.setValue(urlSegment);
 					break;
 				case "number":
 				case "select":
-					this.segmentTarget.setValue(urlSegment);
+					return this.segmentTarget.setValue(urlSegment);
 					break;
 			}
 		}else{
 			switch(this.type){
 				case "string":
-					this.segmentTarget.setValue(unbase64url(urlSegment));
+					return this.segmentTarget.setValue(unbase64url(urlSegment));
 					break;
 				case "number":
 				case "select":
-					this.segmentTarget.setValue(urlToInt(urlSegment));
+					return this.segmentTarget.setValue(urlToInt(urlSegment));
 					break;
 			}
 		}
+		return false;
 	}
 }
 class HashManager{
@@ -95,6 +96,7 @@ class HashManager{
 		this.currentHash = window.location.hash;
 	}
 	locationHashChanged(){
+		let isInvalid = false;
 		if(window.location.hash == ''){
 			window.location.hash = "!/VGFtZXI/0/RGFpb2g/1w/7Q/7Q/O/O/O/O/0/b/b";
 		}
@@ -104,10 +106,15 @@ class HashManager{
 			this.updateHash();
 		}else if(window.location.hash != this.currentHash){
 			for(let i = 0; i < this.segments.length; i++){
-				this.segments[i].fromHashSegment(this.currentHashArray[i]);
+				if(this.segments[i].fromHashSegment(this.currentHashArray[i])){
+					isInvalid = true;
+				}
 			}
 			this.currentHash = window.location.hash;
 		}
+		if(isInvalid){
+			this.updateHash();
+		}	
 	}
 }
 const hashManager = new HashManager();
