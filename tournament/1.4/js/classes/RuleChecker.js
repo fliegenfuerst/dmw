@@ -168,7 +168,7 @@ class Rules{
 			retArr.push(`You may still use ${Math.abs(statsDifference)} ${(statsDifference == 1) ? "point" : "points"} more for your entry.`);
 		}
 		if(this.reduceTotalStatsBy != 0){
-			retArr.push(`<div style="margin-left: -6px; padding-left: 3px;border: solid; border-color: red">your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped</div>`);
+			retArr.push(`<div style="margin-left: -6px; padding-left: 3px;border: solid; border-color: red">Your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped.</div>`);
 		}
 		if(this.moves.length == 1){
 			retArr.push(`You need to equip at least one more move.`);
