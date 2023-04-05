@@ -26,29 +26,54 @@ function unbase64url(str) {
     return atob(str.replace(/-/g, '+').replace(/_/g, '/'));
 }
 class Segment{
-	constructor(segmentTarget, type){
+	constructor(segmentTarget, type, isClear){
 		this.segmentTarget = segmentTarget;
 		this.type = type;
+		this.isClear = isClear;
 	}
 	toHashSegment(){
-		switch(this.type){
-			case "string":
-				return base64url(this.segmentTarget.value);
-			case "number":
-				return intToUrl(this.segmentTarget.valueAsNumber);
-			case "select":
-				return intToUrl(this.segmentTarget.selectedIndex);
+		if(this.isClear){
+			switch(this.type){
+				case "string":
+					return this.segmentTarget.value;
+				case "number":
+					return this.segmentTarget.valueAsNumber;
+				case "select":
+					return this.segmentTarget.selectedIndex;
+			}
+
+		}else{
+			switch(this.type){
+				case "string":
+					return base64url(this.segmentTarget.value);
+				case "number":
+					return intToUrl(this.segmentTarget.valueAsNumber);
+				case "select":
+					return intToUrl(this.segmentTarget.selectedIndex);
+			}
 		}
 	}
 	fromHashSegment(urlSegment){
-		switch(this.type){
-			case "string":
-				this.segmentTarget.setValue(unbase64url(urlSegment));
-				break;
-			case "number":
-			case "select":
-				this.segmentTarget.setValue(urlToInt(urlSegment));
-				break;
+		if(this.isClear){
+			switch(this.type){
+				case "string":
+					this.segmentTarget.setValue(urlSegment);
+					break;
+				case "number":
+				case "select":
+					this.segmentTarget.setValue(urlSegment);
+					break;
+			}
+		}else{
+			switch(this.type){
+				case "string":
+					this.segmentTarget.setValue(unbase64url(urlSegment));
+					break;
+				case "number":
+				case "select":
+					this.segmentTarget.setValue(urlToInt(urlSegment));
+					break;
+			}
 		}
 	}
 }
@@ -58,8 +83,8 @@ class HashManager{
 		this.currentHash = '';
 		this.currentHashArray = [];
 	}
-	registerSegment(segmentTarget, type){
-		this.segments.push(new Segment(segmentTarget, type));
+	registerSegment(segmentTarget, type, isClear){
+		this.segments.push(new Segment(segmentTarget, type, isClear));
 	}
 	updateHash(){
 		this.currentHashArray = [];
