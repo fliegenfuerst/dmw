@@ -175,17 +175,17 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.brains.value < this.minBrains){
-			tempStr = `You need to raise your brains to ${this.minBrains}.`;
+			tempStr = `You need to raise your brains to ${this.minBrains}`;
 			if(this.minBrainsReason != false){
-				tempStr += ` because you have ${this.minBrainsReason} equipped`;
+				tempStr += ` because you have ${this.minBrainsReason} equipped.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
 		}
 		if(digi.offense.value > this.maxOffense){
-			tempStr = `You need to lower your offense to ${this.maxOffense}.`;
+			tempStr = `You need to lower your offense to ${this.maxOffense}`;
 			if(this.maxOffenseReason != false){
-				tempStr += ` because you have ${this.maxOffenseReason} equipped`;
+				tempStr += ` because you have ${this.maxOffenseReason} equipped.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
