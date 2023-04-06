@@ -137,7 +137,7 @@ class Rules{
 					}
 					if(moveRule.reduceTotalStatsBy != undefined){
 						this.reduceTotalStatsBy += moveRule.reduceTotalStatsBy;
-						this.reduceTotalStatsByReason.push(`${moveRule.name} (reduced by ${moveRule.reduceTotalStatsBy}).`);
+						this.reduceTotalStatsByReason.push(`${moveRule.name} (stat point limit reduced by ${moveRule.reduceTotalStatsBy}).`);
 					}
 					if(moveRule.isBanned != undefined){
 						this.bannedMoves.push(moveRule.name);
@@ -154,7 +154,7 @@ class Rules{
 		let brainsBuffReduction = 0;
 		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
 			this.reduceTotalStatsBy += 50 * Math.floor(digi.brains.value / 100);
-			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (reduced by ${50 * Math.floor(digi.brains.value / 100)})`);
+			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (stat point limit reduced by ${50 * Math.floor(digi.brains.value / 100)})`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
