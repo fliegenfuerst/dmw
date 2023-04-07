@@ -4,25 +4,25 @@ class GUI{
 		this.contentDiv = document.createElement("DIV");
 		this.contentDiv.style = "clear: both;";
 		this.container.appendChild(this.contentDiv);
-		this.ruleCheckerDiv = new RuleCheckerUL();
+		this.RuleCheckerUL = new RuleCheckerUL();
 	}
 	showRegisteredDigimonView(){
 		this.contentDiv.innerHTML = "";
 		this.contentDiv.appendChild(new NameTable(memcardReader.saveSlots[0]));
 		this.contentDiv.appendChild(new RegisteredDigimonTable(memcardReader.saveSlots[0].registeredDigimon[0], 0));
-		this.contentDiv.appendChild(this.ruleCheckerDiv);
+		this.contentDiv.appendChild(this.RuleCheckerUL);
 		decorateSelects();
-		hashManager.locationHashChanged();
+		hashManager.locationHashHasChanged();
 	}
 	getUpdatedMemoryCard(){
 		return memcardReader.getDigimonSavesBlob();
 	}
 	updateRuleCheckerDiv(str, isValid){
-		this.ruleCheckerDiv.updateRuleText(str);
+		this.RuleCheckerUL.updateRuleText(str);
 		if(isValid){
-			this.ruleCheckerDiv.style.backgroundColor = "White";
+			this.RuleCheckerUL.style.backgroundColor = "White";
 		}else{
-			this.ruleCheckerDiv.style.backgroundColor = "Coral";
+			this.RuleCheckerUL.style.backgroundColor = "Coral";
 		}
 	}
 }
