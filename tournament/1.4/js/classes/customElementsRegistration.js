@@ -430,34 +430,50 @@ function getMoveOptionDiv(width){
 		let move = findMoveByName(name);
 		let specialityId = 7;
 		if(name != "empty" && name != "Bubble"){
+			this.toolTipDiv = document.createElement("DIV");
 			specialityId = specialities[move.speciality];
-			if(move.effect != undefined){
-				this.classList.add('has-tooltip');
-				let toolTipDiv = document.createElement("DIV");
-				toolTipDiv.classList.add('is-tooltip');
-				toolTipDiv.classList.add('move-tooltip');
-				toolTipDiv.innerText = `${move.effect.chance}% chance to cause ${move.effect.type.toLowerCase()} effect`;
-				this.appendChild(toolTipDiv);
-				let effectImg = document.createElement("IMG");
-				effectImg.src = `css/${move.effect.type}.png`;
-				effectImg.classList.add('effect-img');
-				this.appendChild(effectImg);
-			}else if(move.buffs != undefined){
-				this.classList.add('has-tooltip');
-				let toolTipDiv = document.createElement("DIV");
-				toolTipDiv.classList.add('is-tooltip');
-				toolTipDiv.classList.add('move-tooltip');
-				let buffs = ["boosts:"]
+			if(move.buffs != undefined){
+				this.toolTipDiv.innerHTML = `<ul><li>MP: ${move.mp} </li></ul>`;
+				this.toolTipDiv.innerHTML += "boosts:";
+				let buffs = [];
 				for(let buff in move.buffs){
 					buffs.push(`<img src="css/${buff}.png" /> ${buff} by ${move.buffs[buff]}%`);
 				}
-				toolTipDiv.innerHTML = buffs.join("</br>");
-				this.appendChild(toolTipDiv);
+				this.toolTipDiv.innerHTML += "<ul><li>" + buffs.join("</li><li>") + "</ul>";
 				let effectImg = document.createElement("IMG");
 				effectImg.src = `css/arrowUp.png`;
 				effectImg.classList.add('effect-img');
 				this.appendChild(effectImg);
+			}else{
+				let toolTipHTML =  `
+				<ul>
+					<li>MP: ${move.mp} </li>
+					<li>Power: ${move.power}</li>
+					<li>Range: ${move.range}</li>
+					<li>Nature: ${move.speciality}</li>
+					<li>Accuracy: ${move.accuracy}</li>
+				`;
+				if(move.effect != undefined){
+					toolTipHTML += `<li>${move.effect.chance}% chance to cause ${move.effect.type.toLowerCase()} effect</li>`;
+					let effectImg = document.createElement("IMG");
+					effectImg.src = `css/${move.effect.type}.png`;
+					effectImg.classList.add('effect-img');
+					this.appendChild(effectImg);
+				}
+				toolTipHTML += `</ul>`;
+				this.toolTipDiv.innerHTML = toolTipHTML;
 			}
+			this.onmouseenter = function(){
+				let rect = this.getBoundingClientRect();
+				onMouseOverTooltip.classList.remove("hidden");
+				onMouseOverTooltip.appendChild(this.toolTipDiv);
+				onMouseOverTooltip.style.left = `${rect.left + rect.width}px`;
+				onMouseOverTooltip.style.top = `${rect.top - 12}px`;
+			};
+			this.onmouseout = function(){
+				onMouseOverTooltip.classList.add("hidden");
+				onMouseOverTooltip.innerHTML = "";
+			};
 		}
 		this.index = id;
 		this.name = name;
@@ -523,13 +539,21 @@ class NameTable extends CustomTable{
 		col.innerText = "User Name";
 		row.appendChild(col);
 		col = document.createElement("TD");
-		col.appendChild(new ScreenNameInput());
-		col.classList.add('has-tooltip');
-		let toolTipDiv = document.createElement("DIV");
-		toolTipDiv.classList.add('is-tooltip');
-		toolTipDiv.classList.add('screenname-tooltip');
-		toolTipDiv.innerText = "Name that will be used for the tournament";
-		col.appendChild(toolTipDiv);
+		let screenNameInput = new ScreenNameInput()
+		screenNameInput.onmouseenter = function(){
+			let rect = this.getBoundingClientRect();
+			onMouseOverTooltip.classList.remove("hidden");
+			onMouseOverTooltip.appendChild(this.toolTipDiv);
+			onMouseOverTooltip.style.left = `${rect.left + rect.width}px`;
+			onMouseOverTooltip.style.top = `${rect.top - 22}px`;
+		};
+		screenNameInput.onmouseout = function(){
+			onMouseOverTooltip.classList.add("hidden");
+			onMouseOverTooltip.innerHTML = "";
+		};
+		screenNameInput.toolTipDiv = document.createElement("DIV");
+		screenNameInput.toolTipDiv.innerText = "Name that will be used for the tournament";
+		col.appendChild(screenNameInput);
 		row.appendChild(col);
 		this.appendChild(row);
 		this.appendChild(this.getNameRow("Tamer Name"));
