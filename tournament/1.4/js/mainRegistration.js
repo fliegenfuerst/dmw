@@ -61,4 +61,4 @@ window.setInterval(() => {
 		animatedSprite.style.objectPosition = "-" + (animatedSprite.spriteSheetOffset + 16 * idleState) + "px 0px";
 	}
 }, 400);
-window.onhashchange = function(){hashManager.locationHashChanged()};
+window.onhashchange = function(){hashManager.locationHashHasChanged()};
