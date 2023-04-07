@@ -2,7 +2,7 @@ const chars="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
 function intToUrl(value){
 	let digit;
 	let residual = value;
-	let result = '';
+	let result = "";
 	while(true){
 		digit = residual % 64;
 		result = chars.charAt(digit) + result;
@@ -20,60 +20,36 @@ function urlToInt(url){
 	return result;
 }
 function base64url(str) {
-    return btoa(str).replace(/=+$/, '').replace(/\+/g,'-').replace(/\//g, '_');
+    return btoa(str).replace(/=+$/, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 function unbase64url(str) {
-    return atob(str.replace(/-/g, '+').replace(/_/g, '/'));
+    return atob(str.replace(/-/g, "+").replace(/_/g, "/"));
 }
-class Segment{
+class HashSegment{
 	constructor(segmentTarget, type, isClear){
 		this.segmentTarget = segmentTarget;
 		this.type = type;
 		this.isClear = isClear;
 	}
 	toHashSegment(){
-		if(this.isClear){
-			switch(this.type){
-				case "string":
-					return this.segmentTarget.value;
-				case "number":
-					return this.segmentTarget.valueAsNumber;
-				case "select":
-					return this.segmentTarget.selectedIndex;
-			}
-
-		}else{
-			switch(this.type){
-				case "string":
-					return base64url(this.segmentTarget.value);
-				case "number":
-					return intToUrl(this.segmentTarget.valueAsNumber);
-				case "select":
-					return intToUrl(this.segmentTarget.selectedIndex);
-			}
+		switch(this.type){
+			case "string":
+				return this.isClear ? this.segmentTarget.value : base64url(this.segmentTarget.value);
+			case "number":
+				return this.isClear ? this.segmentTarget.valueAsNumber : intToUrl(this.segmentTarget.valueAsNumber);
+			case "select":
+				return this.isClear ? this.segmentTarget.selectedIndex : intToUrl(this.segmentTarget.selectedIndex);
 		}
 	}
 	fromHashSegment(urlSegment){
-		if(this.isClear){
-			switch(this.type){
-				case "string":
-					return this.segmentTarget.setValue(urlSegment);
-					break;
-				case "number":
-				case "select":
-					return this.segmentTarget.setValue(urlSegment);
-					break;
-			}
-		}else{
-			switch(this.type){
-				case "string":
-					return this.segmentTarget.setValue(unbase64url(urlSegment));
-					break;
-				case "number":
-				case "select":
-					return this.segmentTarget.setValue(urlToInt(urlSegment));
-					break;
-			}
+		switch(this.type){
+			case "string":
+				return this.isClear ? this.segmentTarget.setValue(urlSegment) : this.segmentTarget.setValue(unbase64url(urlSegment));
+				break;
+			case "number":
+			case "select":
+				return this.isClear ? this.segmentTarget.setValue(urlSegment) : this.segmentTarget.setValue(urlToInt(urlSegment));
+				break;
 		}
 		return false;
 	}
@@ -81,11 +57,12 @@ class Segment{
 class HashManager{
 	constructor(){
 		this.segments = [];
-		this.currentHash = '';
+		this.currentHash = "";
 		this.currentHashArray = [];
+		this.isInvalid = false;
 	}
 	registerSegment(segmentTarget, type, isClear){
-		this.segments.push(new Segment(segmentTarget, type, isClear));
+		this.segments.push(new HashSegment(segmentTarget, type, isClear));
 	}
 	updateHash(){
 		this.currentHashArray = [];
@@ -95,9 +72,9 @@ class HashManager{
 		window.location.hash = "!" + this.currentHashArray.join("/");
 		this.currentHash = window.location.hash;
 	}
-	locationHashChanged(){
-		let isInvalid = false;
-		if(window.location.hash == ''){
+	locationHashHasChanged(){
+		this.isInvalid = false;
+		if(window.location.hash == ""){
 			window.location.hash = "!/VGFtZXI/0/RGFpb2g/1w/7Q/7Q/O/O/O/O/0/b/b";
 		}
 		this.currentHashArray = window.location.hash.substr(2, window.location.hash.length).split("/");
@@ -107,14 +84,13 @@ class HashManager{
 		}else if(window.location.hash != this.currentHash){
 			for(let i = 0; i < this.segments.length; i++){
 				if(this.segments[i].fromHashSegment(this.currentHashArray[i])){
-					isInvalid = true;
+					this.isInvalid = true;
 				}
 			}
 			this.currentHash = window.location.hash;
 		}
-		if(isInvalid){
+		if(this.isInvalid)
 			this.updateHash();
-		}	
 	}
 }
 const hashManager = new HashManager();
