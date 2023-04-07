@@ -43,6 +43,27 @@ function downloadScreenshot(filename){
 function copyURLToClipBoard(){
 	navigator.clipboard.writeText(window.location.href);	
 }
+function copyDigimonDataToClipBoard(){
+	let digi = memcardReader.saveSlots[0].registeredDigimon[0];
+	let digiStats = digimonStats[digi.type.value];
+	let copyString = "";
+	copyString += `${digiStats.name}\n`;
+	copyString += `${digi.hp.value}\n`;
+	copyString += `${digi.mp.value}\n`;
+	copyString += `${digi.offense.value}\n`;
+	copyString += `${digi.defense.value}\n`;
+	copyString += `${digi.speed.value}\n`;
+	copyString += `${digi.brains.value}\n`;
+	copyString += `\n`;
+	for(let i = 1; i < 4; i++){
+		if(digi[`move${i}`].value == 255){
+			copyString += ` \n`;
+		}else{
+			copyString += `${digiStats.moves[digi[`move${i}`].value - 0x2E]}\n`;
+		}
+	}
+	navigator.clipboard.writeText(copyString);
+}
 function downloadEntry(){
 	copyURLToClipBoard();
 	linkCopiedToClipboardAlert.classList.remove("hidden");
