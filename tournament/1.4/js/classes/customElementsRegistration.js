@@ -238,9 +238,13 @@ class DigimonSelect extends HTMLSelectElement{
 		hashManager.registerSegment(this, "select", false);
 	}
 	setValue(value){
-		this.selectedIndex = value;
-		this.applyChange();
-		redrawImageSelects();
+		if(value < digimonAlphabetical.length){	
+			this.selectedIndex = value;
+			this.applyChange();
+			redrawImageSelects();
+		}else{
+			return true;
+		}
 	}
 	updateValue(){
 		this.applyChange();
@@ -362,7 +366,7 @@ class MoveSelect extends HTMLSelectElement{
 		this.digi = digi;
 		this.index = index;
 		this.owner = owner;
-		this.id = `registered-digi-${registeredDigiId}-move-select-${index}`;
+		this.id = `move${index + 1}-0`;
 		this.width;
 		this.style.width = "170px";
 		this.style.float = "right";
@@ -406,16 +410,20 @@ class MoveSelect extends HTMLSelectElement{
 		}
 	}
 	setValue(value){
-		this.selectedIndex = value;
-		this.applyChange();
-		redrawImageSelects();
+		if(value <= this.moveOptions.length){
+			this.selectedIndex = value;
+			this.applyChange();
+			redrawImageSelects();
+		}else{
+			return true;
+		}
 	}
 	updateValue(){
 		this.applyChange();
 		hashManager.updateHash();
 	}
 	applyChange(){
-		if(this.selectedOptions[0].value == (this.options.length - 1)){
+		if(this.selectedOptions.length > 0 && this.selectedOptions[0].value == (this.options.length - 1)){
 			this.digi[`move${this.index + 1}`].value = 0xFF;
 		}else{
 			this.digi[`move${this.index + 1}`].value = parseInt(this.selectedOptions[0].value) + 0x2E;
