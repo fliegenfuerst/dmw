@@ -62,8 +62,45 @@ function copyDigimonDataToClipBoard(){
 			copyString += `${digiStats.moves[digi[`move${i}`].value - 0x2E]}\n`;
 		}
 	}
-	navigator.clipboard.writeText(copyString);
+	navigator.clipboard.writeText(copyString.substring(0, copyString.length - 1));
 }
+function copyDigimonDataFromClipBoard(event){
+	let data = event.target.value.split(/\n/);
+	event.target.value = "";
+	if(data.length != 11){
+		return alert("invalid clipboard input");
+	}
+	let digiStats = findDigimonByName(data[0]);
+	let digi = {};
+	if(digiStats == false){
+		return alert("invalid clipboard input");
+	}
+	digi.type = findDigimonIndexByName(data[0]);
+	for(let i = 1; i < 7; i++){
+		digi[statNames[i-1]] = parseInt(data[i]);
+		if(digi[statNames[i-1]] == NaN){
+			return alert("invalid clipboard input");
+		}
+	}
+	let movesLength = getDigiMovesLength(digiStats);
+	for(let i = 1; i < 4; i++){
+		digi[`move${i}`] = data[7 + i];
+		if(digi[`move${i}`] == "" || digi[`move${i}`] == " "){
+			digi[`move${i}`] = movesLength;
+		}else{
+			digi[`move${i}`] = findMoveIndexByName(digiStats, digi[`move${i}`]);
+			if(digi[`move${i}`] != 0 && digi[`move${i}`] == false){
+				return alert("invalid clipboard input");
+			}
+		}
+	}
+	for(let property in digi){
+		document.getElementById(`${property}-0`).setValue(digi[property]);
+	}
+	hashManager.updateHash()
+}
+document.getElementById("importFromDamageCalculatorInput").oninput = copyDigimonDataFromClipBoard;
+
 function downloadEntry(){
 	copyURLToClipBoard();
 	linkCopiedToClipboardAlert.classList.remove("hidden");
