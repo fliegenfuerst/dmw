@@ -35,6 +35,14 @@ li{
 	left: 50%;
 	transform: translate(-50%,0);
 }
+#importFromDamageCalculatorInput{
+	position: relative;
+	top: 6px;
+	height: 16px;
+	width: 36px;
+	resize: none;
+	overflow: hidden;
+}
 #container, #bottom-div{
 	background-color: LightGrey;
 }
