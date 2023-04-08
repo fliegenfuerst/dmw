@@ -455,7 +455,7 @@ function getMoveOptionDiv(width){
 			}else{
 				let toolTipHTML =  `
 				<ul>
-					<li>MP: ${move.mp} </li>
+					<li>MP: ${move.mp * 3} </li>
 					<li>Power: ${move.power}</li>
 					<li>Range: ${move.range}</li>
 					<li>Nature: ${move.speciality}</li>
