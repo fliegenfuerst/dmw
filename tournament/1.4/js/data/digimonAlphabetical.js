@@ -2794,3 +2794,11 @@ const digimonAlphabetical = [
         ]
     }
 ];
+function findDigimonIndexByName(name){
+	for(let i = 0; i < digimonAlphabetical.length; i++){
+		if(name == digimonAlphabetical[i].name){
+			return i;
+		}
+	}
+	return false;
+}
