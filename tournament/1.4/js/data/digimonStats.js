@@ -3960,3 +3960,28 @@ const digimonStats = [
         ]
     }
 ];
+function findDigimonByName(name){
+	for(let digi of digimonStats){
+		if(digi.name == name){
+			return digi;
+		}
+	}
+	return false;
+}
+function findMoveIndexByName(digi, name){
+	for(let i = 0; i < digi.moves.length; i++){
+		if(name == digi.moves[i]){
+			return i;
+		}
+	}
+	return false;
+}
+function getDigiMovesLength(digi){
+	let count = 0;
+	for(let move of digi.moves){
+		if(move != "None" && move != digi.finisher){
+			count++;
+		}
+	}
+	return count;
+}
