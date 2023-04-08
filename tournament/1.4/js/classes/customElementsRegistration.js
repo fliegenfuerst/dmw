@@ -238,7 +238,7 @@ class DigimonSelect extends HTMLSelectElement{
 		hashManager.registerSegment(this, "select", false);
 	}
 	setValue(value){
-		if(value < digimonAlphabetical.length){	
+		if(value > -1 &&value < digimonAlphabetical.length){	
 			this.selectedIndex = value;
 			this.applyChange();
 			redrawImageSelects();
@@ -410,7 +410,7 @@ class MoveSelect extends HTMLSelectElement{
 		}
 	}
 	setValue(value){
-		if(value <= this.moveOptions.length){
+		if(value > -1 && value <= this.moveOptions.length){
 			this.selectedIndex = value;
 			this.applyChange();
 			redrawImageSelects();
