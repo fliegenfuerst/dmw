@@ -2126,6 +2126,7 @@ function findMoveByName(name){
 			return move;
 		}
 	}
+	return false;
 }
 function findFinisherByName(name){
 	for(let finisher of finishers){
