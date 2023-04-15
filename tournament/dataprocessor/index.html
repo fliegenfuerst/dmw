@@ -1,0 +1,66 @@
+<!Doctype html>
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head>
+<title>Digimon World Memory Card Data Viewer</title>
+<body>
+<button class="onlyAvailableWhenGroupable" onclick="getEntriesSpreadSheetString(this)" disabled="true">copy entries spreadsheet values</button>
+<button class="onlyAvailableWhenGrouped" onclick="getKlixuzSpreadSheetListString(this)" disabled="true">copy klixuz spreadsheet list values</button>
+<button class="onlyAvailableWhenGrouped" onclick="getKlixuzSpreadSheetGroupString(this)" disabled="true">copy klixuz spreadsheet group values</button>
+<div>
+<textarea id="entryInputTextArea" style="width: 900px; height: 400px">
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Ori/T3Jpbw/KU/U2lzc3k/N/13J/Q5/e3/cw/3W/2c/3/5/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Trigantix/VHJpdGl4/KU/Qm9tYmVy/N/O0/HM/eS/eS/4I/38/1/7/b
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Roselenia/Um9zZQ/KU/Qmxhc3Rp/_/O0/HM/eS/eS/4I/38/0/2/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!SchraubenYeti/U2NocmF1/KU/UmVkRm94/v/O0/HM/eS/eS/4I/38/0/2/b
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Thalimon/RXJpaw/KU/SG93bHI/q/O0/HM/eS/eS/4I/38/0/1/d
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Fellana/RmVs/KU/VmFyaWE/6/O0/HM/eS/eS/4I/38/0/3/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Nidaime/TmlkYWlt/KU/RGFpb2g/U/O0/HM/eS/eS/4I/38/0/3/6
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Schu/U2NodQ/KU/T2xhZg/s/O0/HM/eS/eS/4I/38/0/2/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Ori1/T3Jpbw/KU/U2lzc3k/N/13J/Q5/e3/cw/3W/2c/3/5/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Trigantix1/VHJpdGl4/KU/Qm9tYmVy/N/O0/HM/eS/eS/4I/38/1/7/b
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Roselenia1/Um9zZQ/KU/Qmxhc3Rp/_/O0/HM/eS/eS/4I/38/0/2/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!SchraubenYeti1/U2NocmF1/KU/UmVkRm94/v/O0/HM/eS/eS/4I/38/0/2/b
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Thalimon1/RXJpaw/KU/SG93bHI/q/O0/HM/eS/eS/4I/38/0/1/d
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Fellana1/RmVs/KU/VmFyaWE/6/O0/HM/eS/eS/4I/38/0/3/a
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Nidaime1/TmlkYWlt/KU/RGFpb2g/U/O0/HM/eS/eS/4I/38/0/3/6
+https://fliegenfuerst.github.io/dmw/tournament/1.4/#!Schu1/U2NodQ/KU/T2xhZg/s/O0/HM/eS/eS/4I/38/0/2/a
+
+</textarea>
+</div>
+<button onclick="addEntriesToParticipantTable(this)">parse entries</button>
+<button class="onlyAvailableWhenGroupable" id="groupParticipantsButton" onclick="groupParticipants(this)" disabled="true">group entries</button>
+<span id="groupSizesCheckBoxesSpan"></span>
+<table class="hidden" id="participantTable">
+	<th>screen name</th>
+	<th>tamer name</th>
+	<th>digi name</th>
+	<th>digi type</th>
+	<th>HP</th>
+	<th>MP</th>
+	<th>Offense</th>
+	<th>Defense</th>
+	<th>Speed</th>
+	<th>Brains</th>
+	<th>Move1</th>
+	<th>Move2</th>
+	<th>Move3</th>
+	<th>set group</th>
+</table>
+<div id="container"></div>
+<footer>v.0.1</footer>
+<script type="text/javascript" src="js/data/digimonStats.js"></script>
+<script type="text/javascript" src="js/data/moves.js"></script>
+<script type="text/javascript" src="js/data/digimonAlphabetical.js"></script>
+<script type="text/javascript" src="js/classes/Helper.js"></script>
+<script type="text/javascript" src="js/classes/DigimonSave.js"></script>
+<script type="text/javascript" src="js/classes/MemoryCardReader.js"></script>
+<script type="text/javascript" src="js/classes/customElements.js"></script>
+<script type="text/javascript" src="js/registerCustomElements.js"></script>
+<script type="text/javascript" src="js/classes/BlobBuilder.js"></script>
+<script type="text/javascript" src="js/classes/GUI.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
