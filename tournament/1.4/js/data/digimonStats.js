@@ -1322,7 +1322,7 @@ const digimonStats = [
     {
         "id": 60,
         "name": "H-Kabuterimon",
-        "finisher": "Electro Shocker",
+        "finisher": "High Electro Shocker",
         "moves": [
             "Prominence Beam",
             "Red Inferno",
@@ -1338,7 +1338,7 @@ const digimonStats = [
             "Charm Perfume",
             "Poison Powder",
             "Mass Morph",
-            "Electro Shocker"
+            "High Electro Shocker"
         ]
     },
     {
