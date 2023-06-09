@@ -62,7 +62,7 @@ function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 }
 const moveRules = [
 {"name": "Aqua Magic", "reduceTotalStatsBy": 45},
-{"name": "Mass Morph", "reduceTotalStatsBy": 95},
+{"name": "Mass Morph", "reduceTotalStatsBy": 90},
 {"name": "War Cry", "reduceTotalStatsBy": 50},
 {"name": "Muscle Charge", "maxDefense": 955, "reduceTotalStatsBy": 135, "maxBuffMoves": 1},
 {"name": "Full Potential", "maxOffense": 840, "maxDefense": 840, "maxSpeed": 840, "reduceTotalStatsBy": 200, "maxBuffMoves": 1},
