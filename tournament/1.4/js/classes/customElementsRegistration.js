@@ -65,7 +65,7 @@ class MaxCombinedStatsNumberInput extends HTMLInputElement{
 		this.value = maxCombinedStats;
 		this.id = "max-combined-stats-number-input";
 		this.min = 0;
-		this.max = 65535;
+		this.max = 137622;
 		this.step = 1;
 		this.style.float = "right";
 		this.style.backgroundColor = "coral";
@@ -586,12 +586,12 @@ class DigimonTable extends CustomTable{
 		this.finisherCell = document.createElement("TD");;
 		this.appendChild(this.getNameRow("Name"));
 		this.appendChild(this.getTypeRow("Type"));
-		this.appendChild(this.getNumberRow("HP", 0, 65535));
-		this.appendChild(this.getNumberRow("MP", 0, 65535));
-		this.appendChild(this.getNumberRow("Offense", 0, 65535));
-		this.appendChild(this.getNumberRow("Defense", 0, 65535));
-		this.appendChild(this.getNumberRow("Speed", 0, 65535));
-		this.appendChild(this.getNumberRow("Brains", 0, 65535));
+		this.appendChild(this.getNumberRow("HP", 0, 32767));
+		this.appendChild(this.getNumberRow("MP", 0, 32767));
+		this.appendChild(this.getNumberRow("Offense", 0, 32767));
+		this.appendChild(this.getNumberRow("Defense", 0, 32767));
+		this.appendChild(this.getNumberRow("Speed", 0, 32767));
+		this.appendChild(this.getNumberRow("Brains", 0, 32767));
 		this.getMovesStatRows();
 		this.style.width = "230px";
 		this.style.margin = "auto";
