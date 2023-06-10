@@ -156,8 +156,8 @@ class Rules{
 		}
 		for(let combinedMoveRule of combinedMoveRules){
 			let counter = 0;
-			for(let move of combinedMoveRule.moves){
-				if(this.moves.indexOf(move) != 1){
+			for(let move of this.moves){
+				if(combinedMoveRule.moves.indexOf(move.name) != -1){
 					counter++;
 				}
 			}
