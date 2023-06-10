@@ -188,7 +188,7 @@ class Rules{
 		let brainsBuffReduction = 0;
 		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
 			this.reduceTotalStatsBy += 200 * Math.floor(digi.brains.value / 100);
-			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (stat point limit reduced by ${50 * Math.floor(digi.brains.value / 100)})`);
+			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (stat point limit reduced by ${200 * Math.floor(digi.brains.value / 100)})`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
