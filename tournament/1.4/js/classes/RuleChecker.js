@@ -1,6 +1,6 @@
 const minimumStats = {"hp": 500, "mp": 500, "offense": 50, "defense": 50, "speed": 50, "brains": 50};
 const statNames = ["hp", "mp", "offense", "defense", "speed", "brains"];
-const simpleRuleTypes = ["maxOffense", "maxDefense", "maxSpeed", "maxBuffMoves", "effectChanceCeiling"];
+const simpleRuleTypes = ["maxHP", "maxMP", "maxOffense", "maxDefense", "maxSpeed", "maxBrains", "maxBuffMoves", "effectChanceCeiling"];
 
 function countCombinedStats(digi){
 	let sum = Math.round(digi.hp.value / 10);
@@ -61,20 +61,23 @@ function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 	return aboveCeilingMoves;
 }
 const moveRules = [
-{"name": "Aqua Magic", "reduceTotalStatsBy": 45},
-{"name": "Mass Morph", "reduceTotalStatsBy": 90},
-{"name": "War Cry", "reduceTotalStatsBy": 50},
-{"name": "Muscle Charge", "maxDefense": 955, "reduceTotalStatsBy": 135, "maxBuffMoves": 1},
-{"name": "Full Potential", "maxOffense": 840, "maxDefense": 840, "maxSpeed": 840, "reduceTotalStatsBy": 200, "maxBuffMoves": 1},
-{"name": "Ice Statue", "maxOffense": 910, "maxSpeed": 190, "effectChanceCeiling": 40},
-{"name": "Megalo Spark", "maxOffense": 925, "maxSpeed": 265},
-{"name": "Insect Plague", "maxDefense": 910, "maxSpeed": 250},
-{"name": "Poison Powder", "maxDefense": 940, "maxSpeed": 290},
-{"name": "Thunder Justice", "maxOffense": 900, "maxSpeed": 275},
-{"name": "Wind Cutter", "maxSpeed": 290},
-{"name": "Meltdown", "maxSpeed": 290},
-{"name": "Bug", "isBanned": true},
-{"name": "Counter", "isBanned": true}
+	{"name": "Aqua Magic", "reduceTotalStatsBy": 410, "maxOffense": 4750, "maxDefense": 2500, "maxSpeed": 900},
+	{"name": "Mass Morph", "reduceTotalStatsBy": 220, "maxOffense": 4000, "maxDefense": 4000, "maxSpeed": 900},
+	{"name": "War Cry", "reduceTotalStatsBy": 300, "maxOffense": 4000, "maxDefense": 3750, "maxSpeed": 900},
+	{"name": "Muscle Charge", "maxOffense": 1750, "maxDefense": 4500, "reduceTotalStatsBy": 550, "maxBuffMoves": 1},
+	{"name": "Full Potential", "maxOffense": 2250, "maxDefense": 3000, "maxSpeed": 900, "reduceTotalStatsBy": 700, "maxBuffMoves": 1},
+	{"name": "Ice Statue", "maxOffense": 3640, "maxSpeed": 570, "effectChanceCeiling": 40},
+	{"name": "Megalo Spark", "maxOffense": 3700, "maxSpeed": 795},
+	{"name": "Insect Plague", "maxDefense": 3640, "maxSpeed": 750},
+	{"name": "Poison Powder", "maxDefense": 3760, "maxSpeed": 890},
+	{"name": "Thunder Justice", "maxOffense": 3600, "maxSpeed": 825},
+	{"name": "Wind Cutter", "maxSpeed": 870},
+	{"name": "Meltdown", "maxSpeed": 870},
+	{"name": "Bug", "isBanned": true},
+	{"name": "Counter", "isBanned": true}
+];
+const combinedMoveRules = [
+	{"moves": ["Aqua Magic", "War Cry"], "maxOffense": 3000, "maxDefense": 3500, "maxSpeed": 900}
 ];
  
 class Rules{
@@ -83,12 +86,18 @@ class Rules{
 	}
 	reset(){
 		this.isValid = true;
-		this.maxOffense = 999;
+		this.maxHP = 30000;
+		this.maxHPReason = false;
+		this.maxMP = 30000;
+		this.maxMPReason = false;
+		this.maxOffense = 5000;
 		this.maxOffenseReason = false;
-		this.maxDefense = 999;
+		this.maxDefense = 5000;
 		this.maxDefenseReason = false;
-		this.maxSpeed = 999;
+		this.maxSpeed = 2000;
 		this.maxSpeedReason = false;
+		this.maxBrains = 1000;
+		this.maxBrainsReason = false;
 		this.minBrains = 50;
 		this.minBrainsReason = false;
 		this.maxBuffMoves = 2;
@@ -145,6 +154,31 @@ class Rules{
 				}
 			}
 		}
+		for(let combinedMoveRule of combinedMoveRules){
+			let counter = 0;
+			for(let move of combinedMoveRule.moves){
+				if(this.moves.indexOf(move) != 1){
+					counter++;
+				}
+			}
+			if(counter == combinedMoveRule.moves.length){
+				for(let simpleRuleType of simpleRuleTypes){
+					if(combinedMoveRule[simpleRuleType] != undefined){
+						if(this[simpleRuleType] > combinedMoveRule[simpleRuleType]){
+							this[simpleRuleType] = combinedMoveRule[simpleRuleType];
+							this[`${simpleRuleType}Reason`] = helper.getAndSentenceFromStringArr(combinedMoveRule.moves);
+						}
+					}
+				}
+				if(combinedMoveRule.reduceTotalStatsBy != undefined){
+					this.reduceTotalStatsBy += combinedMoveRule.reduceTotalStatsBy;
+					this.reduceTotalStatsByReason.push(`${helper.getAndSentenceFromStringArr(combinedMoveRule.moves)} (stat point limit reduced by ${combinedMoveRule.reduceTotalStatsBy}).`);
+				}
+				if(combinedMoveRule.isBanned != undefined){
+					this.bannedMoves.push(helper.getAndSentenceFromStringArr(combinedMoveRule.moves));
+				}
+			}
+		}
 		this.aboveCeilingMoves = filterNonPoisonAboveEffectChanceCeilingMoves(this.moves, this.effectChanceCeiling);
 	}
 	getRulesString(digi){
@@ -184,6 +218,22 @@ class Rules{
 			retArr.push(tempStr);
 			this.isValid = false;
 		}
+		if(digi.hp.value > this.maxHP){
+			tempStr = `You need to lower your offense to ${this.maxHP}`;
+			if(this.maxHPReason != false){
+				tempStr += ` because you have ${this.maxHPReason} equipped.`;
+			}
+			retArr.push(tempStr);
+			this.isValid = false;
+		}
+		if(digi.mp.value > this.maxMP){
+			tempStr = `You need to lower your offense to ${this.maxMP}`;
+			if(this.maxMPReason != false){
+				tempStr += ` because you have ${this.maxMPReason} equipped.`;
+			}
+			retArr.push(tempStr);
+			this.isValid = false;
+		}
 		if(digi.offense.value > this.maxOffense){
 			tempStr = `You need to lower your offense to ${this.maxOffense}`;
 			if(this.maxOffenseReason != false){
@@ -204,6 +254,14 @@ class Rules{
 			tempStr = `You need to lower your speed to ${this.maxSpeed}`;
 			if(this.maxSpeedReason != false){
 				tempStr += ` because you have ${this.maxSpeedReason} equipped.`;
+			}
+			retArr.push(tempStr);
+			this.isValid = false;
+		}
+		if(digi.brains.value > this.maxBrains){
+			tempStr = `You need to lower your speed to ${this.maxBrains}`;
+			if(this.maxBrainsReason != false){
+				tempStr += ` because you have ${this.maxBrainsReason} equipped.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
