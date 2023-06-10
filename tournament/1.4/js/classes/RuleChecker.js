@@ -122,7 +122,7 @@ class Rules{
 			}
 		}
 		if(this.moves.length == 2){
-			this.minBrains = 200;
+			this.minBrains = 750;
 			this.minBrainsReason = "only two moves";
 			this.maxBuffMoves = 0;
 			this.maxBuffMovesReason = "only two moves";
@@ -187,7 +187,7 @@ class Rules{
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
 		let brainsBuffReduction = 0;
 		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
-			this.reduceTotalStatsBy += 50 * Math.floor(digi.brains.value / 100);
+			this.reduceTotalStatsBy += 200 * Math.floor(digi.brains.value / 100);
 			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (stat point limit reduced by ${50 * Math.floor(digi.brains.value / 100)})`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
