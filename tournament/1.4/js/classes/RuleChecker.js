@@ -146,7 +146,7 @@ class Rules{
 					}
 					if(moveRule.reduceTotalStatsBy != undefined){
 						this.reduceTotalStatsBy += moveRule.reduceTotalStatsBy;
-						this.reduceTotalStatsByReason.push(`${moveRule.name} (stat point limit reduced by ${moveRule.reduceTotalStatsBy}).`);
+						this.reduceTotalStatsByReason.push(`${moveRule.name} (stat point limit reduced by ${moveRule.reduceTotalStatsBy})`);
 					}
 					if(moveRule.isBanned != undefined){
 						this.bannedMoves.push(moveRule.name);
