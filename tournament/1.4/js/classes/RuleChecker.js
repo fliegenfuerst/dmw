@@ -66,7 +66,7 @@ const moveRules = [
 	{"name": "War Cry", "reduceTotalStatsBy": 300, "maxOffense": 4000, "maxDefense": 3750, "maxSpeed": 900},
 	{"name": "Muscle Charge", "maxOffense": 1750, "maxDefense": 4500, "reduceTotalStatsBy": 550, "maxBuffMoves": 1},
 	{"name": "Full Potential", "maxOffense": 2250, "maxDefense": 3000, "maxSpeed": 900, "reduceTotalStatsBy": 700, "maxBuffMoves": 1},
-	{"name": "Ice Statue", "maxOffense": 3640, "maxSpeed": 570, "effectChanceCeiling": 40},
+	{"name": "Ice Statue", "maxOffense": 3640, "maxSpeed": 640, "effectChanceCeiling": 40},
 	{"name": "Megalo Spark", "maxOffense": 3700, "maxSpeed": 795},
 	{"name": "Insect Plague", "maxDefense": 3640, "maxSpeed": 750},
 	{"name": "Poison Powder", "maxDefense": 3760, "maxSpeed": 890},
