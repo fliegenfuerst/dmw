@@ -181,7 +181,7 @@ class NameInput extends HTMLInputElement{
 		this.type = "text";
 		this.id = id;
 		this.value = targetValue.value;
-		this.maxLength = 9;
+		this.maxLength = 7;
 		this.style.width = "72px";
 		this.style.float = "right";
 		this.style.textAlign = "center";
