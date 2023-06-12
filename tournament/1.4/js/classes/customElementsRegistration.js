@@ -519,7 +519,11 @@ class CustomTable extends HTMLTableElement{
 		if(this.index != undefined){
 			id += `-${this.index}`;
 		}
-		col.innerText = name;
+		if(name = "Name"){
+			col.innerText = "Digimon Name";
+		}else{
+			col.innerText = name;	
+		}
 		row.appendChild(col);
 		col = document.createElement("TD");
 		col.appendChild(new NameInput(id, this.model[propertyName]));
