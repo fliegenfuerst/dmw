@@ -19,8 +19,8 @@ class DigimonSave{
 		if(this.tamerName.value == "Tamer"){
 			this.tamerName.value = screenName.slice(0, 6);
 		}
-		this.writeString(0x12, this.tamerName.value, 6);
-		this.writeString(this.tamerName.offset, this.tamerName.value, 6);
+		this.writeString(0x12, this.tamerName.value, 7);
+		this.writeString(this.tamerName.offset, this.tamerName.value, 7);
 		let name = digimonStats[this.registeredDigimon[0].type.value].name;
 		let temp = helper.getZeroArray(17);
 		for(let i = 0; i < name.length; i++){
@@ -235,7 +235,7 @@ class DigimonSave{
 						this.writeBytes(data[propertyNames[i]].offset, helper.valueToSaveArraySigned(data[propertyNames[i]].value, 2));
 						break;
 					case "string":
-						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 6);
+						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 7);
 						break;
 				}
 		}
