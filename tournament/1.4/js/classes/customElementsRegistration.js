@@ -519,7 +519,7 @@ class CustomTable extends HTMLTableElement{
 		if(this.index != undefined){
 			id += `-${this.index}`;
 		}
-		if(name = "Name"){
+		if(name == "Name"){
 			col.innerText = "Digimon Name";
 		}else{
 			col.innerText = name;	
