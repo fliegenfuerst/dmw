@@ -67,6 +67,7 @@ class Participant{
 		this.groupName = false;
 		this.presetGroup = false;
 		this.chooserCheckBoxGroup = [];
+		this.originalIndex = -1;
 	}
 	getTableRow(){
 		this.tableRow = document.createElement("TR");
@@ -141,8 +142,8 @@ class Participant{
 	getEntriesSpreadSheetString(){
 		return `${this.screenName}\t${this.tamerName}\t${this.digi.name}\t${digimonStats[this.digi.type].name}`;
 	}
-	getKlixuzSpreadSheetData(index){
-		return `${this.screenName}\t${this.digi.name}\t${digimonStats[this.digi.type].name}\t=A${index+1}\t${this.digi.maxHp}\t${this.digi.maxMp}\t${this.digi.offense}\t${this.digi.defense}\t${this.digi.speed}\t${this.digi.brains}`;
+	getKlixuzSpreadSheetData(){
+		return `${this.screenName}\t${this.digi.name}\t${digimonStats[this.digi.type].name}\t=A${this.originalIndex+1}\t${this.digi.maxHp}\t${this.digi.maxMp}\t${this.digi.offense}\t${this.digi.defense}\t${this.digi.speed}\t${this.digi.brains}`;
 	}
 }
 class GroupsMemoryCard{
@@ -174,7 +175,6 @@ class GroupsMemoryCard{
 			if(index != -1){
 				this.memcardReader.saveSlotArray[index].updatePlayerName(member.tamerName);
 				this.memcardReader.saveSlotArray[index].registerDigimonfromLinkData(member.digi);
-				//this.memcardReader.saveSlotArray[index].updateCurrentDigimon(member.digi);
 				this.memcardReader.saveSlotArray[index].updateSaveName(member.tamerName, digimonStats[member.digi.type].name);
 				this.memcardReader.saveSlotArray[index].setScreenName(member.screenName);
 				this.gui.updateSlotButtons();
@@ -264,28 +264,9 @@ class Order{
 	}
 	getKlixuzSpreadSheetData(){
 		let retArr = [];
-		let index = 1;
-		for(let groupName in this.groups){
-			for(let member of this.groups[groupName].members){
-				retArr.push(member.getKlixuzSpreadSheetData(index++));
-			}
-		}
-		navigator.clipboard.writeText(retArr.join("\n"));
-	}
-	getKlixuzSpreadSheetGroupData(){
-		let retArr = [];
-		retArr[0] = [];
-		for(let i = 0; i < this.groups[this.groupNames[0]].members.length; i++){
-			retArr[i + 1] = [];
-		}
-		for(let i = 0; i < this.groupNames.length; i++){
-			retArr[0].push(`group ${this.groupNames[i]}`);
-			for(let j = 0; j < this.groups[this.groupNames[i]].members.length; j++){
-				retArr[j + 1].push(this.groups[this.groupNames[i]].members[j].screenName);
-			}
-		}
-		for(let i = 0; i < retArr.length; i++){
-			retArr[i] = retArr[i].join("\t");
+		for(let participant of participants){
+			console.log(participant);
+			retArr.push(participant.getKlixuzSpreadSheetData());
 		}
 		navigator.clipboard.writeText(retArr.join("\n"));
 	}
@@ -296,7 +277,7 @@ class Order{
 		}
 		for(let i = 0; i < this.groupNames.length; i++){
 			for(let j = 0; j < this.groups[this.groupNames[i]].members.length; j++){
-				retArr[j].push(i * this.groups[this.groupNames[i]].members.length + j + 1);
+				retArr[j].push(this.groups[this.groupNames[i]].members[j].originalIndex + 1);
 			}
 		}
 		for(let i = 0; i < retArr.length; i++){
@@ -306,7 +287,6 @@ class Order{
 	}
 }
 const possibleGroupSizes = [4, 5, 6];
-//const possibleTournamentSizes = [8, 10, 12, 14, 16, 20, 24, 32];
 const possibleTournamentSizes = [8, 10, 12, 15, 16, 18, 20, 24, 25, 28, 30, 32, 35, 36, 40, 42];
 function groupParticipants(){
 	container.innerHTML = "";
@@ -329,6 +309,7 @@ function addEntriesToParticipantTable(){
 		if(data[i] != ""){
 			participant = parseLink(data[i].trim());
 			if(!participants.contains(participant)){
+				participant.originalIndex = participants.length;
 				participants.push(participant);
 				participantTable.appendChild(participant.tableRow);
 			}
