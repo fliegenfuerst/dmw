@@ -148,7 +148,7 @@ class Participant{
 			if(this.digi["move" + i] == 0xFF){
 				retStr += "\tempty";
 			}else{
-				retStr += ´\t${digimonStats[this.digi.type].moves[this.digi["move" + i] - 0x2E]}´;
+				retStr += `\t${digimonStats[this.digi.type].moves[this.digi["move" + i] - 0x2E]}`;
 			}
 		}
 		return retStr;
