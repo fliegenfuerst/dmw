@@ -143,7 +143,15 @@ class Participant{
 		return `${this.screenName}\t${this.tamerName}\t${this.digi.name}\t${digimonStats[this.digi.type].name}`;
 	}
 	getKlixuzSpreadSheetData(){
-		return `${this.screenName}\t${this.digi.name}\t${digimonStats[this.digi.type].name}\t=A${this.originalIndex+1}\t${this.digi.maxHp}\t${this.digi.maxMp}\t${this.digi.offense}\t${this.digi.defense}\t${this.digi.speed}\t${this.digi.brains}`;
+		let retStr = `${this.screenName}\t${this.digi.name}\t${digimonStats[this.digi.type].name}\t=A${this.originalIndex+1}\t${this.digi.maxHp}\t${this.digi.maxMp}\t${this.digi.offense}\t${this.digi.defense}\t${this.digi.speed}\t${this.digi.brains}`;
+		for(let i = 1; i < 4; i++){
+			if(this.digi["move" + i] == 0xFF){
+				retStr += "\tempty";
+			}else{
+				retStr += ´\t${digimonStats[this.digi.type].moves[this.digi["move" + i] - 0x2E]}´;
+			}
+		}
+		return retStr;
 	}
 }
 class GroupsMemoryCard{
