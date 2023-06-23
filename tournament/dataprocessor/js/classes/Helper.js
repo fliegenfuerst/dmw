@@ -130,7 +130,7 @@ class Helper{
 		return arr;
 	}
 	getDigimonMemoryCardHeaderArray(drmIndex){
-		let arr = [...[81,0,0,0,0,32,0,0,255,255,66,65,83,76,85,83,45,48,49,48,51,50,68,77,82], ...[48 + drmIndex], ...this.getZeroArray(101)];
+		let arr = [...[81,0,0,0,0,32,0,0,255,255,66,65,83,76,85,83,45,48,49,48,51,50,68,77,82], ...[drmIndex.toString(16).charCodeAt(0)], ...this.getZeroArray(101)];
 		let sum = arr[0];
 		for(let i = 1; i < arr.length; i++){
 			sum =  sum ^ arr[i];
