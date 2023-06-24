@@ -321,7 +321,7 @@ class DigimonSave{
 						this.writeBytes(data[propertyNames[i]].offset, helper.valueToSaveArraySigned(data[propertyNames[i]].value, 2));
 						break;
 					case "string":
-						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 6);
+						this.writeString(data[propertyNames[i]].offset, data[propertyNames[i]].value, 7);
 						break;
 				}
 			}
