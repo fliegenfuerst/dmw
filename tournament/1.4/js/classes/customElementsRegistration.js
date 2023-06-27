@@ -16,6 +16,7 @@ class NumberInput extends HTMLInputElement{
 		this.onkeypress = this.isNumberKey;
 		this.onkeyup = this.checkMax;
 		this.oninput = this.onchange = this.updateValue;
+		this.is = 'number-input';
 		hashManager.registerSegment(this, "number", false);
 	}
 	isNumberKey(event){
