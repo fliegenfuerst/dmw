@@ -2,7 +2,7 @@
 <script type="text/javascript" src="https://fliegenfuerst.github.io/dmw/tournament/1.4/js/data/digimonStats.js"></script>
 <script type="text/javascript" src="https://fliegenfuerst.github.io/dmw/tournament/1.4/js/data/digimonAlphabetical.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
-<body onload="showAgumon">
+<body">
 <div>
 <button id="showNextDigiButton">download sprites</button>
 <button id="drawBackgroundButton">draw background</button>
@@ -194,10 +194,7 @@ function fillDigimonSelect(){
 	digiSelect.selectedIndex = 1;
 }
 fillDigimonSelect();
-function showAgumon(){
-	drawDigi(digimonAlphabetical[previewDigiIndex]);
-}
-window.onload = function showAgumon();
+drawDigi(digimonStats[previewDigiIndex]);
 </script>
 </body>
 </html>
