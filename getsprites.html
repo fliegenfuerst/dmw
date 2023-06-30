@@ -1,30 +1,31 @@
 <html>
 <script type="text/javascript" src="https://fliegenfuerst.github.io/dmw/tournament/1.4/js/data/digimonStats.js"></script>
+<script type="text/javascript" src="https://fliegenfuerst.github.io/dmw/tournament/1.4/js/data/digimonAlphabetical.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+<body>
+<div>
 <button id="showNextDigiButton">download sprites</button>
-<div id="name"></div>
+<button id="drawBackgroundButton">draw background</button>
+<button id="flipHorizontallyButton">flip horizontally</button>
+<label for="scaleInput">scale by:</label>
+<input type="number" min=1 value=1 id="scaleInput"/>
+<fieldset id="animationStateFieldset">
+<legend>Select an animation state:</legend>
+<input type="radio" name="state" id="idle1" value="idle1"/>
+<label for="idle1">idle 1</label>
+<input type="radio" name="state" id="idle2" value="idle2"/>
+<label for="idle2">idle 2</label>
+<input type="radio" name="state" id="attacking" value="attacking"/>
+<label for="attacking">attacking</label>
+<input type="radio" name="state" id="attacked" value="attacked"/> 
+<label for="attacked">attacked</label>
+</fieldset>
+<select id="digiSelect"></select>
+</div>
 <div class="fill" align="center">
   <canvas id="canvas" width="18" height="18"></canvas>
 </div>
-<style>
-@import url("http://necolas.github.io/normalize.css/3.0.1/normalize.css");
-
-.hide {
-  display: none;
-}
-
-.logo {
-  text-align: center;
-}
-
-.fill {
-  width: 100%;
-}
-
-.fr {
-  float: right;
-}
-</style>
+</body>
 <script>
 class Sprite{
 	constructor(name, blob){
@@ -43,48 +44,157 @@ function downloadBlob(blob, filename){
 	document.body.removeChild(link);
 }
 
-
-const digiName = document.getElementById("name");
+var scaleFactor = 1;
+var hasBackground = false;
+var isFlipped = false;
+var scaleBy = 1;
+var previewDigiIndex = 1;
+const digiSelect = document.getElementById("digiSelect");
+digiSelect.onchange = showSelectedDigi;
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
+ctx.webkitImageSmoothingEnabled = false;
+ctx.mozImageSmoothingEnabled = false;
+ctx.imageSmoothingEnabled = false;
 const showNextDigiButton = document.getElementById("showNextDigiButton");
 showNextDigiButton.onclick = showNextDigi;
+const drawBackgroundButton = document.getElementById("drawBackgroundButton");
+drawBackgroundButton.onclick = toggleDrawBackground;
+const flipHorizontallyButton = document.getElementById("flipHorizontallyButton");
+flipHorizontallyButton.onclick = toggleIsFlipped;
+const scaleInput = document.getElementById("scaleInput");
+scaleInput.onchange = updateScale;
+const animationStateFieldSet = document.getElementById("animationStateFieldset");
+animationStateFieldset.onchange = updateAnimationState;
+const animationStateModifier = {x: 0, y: 0};
+var currentAnimationState = "idle1";
 let backgroundImg = new Image();
 let spriteImg = new Image();
 const sprites = [];
-backgroundImg.crossOrigin="anonymous"
-spriteImg.crossOrigin="anonymous"
+backgroundImg.crossOrigin = "anonymous"
+spriteImg.crossOrigin = "anonymous"
 backgroundImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/bg_box.png';
 spriteImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/digisprites.png';
 
-function showDigi(id){
-	let digi = digimonStats[id];
-	ctx.drawImage(backgroundImg, 0, 0);
-	ctx.drawImage(spriteImg, 32 * digi.id, 0, 16, 16, 1, 1, 16, 16);
-	digiName.innerText = digi.name;
-	
+function showSelectedDigi(event){
+console.log(Object.getOwnPropertyNames(event.target));
+	previewDigiIndex = digiSelect.options[event.target.selectedIndex].value;
+	drawDigi(digimonStats[previewDigiIndex]);
+}
+
+function toggleDrawBackground(){
+	if(hasBackground){
+		drawBackgroundButton.innerText = "draw background";
+	}else{
+		drawBackgroundButton.innerText = "don't draw background";
+	}
+  	hasBackground = !hasBackground;
+	drawDigi(digimonStats[previewDigiIndex]);
+}
+
+function toggleIsFlipped(){
+	if(isFlipped){
+		flipHorizontallyButton.innerText = "flip horizontally";
+	}else{
+		flipHorizontallyButton.innerText = "don't flip horizontally";
+	}
+  	isFlipped = !isFlipped;
+	drawDigi(digimonStats[previewDigiIndex]);
+}
+
+function updateScale(event){
+	scaleBy = event.target.value;
+	drawDigi(digimonStats[previewDigiIndex]);
+}
+
+function updateAnimationState(event){
+	switch(event.target.value){
+		case "idle1":
+			animationStateModifier.x = 0;
+			animationStateModifier.y = 0;
+			currentAnimationState = "idle1";
+			break;
+		case "idle2":
+			animationStateModifier.x = 1;
+			animationStateModifier.y = 0;
+			currentAnimationState = "idle1";
+			break;
+		case "attacking":
+			animationStateModifier.x = 0;
+			animationStateModifier.y = 1;
+			currentAnimationState = "attacking";
+			break;
+		case "attacked":
+			animationStateModifier.x = 1;
+			animationStateModifier.y = 1;
+			currentAnimationState = "attacked";
+			break;
+		default:
+			animationStateModifier.x = 0;
+			animationStateModifier.y = 0;
+			currentAnimationState = "idle1";
+	}
+	drawDigi(digimonStats[previewDigiIndex]);
+}
+
+function drawDigi(digi){
+	if(hasBackground){
+		canvas.width = 18 * scaleBy;
+		canvas.height = 18 * scaleBy;
+		ctx.webkitImageSmoothingEnabled = false;
+		ctx.mozImageSmoothingEnabled = false;
+		ctx.imageSmoothingEnabled = false;
+		ctx.drawImage(backgroundImg, 0, 0, 18, 18, 0, 0, 18 * scaleBy, 18 * scaleBy);
+	}else{
+		canvas.width = 16 * scaleBy;
+		canvas.height = 16 * scaleBy;
+	}
+	if(isFlipped){
+		ctx.scale(-1, 1);
+		ctx.translate(-canvas.width, 0);
+	}
+	ctx.webkitImageSmoothingEnabled = false;
+	ctx.mozImageSmoothingEnabled = false;
+	ctx.imageSmoothingEnabled = false;
+	ctx.drawImage(spriteImg, 32 * digi.id + animationStateModifier.x * 16 , animationStateModifier.y * 16, 16, 16, hasBackground * scaleBy, hasBackground * scaleBy, 16 * scaleBy, 16 * scaleBy);
 }
 
 async function storeDigi(digi){
-	ctx.drawImage(backgroundImg, 0, 0);
-	ctx.drawImage(spriteImg, 32 * digi.id, 0, 16, 16, 1, 1, 16, 16);
-	digiName.innerText = digi.name;
+	drawDigi(digi);
 	const blob = await new Promise(res => canvas.toBlob(res));
 	sprites.push(new Sprite(digi.name + ".png", blob));
 }
 
-var id = 0;
 async function showNextDigi(){
 	for(let i = 0; i < 128; i++){
 		await storeDigi(digimonStats[i]);
 	}
-  
+	drawDigi(digimonStats[previewDigiIndex]);
 	var zip = new JSZip();
-
 	for(let sprite of sprites){
 		zip.file(sprite.saveName, sprite.blob);
 	}
-	downloadBlob(await zip.generateAsync({ type: "blob" }), "sprites.zip");
+	let zipName = "dw1_sprites";
+	if(hasBackground){
+		zipName += "_bg";
+	}
+	if(isFlipped){
+		zipName += "_flipped";
+	}
+	zipName += "_" + currentAnimationState + "_" + canvas.width + "x" + canvas.height + ".zip"
+	downloadBlob(await zip.generateAsync({ type: "blob" }), zipName);
 }
+function fillDigimonSelect(){
+	let tempOption;
+	for(let digi of digimonAlphabetical){
+		tempOption = document.createElement("OPTION");
+		tempOption.value = digi.id;
+		tempOption.innerText = digi.name;
+		digiSelect.appendChild(tempOption);
+	}
+	digiSelect.selectedIndex = 1;
+}
+fillDigimonSelect();
+drawDigi(digimonAlphabetical[previewDigiIndex]);
 </script>
 </html>
