@@ -19,7 +19,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": false,
+            "idle2": false,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 3,
@@ -41,7 +47,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 7,
@@ -63,7 +75,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 95,
@@ -85,7 +103,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 116,
@@ -107,7 +131,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": false,
+            "idle2": false,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 40,
@@ -129,7 +159,13 @@ const digimonAlphabetical = [
             "DG Dimension",
             "Full Potential",
             "Spiral Sword"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 20,
@@ -151,7 +187,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 86,
@@ -173,7 +215,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 37,
@@ -195,7 +243,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 4,
@@ -217,7 +271,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 21,
@@ -239,7 +299,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 45,
@@ -261,7 +327,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 104,
@@ -283,7 +355,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 1,
@@ -305,7 +383,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 126,
@@ -327,7 +411,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 36,
@@ -349,7 +439,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 121,
@@ -371,7 +467,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 98,
@@ -393,7 +495,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 49,
@@ -415,7 +523,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 101,
@@ -437,7 +551,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 127,
@@ -459,7 +579,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 6,
@@ -481,7 +607,13 @@ const digimonAlphabetical = [
             "Death Claw",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 56,
@@ -503,7 +635,13 @@ const digimonAlphabetical = [
             "Hurricane",
             "Tear Drop",
             "Aqua Magic"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 74,
@@ -525,7 +663,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 38,
@@ -547,7 +691,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 18,
@@ -569,7 +719,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 42,
@@ -591,7 +747,13 @@ const digimonAlphabetical = [
             "Ult Poop Hell",
             "Dark Network & Concert Crush",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 69,
@@ -613,7 +775,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 23,
@@ -635,7 +803,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 89,
@@ -657,7 +831,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 17,
@@ -679,7 +859,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 22,
@@ -701,7 +887,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 110,
@@ -723,7 +915,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 87,
@@ -745,7 +943,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 64,
@@ -767,7 +971,13 @@ const digimonAlphabetical = [
             "Full Potential",
             "Genoside Attack",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 41,
@@ -789,7 +999,13 @@ const digimonAlphabetical = [
             "Full Potential",
             "Deadly Bomb",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 80,
@@ -811,7 +1027,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 68,
@@ -833,7 +1055,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 5,
@@ -855,7 +1083,13 @@ const digimonAlphabetical = [
             "Mega Flame",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 92,
@@ -877,7 +1111,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 105,
@@ -899,7 +1139,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 60,
@@ -921,7 +1167,13 @@ const digimonAlphabetical = [
             "Poison Powder",
             "Mass Morph",
             "Electro Shocker"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 122,
@@ -943,7 +1195,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 0,
@@ -965,7 +1223,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 72,
@@ -987,7 +1251,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 100,
@@ -1009,7 +1279,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 94,
@@ -1031,7 +1307,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 78,
@@ -1053,7 +1335,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 117,
@@ -1075,7 +1363,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 19,
@@ -1097,7 +1391,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 120,
@@ -1119,7 +1419,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 50,
@@ -1141,7 +1447,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 2,
@@ -1163,7 +1475,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 32,
@@ -1185,7 +1503,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 51,
@@ -1207,7 +1531,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 48,
@@ -1229,7 +1559,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 115,
@@ -1251,7 +1587,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 13,
@@ -1273,7 +1615,13 @@ const digimonAlphabetical = [
             "Full Potential",
             "Smiley Bomb",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 118,
@@ -1295,7 +1643,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": false,
+            "idle2": false,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 124,
@@ -1317,7 +1671,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": false,
+            "idle2": false,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 61,
@@ -1339,7 +1699,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 54,
@@ -1361,7 +1727,13 @@ const digimonAlphabetical = [
             "Full Potential",
             "Genoside Attack",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 9,
@@ -1383,7 +1755,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 65,
@@ -1405,7 +1783,13 @@ const digimonAlphabetical = [
             "Ult Poop Hell",
             "Dark Network & Concert Crush",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 12,
@@ -1427,7 +1811,13 @@ const digimonAlphabetical = [
             "DG Dimension",
             "Full Potential",
             "Giga Scissor Claw"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 27,
@@ -1449,7 +1839,13 @@ const digimonAlphabetical = [
             "All Range Beam",
             "Energy Bomb",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 113,
@@ -1471,7 +1867,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 83,
@@ -1493,7 +1895,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 52,
@@ -1515,7 +1923,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 47,
@@ -1537,7 +1951,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 14,
@@ -1559,7 +1979,13 @@ const digimonAlphabetical = [
             "Confused Storm",
             "Lovely Attack",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 91,
@@ -1581,7 +2007,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 93,
@@ -1603,7 +2035,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 81,
@@ -1625,7 +2063,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 66,
@@ -1647,7 +2091,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 53,
@@ -1669,7 +2119,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 58,
@@ -1691,7 +2147,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 79,
@@ -1713,7 +2175,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 11,
@@ -1735,7 +2203,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 34,
@@ -1757,7 +2231,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 109,
@@ -1779,7 +2259,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 46,
@@ -1801,7 +2287,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 63,
@@ -1823,7 +2315,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 31,
@@ -1845,7 +2343,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 57,
@@ -1867,7 +2371,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 59,
@@ -1889,7 +2399,13 @@ const digimonAlphabetical = [
             "Hurricane",
             "Crimson Flare",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 85,
@@ -1911,7 +2427,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 55,
@@ -1933,7 +2455,13 @@ const digimonAlphabetical = [
             "Bit Bomb",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 73,
@@ -1955,7 +2483,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 29,
@@ -1977,7 +2511,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 82,
@@ -1999,7 +2539,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 15,
@@ -2021,7 +2567,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 77,
@@ -2043,7 +2595,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 108,
@@ -2065,7 +2623,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 106,
@@ -2087,7 +2651,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 102,
@@ -2109,7 +2679,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 10,
@@ -2131,7 +2707,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 97,
@@ -2153,7 +2735,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 35,
@@ -2175,7 +2763,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 75,
@@ -2197,7 +2791,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 119,
@@ -2219,7 +2819,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 26,
@@ -2241,7 +2847,13 @@ const digimonAlphabetical = [
             "All Range Beam",
             "Dark Shot",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 71,
@@ -2263,7 +2875,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 103,
@@ -2285,7 +2903,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 107,
@@ -2307,7 +2931,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 39,
@@ -2329,7 +2959,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 44,
@@ -2351,7 +2987,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 76,
@@ -2373,7 +3015,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 90,
@@ -2395,7 +3043,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 111,
@@ -2417,7 +3071,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 123,
@@ -2439,7 +3099,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": false,
+            "idle2": false,
+            "attacking": false,
+            "attacked": false
+        }
     },
     {
         "id": 30,
@@ -2461,7 +3127,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 84,
@@ -2483,7 +3155,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 96,
@@ -2505,7 +3183,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 16,
@@ -2527,7 +3211,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 8,
@@ -2549,7 +3239,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 33,
@@ -2571,7 +3267,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 28,
@@ -2593,7 +3295,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 25,
@@ -2615,7 +3323,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 88,
@@ -2637,7 +3351,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 70,
@@ -2659,7 +3379,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 112,
@@ -2681,7 +3407,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 99,
@@ -2703,7 +3435,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 62,
@@ -2725,7 +3463,13 @@ const digimonAlphabetical = [
             "Fire Tower",
             "Fire Tower",
             "Fire Tower"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 24,
@@ -2747,7 +3491,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 67,
@@ -2769,7 +3519,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     },
     {
         "id": 43,
@@ -2791,7 +3547,13 @@ const digimonAlphabetical = [
             "None",
             "None",
             "None"
-        ]
+        ],
+        "animationStates": {
+            "idle1": true,
+            "idle2": true,
+            "attacking": true,
+            "attacked": true
+        }
     }
 ];
 function findDigimonIndexByName(name){
