@@ -1,3 +1,8 @@
+/*
+fieldset{
+  max-width: 84px;
+}
+*/
 class Sprite{
 	constructor(name, blob){
 		this.saveName = name;
@@ -31,6 +36,10 @@ class SpriteDownloader{
 	idle2RadioButtonLabel = document.createElement("LABEL");
 	attackingRadioButtonLabel = document.createElement("LABEL");
 	attackedRadioButtonLabel = document.createElement("LABEL");
+	idle1RadioButtonLabelI = document.createElement("I");
+	idle2RadioButtonLabelI = document.createElement("I");
+	attackingRadioButtonLabelI = document.createElement("I");
+	attackedRadioButtonLabelI = document.createElement("I");
 	digiSelect = document.createElement("SELECT");
 	canvas = document.createElement("CANVAS");
 	context;
@@ -42,7 +51,7 @@ class SpriteDownloader{
 	hasBackground = false;
 	isFlipped = false;
 	scaleBy = 1;
-	previewDigiIndex = 1;
+	currentDigimon = digimonAlphabetical[1];
 	currentAnimationState = "idle1";
 	constructor(){
 		this.downloadButton.innerText = "download sprites";
@@ -65,43 +74,45 @@ class SpriteDownloader{
 		this.idle2RadioButton.value = "idle2";
 		this.attackingRadioButton.value = "attacking";
 		this.attackedRadioButton.value = "attacked";
+		/*this.idle1RadioButton.id = "idle1";
+		this.idle2RadioButton.id = "idle2";
+		this.attackingRadioButton.id = "attacking";
+		this.attackedRadioButton.id = "attacked";
 		this.idle1RadioButtonLabel.for = this.idle1RadioButton;
-		this.idle1RadioButtonLabel.innerText = "idle1";
 		this.idle2RadioButtonLabel.for = this.idle2RadioButton;
-		this.idle2RadioButtonLabel.innerText = "idle2";
 		this.attackingRadioButtonLabel.for = this.attackingRadioButton;
-		this.attackingRadioButtonLabel.innerText = "attacking";
-		this.attackedRadioButtonLabel.for = this.attackedRadioButton;
-		this.attackedRadioButtonLabel.innerText = "attacked";
-		this.animationStateFieldSetLegend.innerText = "Select an animation state:";
-		this.scaleInput._owner = this;
-		this.animationStateFieldSet._owner = this;
-		this.digiSelect._owner = this;
+		this.attackedRadioButtonLabel.for = this.attackedRadioButton;*/
+		this.idle1RadioButtonLabelI.innerText = "idle1";
+		this.idle2RadioButtonLabelI.innerText = "idle2";
+		this.attackingRadioButtonLabelI.innerText = "attacking";
+		this.attackedRadioButtonLabelI.innerText = "attacked";
+		this.animationStateFieldSetLegend.innerText = "Animation state:";
 		this.downloadButton.onclick = this.downloadSprites;
 		this.drawBackgroundButton.onclick = this.toggleDrawBackground;
 		this.flipHorizontallyButton.onclick = this.toggleIsFlipped;
 		this.scaleInput.onchange = this.updateScale;
 		this.digiSelect.onchange = this.showSelectedDigi;
-		this.animationStateFieldSet.onchange = this.updateAnimationState;
+		this.animationStateFieldSet.onchange = this.setAnimationState;
+		
+		this.idle1RadioButtonLabel.appendChild(this.idle1RadioButton);
+		this.idle1RadioButtonLabel.appendChild(this.idle1RadioButtonLabelI);
+		this.idle2RadioButtonLabel.appendChild(this.idle2RadioButton);
+		this.idle2RadioButtonLabel.appendChild(this.idle2RadioButtonLabelI);
+		this.attackingRadioButtonLabel.appendChild(this.attackingRadioButton);
+		this.attackingRadioButtonLabel.appendChild(this.attackingRadioButtonLabelI);
+		this.attackedRadioButtonLabel.appendChild(this.attackedRadioButton);
+		this.attackedRadioButtonLabel.appendChild(this.attackedRadioButtonLabelI);
+		this.animationStateFieldSet.maxWidth = "84px";
 		this.animationStateFieldSet.appendChild(this.animationStateFieldSetLegend);
-		this.animationStateFieldSet.appendChild(this.idle1RadioButton);
 		this.animationStateFieldSet.appendChild(this.idle1RadioButtonLabel);
-		this.animationStateFieldSet.appendChild(this.idle2RadioButton);
+		this.animationStateFieldSet.appendChild(document.createElement("BR"));
 		this.animationStateFieldSet.appendChild(this.idle2RadioButtonLabel);
-		this.animationStateFieldSet.appendChild(this.attackingRadioButton);
+		this.animationStateFieldSet.appendChild(document.createElement("BR"));
 		this.animationStateFieldSet.appendChild(this.attackingRadioButtonLabel);
-		this.animationStateFieldSet.appendChild(this.attackedRadioButton);
+		this.animationStateFieldSet.appendChild(document.createElement("BR"));
 		this.animationStateFieldSet.appendChild(this.attackedRadioButtonLabel);
 		this.canvas.width = 18;
 		this.canvas.height = 18;
-		let tempOption;
-		for(let digi of digimonAlphabetical){
-			tempOption = document.createElement("OPTION");
-			tempOption.value = digi.id;
-			tempOption.innerText = digi.name;
-			this.digiSelect.appendChild(tempOption);
-		}
-		this.digiSelect.selectedIndex = 1;
 		this.container.appendChild(this.downloadButton);
 		this.container.appendChild(this.drawBackgroundButton);
 		this.container.appendChild(this.flipHorizontallyButton);
@@ -116,74 +127,118 @@ class SpriteDownloader{
 		this.spriteImg.crossOrigin = "anonymous"
 		this.backgroundImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/bg_box.png';
 		this.spriteImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/digisprites.png';
+		this.downloadButton._owner = this;
+		this.drawBackgroundButton._owner = this;
+		this.flipHorizontallyButton._owner = this;
+		this.scaleInput._owner = this;
+		this.animationStateFieldSet._owner = this;
+		this.digiSelect._owner = this;
+		let tempOption;
+		for(let digi of digimonAlphabetical){
+			tempOption = document.createElement("OPTION");
+			tempOption.value = digi.id;
+			tempOption.innerText = digi.name;
+			this.digiSelect.appendChild(tempOption);
+		}
+		this.digiSelect.selectedIndex = 1;
+		this.idle1RadioButton.checked = true;
+		this.drawDigi();
 		return this.container;
 		console.log(this.context);
 	}
 	
 	showSelectedDigi(event){
-		this._owner.previewDigiIndex = this.options[event.target.selectedIndex].value;
-		this._owner.drawDigi(digimonStats[this._owner.previewDigiIndex]);
+		let lastAvailableAnimationState = -1;
+		let changeState = true;
+		let falseCount = 0;
+		this._owner.currentDigimon = digimonAlphabetical[this.selectedIndex];
+		for(let animationState in this._owner.currentDigimon.animationStates){
+			if(this._owner.currentDigimon.animationStates[animationState]){
+				if(lastAvailableAnimationState == -1){
+					lastAvailableAnimationState = animationState;
+				}
+			}else{
+				this._owner[animationState+"RadioButton"].checked = false;
+			}
+			if(!this._owner[animationState+"RadioButton"].checked){
+				falseCount++;
+			}
+			if(animationState == this._owner.currentAnimationState){
+				if(this._owner.currentDigimon.animationStates[animationState]){
+					changeState = false;
+				}else{
+					this._owner[animationState+"RadioButton"].checked = false;
+				}
+			}
+			this._owner[animationState+"RadioButton"].disabled = !this._owner.currentDigimon.animationStates[animationState];
+		}
+		if(falseCount == 4){
+			changeState = true;
+		}
+		if(changeState && lastAvailableAnimationState != -1){
+		console.log(lastAvailableAnimationState);
+			this._owner[lastAvailableAnimationState+"RadioButton"].checked = true;
+			this._owner.currentAnimationState = lastAvailableAnimationState;
+			this._owner.updateAnimationState();
+		}
+		
+		this._owner.drawDigi();
 	}
 
 	toggleDrawBackground(){
-		if(this.hasBackground){
-			this.drawBackgroundButton.innerText = "draw background";
+		if(this._owner.hasBackground){
+			this.innerText = "draw background";
 		}else{
-			this.drawBackgroundButton.innerText = "don't draw background";
+			this.innerText = "don't draw background";
 		}
-		this.hasBackground = !this.hasBackground;
-		this.drawDigi(digimonStats[this.previewDigiIndex]);
+		this._owner.hasBackground = !this._owner.hasBackground;
+		this._owner.drawDigi();
 	}
 
 	toggleIsFlipped(){
-		if(this.isFlipped){
-			this.flipHorizontallyButton.innerText = "flip horizontally";
+		if(this._owner.isFlipped){
+			this.innerText = "flip horizontally";
 		}else{
-			this.flipHorizontallyButton.innerText = "don't flip horizontally";
+			this.innerText = "don't flip horizontally";
 		}
-		this.isFlipped = !isFlipped;
-		this.drawDigi(digimonStats[this.previewDigiIndex]);
+		this._owner.isFlipped = !this._owner.isFlipped;
+		this._owner.drawDigi();
 	}
 
-	updateScale(event){
-		this._owner.scaleBy = event.target.value;
-		this._owner.drawDigi(digimonStats[this._owner.previewDigiIndex]);
+	updateScale(){
+		this._owner.scaleBy = this.value;
+		this._owner.drawDigi();
 	}
-
-	updateAnimationState(event){
-		switch(event.target.value){
+	setAnimationState(event){
+		this._owner.currentAnimationState = event.target.value;
+		this._owner.updateAnimationState();
+	}
+	updateAnimationState(){
+		this.animationStateModifier.x = 0;
+		this.animationStateModifier.y = 0;
+		switch(this.currentAnimationState){
 			case "idle1":
-				this._owner.animationStateModifier.x = 0;
-				this._owner.animationStateModifier.y = 0;
-				this._owner.currentAnimationState = "idle1";
 				break;
 			case "idle2":
-				this._owner.animationStateModifier.x = 1;
-				this._owner.animationStateModifier.y = 0;
-				this._owner.currentAnimationState = "idle1";
+				this.animationStateModifier.x = 1;
 				break;
 			case "attacking":
-				this._owner.animationStateModifier.x = 0;
-				this._owner.animationStateModifier.y = 1;
-				this._owner.currentAnimationState = "attacking";
+				this.animationStateModifier.y = 1;
 				break;
 			case "attacked":
-				this._owner.animationStateModifier.x = 1;
-				this._owner.animationStateModifier.y = 1;
-				this._owner.currentAnimationState = "attacked";
+				this.animationStateModifier.x = 1;
+				this.animationStateModifier.y = 1;
 				break;
 			default:
-				this._owner.animationStateModifier.x = 0;
-				this._owner.animationStateModifier.y = 0;
-				this._owner.currentAnimationState = "idle1";
+				this.currentAnimationState = "idle1";
 		}
-		this._owner.drawDigi(digimonStats[this._owner.previewDigiIndex]);
+		this.drawDigi();
 	}
 
 	drawDigi(digi){
 		if(this.hasBackground){
-			this.canvas.width = 18 * scaleBy;
-			this.canvas.height = 18 * scaleBy;
+			this.canvas.width = 18 * this.scaleBy;
+			this.canvas.height = 18 * this.scaleBy;
 			this.context.webkitImageSmoothingEnabled = false;
 			this.context.mozImageSmoothingEnabled = false;
 			this.context.imageSmoothingEnabled = false;
@@ -194,38 +249,46 @@ class SpriteDownloader{
 		}
 		if(this.isFlipped){
 			this.context.scale(-1, 1);
-			this.context.translate(-canvas.width, 0);
+			this.context.translate(-this.canvas.width, 0);
 		}
 		this.context.webkitImageSmoothingEnabled = false;
 		this.context.mozImageSmoothingEnabled = false;
 		this.context.imageSmoothingEnabled = false;
-		this.context.drawImage(this.spriteImg, 32 * digi.id + this.animationStateModifier.x * 16 , this.animationStateModifier.y * 16, 16, 16, this.hasBackground * this.scaleBy, this.hasBackground * this.scaleBy, 16 * this.scaleBy, 16 * this.scaleBy);
+		this.context.drawImage(this.spriteImg, 32 * this.currentDigimon.id + this.animationStateModifier.x * 16 , this.animationStateModifier.y * 16, 16, 16, this.hasBackground * this.scaleBy, this.hasBackground * this.scaleBy, 16 * this.scaleBy, 16 * this.scaleBy);
 	}
-	async storeDigi(digi){
-		this.drawDigi(digi);
-		const blob = await new Promise(res => this.canvas.toBlob(res));
-		this.sprites.push(new Sprite(digi.name + ".png", blob));
+	async storeDigi(id){
+		this.currentDigimon = digimonAlphabetical[id];
+		console.log(this.currentDigimon);
+		console.log(id);
+		if(this.currentDigimon.animationStates[this.currentAnimationState]){
+			this.drawDigi();
+			const blob = await new Promise(res => this.canvas.toBlob(res));
+			this.sprites.push(new Sprite(this.currentDigimon.name + ".png", blob));
+		}
 	}
 
 	async downloadSprites(){
-		this.sprites = [];
-		for(let i = 0; i < 128; i++){
-			await this.storeDigi(digimonStats[i]);
+		let currentId = this._owner.currentDigimon.id;
+		this._owner.sprites = [];
+		console.log(digimonAlphabetical.length);
+		for(let i = 0; i < 127; i++){
+			await this._owner.storeDigi(i);
 		}
-		this.drawDigi(digimonStats[this.previewDigiIndex]);
+		this._owner.currentDigimon = digimonStats[currentId];
+		this._owner.drawDigi();
 		var zip = new JSZip();
-		for(let sprite of this.sprites){
+		for(let sprite of this._owner.sprites){
 			zip.file(sprite.saveName, sprite.blob);
 		}
 		let zipName = "dw1_sprites";
-		if(this.hasBackground){
+		if(this._owner.hasBackground){
 			zipName += "_bg";
 		}
-		if(this.isFlipped){
+		if(this._owner.isFlipped){
 			zipName += "_flipped";
 		}
-		zipName += "_" + this.currentAnimationState + "_" + this.canvas.width + "x" + this.canvas.height + ".zip"
-		this.downloadBlob(await zip.generateAsync({ type: "blob" }), zipName);
+		zipName += "_" + this._owner.currentAnimationState + "_" + this._owner.canvas.width + "x" + this._owner.canvas.height + ".zip"
+		this._owner.downloadBlob(await zip.generateAsync({ type: "blob" }), zipName);
 	}
 	downloadBlob(blob, filename){
 		let link = document.createElement('a');
@@ -238,155 +301,3 @@ class SpriteDownloader{
 	}
 }
 document.getElementsByTagName("BODY")[0].appendChild(new SpriteDownloader());
-var scaleFactor = 1;
-var hasBackground = false;
-var isFlipped = false;
-var scaleBy = 1;
-var previewDigiIndex = 1;
-const digiSelect = document.getElementById("digiSelect");
-digiSelect.onchange = showSelectedDigi;
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext("2d");
-ctx.webkitImageSmoothingEnabled = false;
-ctx.mozImageSmoothingEnabled = false;
-ctx.imageSmoothingEnabled = false;
-const showNextDigiButton = document.getElementById("showNextDigiButton");
-showNextDigiButton.onclick = showNextDigi;
-const drawBackgroundButton = document.getElementById("drawBackgroundButton");
-drawBackgroundButton.onclick = toggleDrawBackground;
-const flipHorizontallyButton = document.getElementById("flipHorizontallyButton");
-flipHorizontallyButton.onclick = toggleIsFlipped;
-const scaleInput = document.getElementById("scaleInput");
-scaleInput.onchange = updateScale;
-const animationStateFieldSet = document.getElementById("animationStateFieldset");
-animationStateFieldset.onchange = updateAnimationState;
-const animationStateModifier = {x: 0, y: 0};
-var currentAnimationState = "idle1";
-let backgroundImg = new Image();
-let spriteImg = new Image();
-const sprites = [];
-backgroundImg.crossOrigin = "anonymous"
-spriteImg.crossOrigin = "anonymous"
-backgroundImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/bg_box.png';
-spriteImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/digisprites.png';
-
-function showSelectedDigi(event){
-console.log(Object.getOwnPropertyNames(event.target));
-	previewDigiIndex = digiSelect.options[event.target.selectedIndex].value;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function toggleDrawBackground(){
-	if(hasBackground){
-		drawBackgroundButton.innerText = "draw background";
-	}else{
-		drawBackgroundButton.innerText = "don't draw background";
-	}
-  	hasBackground = !hasBackground;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function toggleIsFlipped(){
-	if(isFlipped){
-		flipHorizontallyButton.innerText = "flip horizontally";
-	}else{
-		flipHorizontallyButton.innerText = "don't flip horizontally";
-	}
-  	isFlipped = !isFlipped;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function updateScale(event){
-	scaleBy = event.target.value;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function updateAnimationState(event){
-	switch(event.target.value){
-		case "idle1":
-			animationStateModifier.x = 0;
-			animationStateModifier.y = 0;
-			currentAnimationState = "idle1";
-			break;
-		case "idle2":
-			animationStateModifier.x = 1;
-			animationStateModifier.y = 0;
-			currentAnimationState = "idle1";
-			break;
-		case "attacking":
-			animationStateModifier.x = 0;
-			animationStateModifier.y = 1;
-			currentAnimationState = "attacking";
-			break;
-		case "attacked":
-			animationStateModifier.x = 1;
-			animationStateModifier.y = 1;
-			currentAnimationState = "attacked";
-			break;
-		default:
-			animationStateModifier.x = 0;
-			animationStateModifier.y = 0;
-			currentAnimationState = "idle1";
-	}
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function drawDigi(digi){
-	if(hasBackground){
-		canvas.width = 18 * scaleBy;
-		canvas.height = 18 * scaleBy;
-		ctx.webkitImageSmoothingEnabled = false;
-		ctx.mozImageSmoothingEnabled = false;
-		ctx.imageSmoothingEnabled = false;
-		ctx.drawImage(backgroundImg, 0, 0, 18, 18, 0, 0, 18 * scaleBy, 18 * scaleBy);
-	}else{
-		canvas.width = 16 * scaleBy;
-		canvas.height = 16 * scaleBy;
-	}
-	if(isFlipped){
-		ctx.scale(-1, 1);
-		ctx.translate(-canvas.width, 0);
-	}
-	ctx.webkitImageSmoothingEnabled = false;
-	ctx.mozImageSmoothingEnabled = false;
-	ctx.imageSmoothingEnabled = false;
-	ctx.drawImage(spriteImg, 32 * digi.id + animationStateModifier.x * 16 , animationStateModifier.y * 16, 16, 16, hasBackground * scaleBy, hasBackground * scaleBy, 16 * scaleBy, 16 * scaleBy);
-}
-
-async function storeDigi(digi){
-	drawDigi(digi);
-	const blob = await new Promise(res => canvas.toBlob(res));
-	sprites.push(new Sprite(digi.name + ".png", blob));
-}
-
-async function showNextDigi(){
-	for(let i = 0; i < 128; i++){
-		await storeDigi(digimonStats[i]);
-	}
-	drawDigi(digimonStats[previewDigiIndex]);
-	var zip = new JSZip();
-	for(let sprite of sprites){
-		zip.file(sprite.saveName, sprite.blob);
-	}
-	let zipName = "dw1_sprites";
-	if(hasBackground){
-		zipName += "_bg";
-	}
-	if(isFlipped){
-		zipName += "_flipped";
-	}
-	zipName += "_" + currentAnimationState + "_" + canvas.width + "x" + canvas.height + ".zip"
-	downloadBlob(await zip.generateAsync({ type: "blob" }), zipName);
-}
-function fillDigimonSelect(){
-	let tempOption;
-	for(let digi of digimonAlphabetical){
-		tempOption = document.createElement("OPTION");
-		tempOption.value = digi.id;
-		tempOption.innerText = digi.name;
-		digiSelect.appendChild(tempOption);
-	}
-	digiSelect.selectedIndex = 1;
-}
-fillDigimonSelect();
-drawDigi(digimonAlphabetical[previewDigiIndex]);
