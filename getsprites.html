@@ -1,32 +1,20 @@
-<html>
-<script type="text/javascript" src="https://fliegenfuerst.github.io/dmw/tournament/1.4/js/data/digimonStats.js"></script>
-<script type="text/javascript" src="https://fliegenfuerst.github.io/dmw/tournament/1.4/js/data/digimonAlphabetical.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
-<body">
-<div>
-<button id="showNextDigiButton">download sprites</button>
-<button id="drawBackgroundButton">draw background</button>
-<button id="flipHorizontallyButton">flip horizontally</button>
-<label for="scaleInput">scale by:</label>
-<input type="number" min=1 value=1 id="scaleInput"/>
-<fieldset id="animationStateFieldset">
-<legend>Select an animation state:</legend>
-<input type="radio" name="state" id="idle1" value="idle1"/>
-<label for="idle1">idle 1</label>
-<input type="radio" name="state" id="idle2" value="idle2"/>
-<label for="idle2">idle 2</label>
-<input type="radio" name="state" id="attacking" value="attacking"/>
-<label for="attacking">attacking</label>
-<input type="radio" name="state" id="attacked" value="attacked"/> 
-<label for="attacked">attacked</label>
-</fieldset>
-<select id="digiSelect"></select>
-</div>
-<div class="fill" align="center">
-  <canvas id="canvas" width="18" height="18"></canvas>
-</div>
-</body>
-<script>
+/*
+fieldset{
+  max-width: 143px;
+  margin-left: 143px;
+}
+input[type=number]{
+  max-width: 83px;
+  min-width: 83px;
+}
+button{
+  min-width: 143px;
+  max-width: 143px;
+}
+*{
+  padding: 0;
+}
+*/
 class Sprite{
 	constructor(name, blob){
 		this.saveName = name;
@@ -43,159 +31,304 @@ function downloadBlob(blob, filename){
 	link.click();
 	document.body.removeChild(link);
 }
+class SpriteDownloader{
+	container = document.createElement("DIV");
+	div1 = document.createElement("DIV");
+	div2 = document.createElement("DIV");
+	div3 = document.createElement("DIV");
+	div4 = document.createElement("DIV");
+	downloadSpriteButton = document.createElement("BUTTON");
+	downloadZipButton = document.createElement("BUTTON");
+	drawBackgroundButton = document.createElement("BUTTON");
+	flipHorizontallyButton = document.createElement("BUTTON");
+	scaleInput = document.createElement("INPUT");
+	scaleInputLabel = document.createElement("LABEL");
+	animationStateFieldSet = document.createElement("FIELDSET");
+	animationStateFieldSetLegend = document.createElement("LEGEND");
+	idle1RadioButton = document.createElement("INPUT");
+	idle2RadioButton = document.createElement("INPUT");
+	attackingRadioButton = document.createElement("INPUT");
+	attackedRadioButton = document.createElement("INPUT");
+	idle1RadioButtonLabel = document.createElement("LABEL");
+	idle2RadioButtonLabel = document.createElement("LABEL");
+	attackingRadioButtonLabel = document.createElement("LABEL");
+	attackedRadioButtonLabel = document.createElement("LABEL");
+	idle1RadioButtonLabelI = document.createElement("I");
+	idle2RadioButtonLabelI = document.createElement("I");
+	attackingRadioButtonLabelI = document.createElement("I");
+	attackedRadioButtonLabelI = document.createElement("I");
+	digiSelect = document.createElement("SELECT");
+	canvas = document.createElement("CANVAS");
+	context;
+	backgroundImg = new Image();
+	spriteImg = new Image();
+	sprites = [];
+	animationStateModifier = {x: 0, y: 0};
+	scaleFactor = 1;
+	hasBackground = false;
+	isFlipped = false;
+	scaleBy = 1;
+	currentDigimon = digimonAlphabetical[1];
+	currentAnimationState = "idle1";
+	constructor(){
+		this.downloadSpriteButton.innerText = "download sprite";
+		this.downloadZipButton.innerText = "download sprites";
+		this.drawBackgroundButton.innerText = "draw background";
+		this.flipHorizontallyButton.innerText = "flip horizontally";
+		this.scaleInput.type = "number";
+		this.scaleInput.min = 1;
+		this.scaleInput.value = 1;
+		this.scaleInputLabel.for = this.scaleInput;
+		this.scaleInputLabel.innerText = "scale by:";
+		this.idle1RadioButton.type = "radio";
+		this.idle2RadioButton.type = "radio";
+		this.attackingRadioButton.type = "radio";
+		this.attackedRadioButton.type = "radio";
+		this.idle1RadioButton.name = "state";
+		this.idle2RadioButton.name = "state";
+		this.attackingRadioButton.name = "state";
+		this.attackedRadioButton.name = "state";
+		this.idle1RadioButton.value = "idle1";
+		this.idle2RadioButton.value = "idle2";
+		this.attackingRadioButton.value = "attacking";
+		this.attackedRadioButton.value = "attacked";
+		/*this.idle1RadioButton.id = "idle1";
+		this.idle2RadioButton.id = "idle2";
+		this.attackingRadioButton.id = "attacking";
+		this.attackedRadioButton.id = "attacked";
+		this.idle1RadioButtonLabel.for = this.idle1RadioButton;
+		this.idle2RadioButtonLabel.for = this.idle2RadioButton;
+		this.attackingRadioButtonLabel.for = this.attackingRadioButton;
+		this.attackedRadioButtonLabel.for = this.attackedRadioButton;*/
+		this.idle1RadioButtonLabelI.innerText = "idle1";
+		this.idle2RadioButtonLabelI.innerText = "idle2";
+		this.attackingRadioButtonLabelI.innerText = "attacking";
+		this.attackedRadioButtonLabelI.innerText = "attacked";
+		this.animationStateFieldSetLegend.innerText = "Animation state:";
+		
+		this.idle1RadioButtonLabel.appendChild(this.idle1RadioButton);
+		this.idle1RadioButtonLabel.appendChild(this.idle1RadioButtonLabelI);
+		this.idle2RadioButtonLabel.appendChild(this.idle2RadioButton);
+		this.idle2RadioButtonLabel.appendChild(this.idle2RadioButtonLabelI);
+		this.attackingRadioButtonLabel.appendChild(this.attackingRadioButton);
+		this.attackingRadioButtonLabel.appendChild(this.attackingRadioButtonLabelI);
+		this.attackedRadioButtonLabel.appendChild(this.attackedRadioButton);
+		this.attackedRadioButtonLabel.appendChild(this.attackedRadioButtonLabelI);
+		
+		this.animationStateFieldSet.appendChild(this.animationStateFieldSetLegend);
+		this.animationStateFieldSet.appendChild(this.idle1RadioButtonLabel);
+		this.animationStateFieldSet.appendChild(document.createElement("BR"));
+		this.animationStateFieldSet.appendChild(this.idle2RadioButtonLabel);
+		this.animationStateFieldSet.appendChild(document.createElement("BR"));
+		this.animationStateFieldSet.appendChild(this.attackingRadioButtonLabel);
+		this.animationStateFieldSet.appendChild(document.createElement("BR"));
+		this.animationStateFieldSet.appendChild(this.attackedRadioButtonLabel);
+		this.canvas.width = 18;
+		this.canvas.height = 18;
+		this.div1.appendChild(this.drawBackgroundButton);
+		this.div1.appendChild(this.flipHorizontallyButton);
+		this.div2.appendChild(this.digiSelect);
+		this.div2.appendChild(this.scaleInputLabel);
+		this.div2.appendChild(this.scaleInput);
+		this.div3.appendChild(this.canvas);
+		this.div3.appendChild(this.animationStateFieldSet);
+		this.div4.appendChild(this.downloadSpriteButton);
+		this.div4.appendChild(this.downloadZipButton);
+		this.container.appendChild(this.div1);
+		this.container.appendChild(this.div2);
+		this.container.appendChild(this.div3);
+		this.container.appendChild(this.div4);
+		
+		this.context = this.canvas.getContext("2d");
+		this.backgroundImg.crossOrigin = "anonymous"
+		this.spriteImg.crossOrigin = "anonymous"
+		this.backgroundImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/bg_box.png';
+		this.spriteImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/digisprites.png';
+		this.downloadSpriteButton._owner = this;
+		this.downloadZipButton._owner = this;
+		this.drawBackgroundButton._owner = this;
+		this.flipHorizontallyButton._owner = this;
+		this.scaleInput._owner = this;
+		this.animationStateFieldSet._owner = this;
+		this.digiSelect._owner = this;
+		
+		this.downloadSpriteButton.onclick = this.downloadSprite;
+		this.downloadZipButton.onclick = this.downloadSpritesZip;
+		this.drawBackgroundButton.onclick = this.toggleDrawBackground;
+		this.flipHorizontallyButton.onclick = this.toggleIsFlipped;
+		this.scaleInput.onchange = this.updateScale;
+		this.animationStateFieldSet.onchange = this.setAnimationState;
+		this.digiSelect.onchange = this.showSelectedDigi;
+		
+		let tempOption;
+		for(let digi of digimonAlphabetical){
+			tempOption = document.createElement("OPTION");
+			tempOption.value = digi.id;
+			tempOption.innerText = digi.name;
+			this.digiSelect.appendChild(tempOption);
+		}
+		this.digiSelect.selectedIndex = 1;
+		this.idle1RadioButton.checked = true;
+		this.drawDigi();
+		return this.container;
+		console.log(this.context);
+	}
+	
+	showSelectedDigi(event){
+		let lastAvailableAnimationState = -1;
+		let changeState = true;
+		let falseCount = 0;
+		this._owner.currentDigimon = digimonAlphabetical[this.selectedIndex];
+		for(let animationState in this._owner.currentDigimon.animationStates){
+			if(this._owner.currentDigimon.animationStates[animationState]){
+				if(lastAvailableAnimationState == -1){
+					lastAvailableAnimationState = animationState;
+				}
+			}else{
+				this._owner[animationState+"RadioButton"].checked = false;
+			}
+			if(!this._owner[animationState+"RadioButton"].checked){
+				falseCount++;
+			}
+			if(animationState == this._owner.currentAnimationState){
+				if(this._owner.currentDigimon.animationStates[animationState]){
+					changeState = false;
+				}else{
+					this._owner[animationState+"RadioButton"].checked = false;
+				}
+			}
+			this._owner[animationState+"RadioButton"].disabled = !this._owner.currentDigimon.animationStates[animationState];
+		}
+		if(falseCount == 4){
+			changeState = true;
+		}
+		if(changeState && lastAvailableAnimationState != -1){
+		console.log(lastAvailableAnimationState);
+			this._owner[lastAvailableAnimationState+"RadioButton"].checked = true;
+			this._owner.currentAnimationState = lastAvailableAnimationState;
+			this._owner.updateAnimationState();
+		}
+		
+		this._owner.drawDigi();
+	}
 
-var scaleFactor = 1;
-var hasBackground = false;
-var isFlipped = false;
-var scaleBy = 1;
-var previewDigiIndex = 1;
-const digiSelect = document.getElementById("digiSelect");
-digiSelect.onchange = showSelectedDigi;
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext("2d");
-ctx.webkitImageSmoothingEnabled = false;
-ctx.mozImageSmoothingEnabled = false;
-ctx.imageSmoothingEnabled = false;
-const showNextDigiButton = document.getElementById("showNextDigiButton");
-showNextDigiButton.onclick = showNextDigi;
-const drawBackgroundButton = document.getElementById("drawBackgroundButton");
-drawBackgroundButton.onclick = toggleDrawBackground;
-const flipHorizontallyButton = document.getElementById("flipHorizontallyButton");
-flipHorizontallyButton.onclick = toggleIsFlipped;
-const scaleInput = document.getElementById("scaleInput");
-scaleInput.onchange = updateScale;
-const animationStateFieldSet = document.getElementById("animationStateFieldset");
-animationStateFieldset.onchange = updateAnimationState;
-const animationStateModifier = {x: 0, y: 0};
-var currentAnimationState = "idle1";
-let backgroundImg = new Image();
-let spriteImg = new Image();
-const sprites = [];
-backgroundImg.crossOrigin = "anonymous"
-spriteImg.crossOrigin = "anonymous"
-backgroundImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/bg_box.png';
-spriteImg.src = 'https://fliegenfuerst.github.io/dw1/stat_tool/digisprites.png';
+	toggleDrawBackground(){
+		if(this._owner.hasBackground){
+			this.innerText = "draw background";
+		}else{
+			this.innerText = "don't draw background";
+		}
+		this._owner.hasBackground = !this._owner.hasBackground;
+		this._owner.drawDigi();
+	}
 
-function showSelectedDigi(event){
-console.log(Object.getOwnPropertyNames(event.target));
-	previewDigiIndex = digiSelect.options[event.target.selectedIndex].value;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
+	toggleIsFlipped(){
+		if(this._owner.isFlipped){
+			this.innerText = "flip horizontally";
+		}else{
+			this.innerText = "don't flip horizontally";
+		}
+		this._owner.isFlipped = !this._owner.isFlipped;
+		this._owner.drawDigi();
+	}
 
-function toggleDrawBackground(){
-	if(hasBackground){
-		drawBackgroundButton.innerText = "draw background";
-	}else{
-		drawBackgroundButton.innerText = "don't draw background";
+	updateScale(){
+		this._owner.scaleBy = this.value;
+		this._owner.drawDigi();
 	}
-  	hasBackground = !hasBackground;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
+	setAnimationState(event){
+		this._owner.currentAnimationState = event.target.value;
+		this._owner.updateAnimationState();
+	}
+	updateAnimationState(){
+		this.animationStateModifier.x = 0;
+		this.animationStateModifier.y = 0;
+		switch(this.currentAnimationState){
+			case "idle1":
+				break;
+			case "idle2":
+				this.animationStateModifier.x = 1;
+				break;
+			case "attacking":
+				this.animationStateModifier.y = 1;
+				break;
+			case "attacked":
+				this.animationStateModifier.x = 1;
+				this.animationStateModifier.y = 1;
+				break;
+			default:
+				this.currentAnimationState = "idle1";
+		}
+		this.drawDigi();
+	}
 
-function toggleIsFlipped(){
-	if(isFlipped){
-		flipHorizontallyButton.innerText = "flip horizontally";
-	}else{
-		flipHorizontallyButton.innerText = "don't flip horizontally";
+	drawDigi(digi){
+		if(this.hasBackground){
+			this.canvas.width = 18 * this.scaleBy;
+			this.canvas.height = 18 * this.scaleBy;
+			this.context.webkitImageSmoothingEnabled = false;
+			this.context.mozImageSmoothingEnabled = false;
+			this.context.imageSmoothingEnabled = false;
+			this.context.drawImage(this.backgroundImg, 0, 0, 18, 18, 0, 0, 18 * this.scaleBy, 18 * this.scaleBy);
+		}else{
+			this.canvas.width = 16 * this.scaleBy;
+			this.canvas.height = 16 * this.scaleBy;
+		}
+		if(this.isFlipped){
+			this.context.scale(-1, 1);
+			this.context.translate(-this.canvas.width, 0);
+		}
+		this.context.webkitImageSmoothingEnabled = false;
+		this.context.mozImageSmoothingEnabled = false;
+		this.context.imageSmoothingEnabled = false;
+		this.context.drawImage(this.spriteImg, 32 * this.currentDigimon.id + this.animationStateModifier.x * 16 , this.animationStateModifier.y * 16, 16, 16, this.hasBackground * this.scaleBy, this.hasBackground * this.scaleBy, 16 * this.scaleBy, 16 * this.scaleBy);
 	}
-  	isFlipped = !isFlipped;
-	drawDigi(digimonStats[previewDigiIndex]);
+	async storeDigi(id){
+		this.currentDigimon = digimonAlphabetical[id];
+		console.log(this.currentDigimon);
+		console.log(id);
+		if(this.currentDigimon.animationStates[this.currentAnimationState]){
+			this.drawDigi();
+			const blob = await new Promise(res => this.canvas.toBlob(res));
+			this.sprites.push(new Sprite(this.currentDigimon.name + ".png", blob));
+		}
+	}
+	async downloadSprite(){
+		this._owner.drawDigi();
+		const blob = await new Promise(res => this._owner.canvas.toBlob(res));
+		this._owner.downloadBlob(blob, this._owner.currentDigimon.name + ".png");
+	}
+	async downloadSpritesZip(){
+		let currentId = this._owner.currentDigimon.id;
+		this._owner.sprites = [];
+		console.log(digimonAlphabetical.length);
+		for(let i = 0; i < 127; i++){
+			await this._owner.storeDigi(i);
+		}
+		this._owner.currentDigimon = digimonStats[currentId];
+		this._owner.drawDigi();
+		var zip = new JSZip();
+		for(let sprite of this._owner.sprites){
+			zip.file(sprite.saveName, sprite.blob);
+		}
+		let zipName = "dw1_sprites";
+		if(this._owner.hasBackground){
+			zipName += "_bg";
+		}
+		if(this._owner.isFlipped){
+			zipName += "_flipped";
+		}
+		zipName += "_" + this._owner.currentAnimationState + "_" + this._owner.canvas.width + "x" + this._owner.canvas.height + ".zip"
+		this._owner.downloadBlob(await zip.generateAsync({ type: "blob" }), zipName);
+	}
+	downloadBlob(blob, filename){
+		let link = document.createElement('a');
+		link.style.display = 'none';
+		document.body.appendChild(link);
+		link.href = URL.createObjectURL(blob);
+		link.download = filename;
+		link.click();
+		document.body.removeChild(link);
+	}
 }
-
-function updateScale(event){
-	scaleBy = event.target.value;
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function updateAnimationState(event){
-	switch(event.target.value){
-		case "idle1":
-			animationStateModifier.x = 0;
-			animationStateModifier.y = 0;
-			currentAnimationState = "idle1";
-			break;
-		case "idle2":
-			animationStateModifier.x = 1;
-			animationStateModifier.y = 0;
-			currentAnimationState = "idle1";
-			break;
-		case "attacking":
-			animationStateModifier.x = 0;
-			animationStateModifier.y = 1;
-			currentAnimationState = "attacking";
-			break;
-		case "attacked":
-			animationStateModifier.x = 1;
-			animationStateModifier.y = 1;
-			currentAnimationState = "attacked";
-			break;
-		default:
-			animationStateModifier.x = 0;
-			animationStateModifier.y = 0;
-			currentAnimationState = "idle1";
-	}
-	drawDigi(digimonStats[previewDigiIndex]);
-}
-
-function drawDigi(digi){
-	if(hasBackground){
-		canvas.width = 18 * scaleBy;
-		canvas.height = 18 * scaleBy;
-		ctx.webkitImageSmoothingEnabled = false;
-		ctx.mozImageSmoothingEnabled = false;
-		ctx.imageSmoothingEnabled = false;
-		ctx.drawImage(backgroundImg, 0, 0, 18, 18, 0, 0, 18 * scaleBy, 18 * scaleBy);
-	}else{
-		canvas.width = 16 * scaleBy;
-		canvas.height = 16 * scaleBy;
-	}
-	if(isFlipped){
-		ctx.scale(-1, 1);
-		ctx.translate(-canvas.width, 0);
-	}
-	ctx.webkitImageSmoothingEnabled = false;
-	ctx.mozImageSmoothingEnabled = false;
-	ctx.imageSmoothingEnabled = false;
-	ctx.drawImage(spriteImg, 32 * digi.id + animationStateModifier.x * 16 , animationStateModifier.y * 16, 16, 16, hasBackground * scaleBy, hasBackground * scaleBy, 16 * scaleBy, 16 * scaleBy);
-}
-
-async function storeDigi(digi){
-	drawDigi(digi);
-	const blob = await new Promise(res => canvas.toBlob(res));
-	sprites.push(new Sprite(digi.name + ".png", blob));
-}
-
-async function showNextDigi(){
-	for(let i = 0; i < 128; i++){
-		await storeDigi(digimonStats[i]);
-	}
-	drawDigi(digimonStats[previewDigiIndex]);
-	var zip = new JSZip();
-	for(let sprite of sprites){
-		zip.file(sprite.saveName, sprite.blob);
-	}
-	let zipName = "dw1_sprites";
-	if(hasBackground){
-		zipName += "_bg";
-	}
-	if(isFlipped){
-		zipName += "_flipped";
-	}
-	zipName += "_" + currentAnimationState + "_" + canvas.width + "x" + canvas.height + ".zip"
-	downloadBlob(await zip.generateAsync({ type: "blob" }), zipName);
-}
-function fillDigimonSelect(){
-	let tempOption;
-	for(let digi of digimonAlphabetical){
-		tempOption = document.createElement("OPTION");
-		tempOption.value = digi.id;
-		tempOption.innerText = digi.name;
-		digiSelect.appendChild(tempOption);
-	}
-	digiSelect.selectedIndex = 1;
-}
-fillDigimonSelect();
-drawDigi(digimonAlphabetical[previewDigiIndex]);
-//https://jsfiddle.net/79cvk4wa/1/
-</script>
-</html>
+document.getElementsByTagName("BODY")[0].appendChild(new SpriteDownloader());
