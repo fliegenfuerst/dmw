@@ -33,11 +33,11 @@ function getPointsAndString(stat){
 }
 function countCombinedStats(digi){
 	let sum = getPointsAndString(Math.round(digi.hp.value / 10));
-	sum += getPointsAndStringMath.round(digi.mp.value / 10));
-	sum += getPointsAndStringdigi.offense.value);
-	sum += getPointsAndStringdigi.defense.value);
-	sum += getPointsAndStringdigi.speed.value);
-	sum += getPointsAndStringdigi.brains.value);
+	sum += getPointsAndString(Math.round(digi.mp.value / 10));
+	sum += getPointsAndString(digi.offense.value);
+	sum += getPointsAndString(digi.defense.value);
+	sum += getPointsAndString(digi.speed.value);
+	sum += getPointsAndString(digi.brains.value);
 	return sum;
 }
 function checkBrainsToSpeedRatio(digi){
