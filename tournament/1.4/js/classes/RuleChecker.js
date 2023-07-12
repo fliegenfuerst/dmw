@@ -248,7 +248,7 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.hp.value > this.maxHP){
-			tempStr = `You need to lower your offense to ${this.maxHP}`;
+			tempStr = `You need to lower your hp to ${this.maxHP}`;
 			if(this.maxHPReason != false){
 				tempStr += ` because you have ${this.maxHPReason} equipped.`;
 			}
@@ -256,7 +256,7 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.mp.value > this.maxMP){
-			tempStr = `You need to lower your offense to ${this.maxMP}`;
+			tempStr = `You need to lower your mp to ${this.maxMP}`;
 			if(this.maxMPReason != false){
 				tempStr += ` because you have ${this.maxMPReason} equipped.`;
 			}
@@ -288,7 +288,7 @@ class Rules{
 			this.isValid = false;
 		}
 		if(digi.brains.value > this.maxBrains){
-			tempStr = `You need to lower your speed to ${this.maxBrains}`;
+			tempStr = `You need to lower your brains to ${this.maxBrains}`;
 			if(this.maxBrainsReason != false){
 				tempStr += ` because you have ${this.maxBrainsReason} equipped.`;
 			}
