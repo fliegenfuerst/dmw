@@ -1,14 +1,43 @@
 const minimumStats = {"hp": 500, "mp": 500, "offense": 50, "defense": 50, "speed": 50, "brains": 50};
 const statNames = ["hp", "mp", "offense", "defense", "speed", "brains"];
 const simpleRuleTypes = ["maxHP", "maxMP", "maxOffense", "maxDefense", "maxSpeed", "maxBrains", "maxBuffMoves", "effectChanceCeiling"];
+const pointBrackets = { 
+	0: [1, "0-999"],
+	1: [2, "1000-1999"],
+	2: [3, "2000-2999"],
+	3: [4, "3000-3999"],
+	4: [5, "4000-4999"],
+	5: [6, "5000-5999"],
+	6: [7, "6000-6999"],
+	7: [8, "7000-7999"],
+	8: [9, "8000-8999"],
+	9: [10, "9000-9999"]
+};
 
+function getPointsAndString(stat){
+	let pointsUsed = 0;
+	let costIndex = 0;
+	if(stat > 999){
+		pointsUsed = 999 * pointBrackets[costIndex++][0];
+		stat -= 999;
+		while(stat > 1000){
+			pointsUsed += 1000 * pointBrackets[costIndex][0];
+			stat -= 1000;
+			costIndex++;
+		}
+		pointsUsed += stat * pointBrackets[costIndex][0];
+	}else{
+		pointsUsed = stat * pointBrackets[costIndex][0];
+	}
+  return pointsUsed;
+}
 function countCombinedStats(digi){
-	let sum = Math.round(digi.hp.value / 10);
-	sum += Math.round(digi.mp.value / 10);
-	sum += digi.offense.value;
-	sum += digi.defense.value;
-	sum += digi.speed.value;
-	sum += digi.brains.value;
+	let sum = getPointsAndString(Math.round(digi.hp.value / 10));
+	sum += getPointsAndStringMath.round(digi.mp.value / 10));
+	sum += getPointsAndStringdigi.offense.value);
+	sum += getPointsAndStringdigi.defense.value);
+	sum += getPointsAndStringdigi.speed.value);
+	sum += getPointsAndStringdigi.brains.value);
 	return sum;
 }
 function checkBrainsToSpeedRatio(digi){
@@ -64,8 +93,8 @@ const moveRules = [
 	{"name": "Mass Morph", "reduceTotalStatsBy": 410, "maxOffense": 4750, "maxDefense": 2500, "maxSpeed": 900},
 	{"name": "Aqua Magic", "reduceTotalStatsBy": 220, "maxOffense": 4000, "maxDefense": 4000, "maxSpeed": 900},
 	{"name": "War Cry", "reduceTotalStatsBy": 300, "maxOffense": 3750, "maxDefense": 4000, "maxSpeed": 900},
-	{"name": "Muscle Charge", "maxOffense": 1750, "maxDefense": 4500, "reduceTotalStatsBy": 550, "maxBuffMoves": 1},
-	{"name": "Full Potential", "maxOffense": 2250, "maxDefense": 3000, "maxSpeed": 900, "reduceTotalStatsBy": 700, "maxBuffMoves": 1},
+	{"name": "Muscle Charge", "reduceTotalStatsBy": 550, "maxOffense": 1750, "maxDefense": 4500},
+	{"name": "Full Potential", "reduceTotalStatsBy": 700, "maxOffense": 2050, "maxDefense": 3000, "maxSpeed": 900},
 	{"name": "Ice Statue", "maxOffense": 3640, "maxSpeed": 640, "effectChanceCeiling": 40},
 	{"name": "Megalo Spark", "maxOffense": 3700, "maxSpeed": 795},
 	{"name": "Insect Plague", "maxDefense": 3640, "maxSpeed": 750},
@@ -73,7 +102,7 @@ const moveRules = [
 	{"name": "Thunder Justice", "maxOffense": 3600, "maxSpeed": 825},
 	{"name": "Wind Cutter", "maxSpeed": 870},
 	{"name": "Meltdown", "maxSpeed": 870},
-	{"name": "Bug", "isBanned": true},
+	{"name": "Bug", "maxSpeed": 570},
 	{"name": "Counter", "isBanned": true}
 ];
 const combinedMoveRules = [
