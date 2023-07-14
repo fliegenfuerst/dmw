@@ -3,15 +3,15 @@ const statNames = ["hp", "mp", "offense", "defense", "speed", "brains"];
 const simpleRuleTypes = ["maxHP", "maxMP", "maxOffense", "maxDefense", "maxSpeed", "maxBrains", "maxBuffMoves", "effectChanceCeiling"];
 const pointBrackets = { 
 	0: [1, "0-999"],
-	1: [2, "1000-1999"],
-	2: [2, "2000-2999"],
-	3: [3, "3000-3999"],
-	4: [3, "4000-4999"],
-	5: [4, "5000-5999"],
-	6: [4, "6000-6999"],
-	7: [5, "7000-7999"],
-	8: [5, "8000-8999"],
-	9: [6, "9000-9999"]
+	1: [1, "1000-1999"],
+	2: [1, "2000-2999"],
+	3: [1, "3000-3999"],
+	4: [1, "4000-4999"],
+	5: [1, "5000-5999"],
+	6: [1, "6000-6999"],
+	7: [1, "7000-7999"],
+	8: [1, "8000-8999"],
+	9: [1, "9000-9999"]
 };
 
 function getPointsAndString(stat){
