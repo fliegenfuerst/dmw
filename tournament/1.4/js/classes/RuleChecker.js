@@ -219,7 +219,7 @@ class Rules{
 			let brainSteps = Math.floor(digi.brains.value / 100) + 1;
 			if(brainSteps > 6){
 				brainSteps = 5;
-			else if(brainSteps > 4){
+			}else if(brainSteps > 4){
 				brainSteps = 4;
 			}
 			this.reduceTotalStatsBy += brainSteps * 200;
