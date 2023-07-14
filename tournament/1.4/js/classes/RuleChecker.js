@@ -215,9 +215,15 @@ class Rules{
 		let retArr = [];
 		let brainsSpeedRule = checkBrainsToSpeedRatio(digi);
 		let brainsBuffReduction = 0;
-		if(this.buffMovesEquipped.length != 0 && digi.brains.value >= 100){
-			this.reduceTotalStatsBy += 200 * Math.floor(digi.brains.value / 100);
-			this.reduceTotalStatsByReason.unshift(`${digi.brains.value} brains (stat point limit reduced by ${200 * Math.floor(digi.brains.value / 100)})`);
+		if(this.buffMovesEquipped.length){
+			let brainSteps = Math.floor(digi.brains.value / 100) + 1;
+			if(brainSteps > 6){
+				brainSteps = 5;
+			else if(brainSteps > 4){
+				brainSteps = 4;
+			}
+			this.reduceTotalStatsBy += brainSteps * 200;
+			this.reduceTotalStatsByReason.unshift(`${brainSteps} possible buff uses (stat point limit reduced by ${brainSteps * 200})`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
