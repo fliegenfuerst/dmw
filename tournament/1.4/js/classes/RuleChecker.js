@@ -93,7 +93,7 @@ const moveRules = [
 	{"name": "Mass Morph", "reduceTotalStatsBy": 450, "maxOffense": 4750, "maxDefense": 2500, "maxSpeed": 900},
 	{"name": "Aqua Magic", "reduceTotalStatsBy": 220, "maxOffense": 4000, "maxDefense": 4000, "maxSpeed": 900},
 	{"name": "War Cry", "reduceTotalStatsBy": 300, "maxOffense": 3750, "maxDefense": 4000, "maxSpeed": 900},
-	{"name": "Muscle Charge", "reduceTotalStatsBy": 550, "maxOffense": 1750, "maxDefense": 4500},
+	{"name": "Muscle Charge", "reduceTotalStatsBy": 750, "maxOffense": 1750, "maxDefense": 4500},
 	{"name": "Full Potential", "reduceTotalStatsBy": 700, "maxOffense": 2050, "maxDefense": 3000, "maxSpeed": 900},
 	{"name": "Ice Statue", "maxOffense": 3640, "maxSpeed": 640, "effectChanceCeiling": 40},
 	{"name": "Megalo Spark", "maxOffense": 3700, "maxSpeed": 795},
