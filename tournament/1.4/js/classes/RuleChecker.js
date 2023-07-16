@@ -228,7 +228,7 @@ class Rules{
 		let tempStr = "";
 		for(let statName of statNames){
 			if(digi[statName].value < this[`min${this.capitalizeString(statName)}`]){
-				tempStr = `You need to raise your brains to ${this[`min${this.capitalizeString(statName)}`]}`;
+				tempStr = `You need to raise your ${statName} to ${this[`min${this.capitalizeString(statName)}`]}`;
 				if(this[`min${this.capitalizeString(statName)}Reason`] != false){
 					tempStr += ` because you have ${this[`min${this.capitalizeString(statName)}Reason`]} equipped.`;
 				} else {
