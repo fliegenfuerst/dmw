@@ -215,6 +215,7 @@ class Rules{
 	}
 	getMinStrings(digi){
 		let retArr = [];
+		let tempStr = "";
 		for(let statName of statNames){
 			if(digi[statName].value < this[`min${this.capitalizeString(statName)}`]){
 				tempStr = `You need to raise your brains to ${this[`min${this.capitalizeString(statName)}`]}`;
