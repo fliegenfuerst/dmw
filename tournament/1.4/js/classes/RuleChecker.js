@@ -1,6 +1,6 @@
 const minimumStats = {"hp": 500, "mp": 500, "offense": 50, "defense": 50, "speed": 50, "brains": 50};
 const statNames = ["hp", "mp", "offense", "defense", "speed", "brains"];
-const simpleRuleTypes = ["maxHP", "maxMP", "maxOffense", "maxDefense", "maxSpeed", "maxBrains", "maxBuffMoves", "effectChanceCeiling"];
+const simpleRuleTypes = ["maxHp", "maxMP", "maxOffense", "maxDefense", "maxSpeed", "maxBrains", "maxBuffMoves", "effectChanceCeiling"];
 const pointBrackets = { 
 	0: [1, "0-999"],
 	1: [1, "1000-1999"],
@@ -115,8 +115,8 @@ class Rules{
 	}
 	reset(){
 		this.isValid = true;
-		this.maxHP = 30000;
-		this.maxHPReason = false;
+		this.maxHp = 30000;
+		this.maxHpReason = false;
 		this.maxMP = 30000;
 		this.maxMPReason = false;
 		this.maxOffense = 5000;
@@ -127,6 +127,16 @@ class Rules{
 		this.maxSpeedReason = false;
 		this.maxBrains = 1000;
 		this.maxBrainsReason = false;
+		this.minHp = 500;
+		this.minHpReason = false;
+		this.minMp = 500;
+		this.minMpReason = false;
+		this.minOffense = 50;
+		this.minOffenseReason = false;
+		this.minDefense = 50;
+		this.minDefenseReason = false;
+		this.minSpeed = 50;
+		this.minSpeedReason = false;
 		this.minBrains = 50;
 		this.minBrainsReason = false;
 		this.maxBuffMoves = 2;
@@ -274,10 +284,10 @@ class Rules{
 			retArr.push(tempStr);
 			this.isValid = false;
 		}*/
-		if(digi.hp.value > this.maxHP){
-			tempStr = `You need to lower your hp to ${this.maxHP}`;
-			if(this.maxHPReason != false){
-				tempStr += ` because you have ${this.maxHPReason} equipped.`;
+		if(digi.hp.value > this.maxHp){
+			tempStr = `You need to lower your hp to ${this.maxHp}`;
+			if(this.maxHpReason != false){
+				tempStr += ` because you have ${this.maxHpReason} equipped.`;
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
