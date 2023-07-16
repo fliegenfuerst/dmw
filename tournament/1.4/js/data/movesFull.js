@@ -2135,3 +2135,27 @@ function findFinisherByName(name){
 		}
 	}
 }
+
+for(let i = 0; i < movesFull.length; i++){
+	movesFull[i].mp = movesFull[i].mp*3;
+	switch(movesFull[i].name){
+		case "Bug":
+			movesFull[i].accuracy = 45;
+			movesFull[i].effect.chance = 10;
+			break;
+
+		case "Ice Statue":
+			movesFull[i].Power = 494
+			movesFull[i].accuracy = 59;
+			movesFull[i].effect.chance = 13;
+
+			break;
+/*
+		case "Bug":
+
+			break;
+*/
+		default:
+			break;
+	}
+}
