@@ -213,7 +213,7 @@ class Rules{
 	capitalizeString(str){
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
-	getMinStrings(){
+	getMinStrings(digi){
 		let retArr = [];
 		for(let statName of statNames){
 			if(digi[statName].value < this[`min${this.capitalizeString(statName)}`]){
@@ -262,7 +262,7 @@ class Rules{
 			retArr.push(`You need to equip at least one more move.`);
 			this.isValid = false;
 		}
-		retArr += [...this.getMinStrings()];
+		retArr += [...this.getMinStrings(digi)];
 		/*if(digi.brains.value < this.minBrains){
 			tempStr = `You need to raise your brains to ${this.minBrains}`;
 			if(this.minBrainsReason != false){
