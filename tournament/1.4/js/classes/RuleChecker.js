@@ -210,6 +210,25 @@ class Rules{
 		}
 		this.aboveCeilingMoves = filterNonPoisonAboveEffectChanceCeilingMoves(this.moves, this.effectChanceCeiling);
 	}
+	capitalizeString(str){
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+	getMinStrings(){
+		let retArr = [];
+		for(let statName of statNames){
+			if(digi[statName].value < this[`min${this.capitalizeString(statName)}`]){
+				tempStr = `You need to raise your brains to ${this[`min${this.capitalizeString(statName)}`]}`;
+				if(this[`min${this.capitalizeString(statName)}Reason`] != false){
+					tempStr += ` because you have ${this[`min${this.capitalizeString(statName)}Reason`]} equipped.`;
+				} else {
+					tempStr += `.`;
+				}
+				retArr.push(tempStr);
+				this.isValid = false;
+			}
+		}
+		return retArr;
+	}
 	getRulesString(digi){
 		this.checkRules(digi);
 		let retArr = [];
@@ -243,7 +262,8 @@ class Rules{
 			retArr.push(`You need to equip at least one more move.`);
 			this.isValid = false;
 		}
-		if(digi.brains.value < this.minBrains){
+		retArr += [...this.getMinStrings()];
+		/*if(digi.brains.value < this.minBrains){
 			tempStr = `You need to raise your brains to ${this.minBrains}`;
 			if(this.minBrainsReason != false){
 				tempStr += ` because you have ${this.minBrainsReason} equipped.`;
@@ -252,7 +272,7 @@ class Rules{
 			}
 			retArr.push(tempStr);
 			this.isValid = false;
-		}
+		}*/
 		if(digi.hp.value > this.maxHP){
 			tempStr = `You need to lower your hp to ${this.maxHP}`;
 			if(this.maxHPReason != false){
