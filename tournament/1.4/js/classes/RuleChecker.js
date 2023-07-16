@@ -263,7 +263,7 @@ class Rules{
 			retArr.push(`You need to equip at least one more move.`);
 			this.isValid = false;
 		}
-		retArr += [...this.getMinStrings(digi)];
+		retArr.push(...this.getMinStrings(digi));
 		/*if(digi.brains.value < this.minBrains){
 			tempStr = `You need to raise your brains to ${this.minBrains}`;
 			if(this.minBrainsReason != false){
