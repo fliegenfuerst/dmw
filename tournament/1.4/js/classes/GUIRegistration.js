@@ -18,11 +18,12 @@ class GUI{
 		return memcardReader.getDigimonSavesBlob();
 	}
 	updateRuleCheckerDiv(str, isValid){
-		this.RuleCheckerUL.updateRuleText(str);
 		if(isValid){
 			this.RuleCheckerUL.style.backgroundColor = "White";
+			str = "<li>Your Entry is valid.</li>" + str;
 		}else{
 			this.RuleCheckerUL.style.backgroundColor = "Coral";
 		}
+		this.RuleCheckerUL.updateRuleText(str);
 	}
 }
