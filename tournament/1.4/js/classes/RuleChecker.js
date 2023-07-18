@@ -385,11 +385,7 @@ class RuleChecker{
 		}else{
 			getEntryButton.disabled = true;
 		}
-		if(this.retStr.length == 0){
-			gui.updateRuleCheckerDiv("Your entry is valid.", this.isValid);
-		}else{
-			gui.updateRuleCheckerDiv(`<li>${this.retStr.join("</li><li>")}</li>`, this.isValid);
-		}
+		gui.updateRuleCheckerDiv(`<li>${this.retStr.join("</li><li>")}</li>`, this.isValid);
 	}
 }
 const ruleChecker = new RuleChecker();
