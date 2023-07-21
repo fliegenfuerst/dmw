@@ -27,7 +27,7 @@ function parseLink(url){
 		return alert("invalid link: " + url + "length does not match");
 	}
 	let screenName = arr[0];
-	/let tamerName = helper.unbase64url(arr[1]);
+	//let tamerName = helper.unbase64url(arr[1]);
 	let tamerName = screenName.substring(0, 6);
 	let digiData = digimonAlphabetical[helper.urlToInt(arr[4])];
 	let digiStats = digimonStats[digiData.id];
