@@ -1,0 +1,93 @@
+<html>
+<canvas id="canvas" width=800 height=800></canvas>
+<script>
+//<canvas id="canvas" width=800 height=800></canvas>
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let width = 800;
+let height = 800;
+let radius = 120;
+drawTheThing(ctx, 20, width - 40);
+
+
+function drawTheThing(ctx, padding, squareSize){
+	let radius1 = squareSize / 2;
+	console.log((radius1));
+	console.log(Math.sqrt(2) * radius1 * 2);
+	let temp1 = ((Math.sqrt(2) * radius1) - radius1);
+	let radius2 = (Math.sqrt(2) - 1) * temp1;
+	let radius3 = radius1 - radius2 * 2;
+	console.log(radius2);
+	console.log(radius3);
+	ctx.translate(padding, padding);
+	
+	ctx.beginPath();
+	ctx.rect(0, 0, radius1 * 2, radius1 * 2);
+	ctx.closePath();
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.rect(radius2 * 2, radius2 * 2, radius3 * 2, radius3 * 2);
+	ctx.closePath();
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.rect(radius2 * 2, 0, radius3 * 2, radius1 * 2);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.rect(0, radius2 * 2, radius1 * 2, radius3 * 2);
+	ctx.closePath();
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.arc(radius2, radius2, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius2, radius1, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius2, (radius1 * 2) - radius2, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius1, radius2, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius1, radius1, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius1, (radius1 * 2) - radius2, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc((radius1 * 2) - radius2, radius2, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc((radius1 * 2) - radius2, radius1, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc((radius1 * 2) - radius2, (radius1 * 2) - radius2, radius2, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius1, radius1, radius1, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(radius1, radius1, radius3, 0, 360);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.translate(-padding, -padding);
+}
+</script>
+</html>
