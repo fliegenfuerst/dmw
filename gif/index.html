@@ -1,0 +1,74 @@
+<html>
+<body>
+<script src="https://fliegenfuerst.github.io/dmw/gif/b64.js"></script>
+<script src="https://fliegenfuerst.github.io/dmw/gif/LZWEncoder.js"></script>
+<script src="https://fliegenfuerst.github.io/dmw/gif/NeuQuant.js"></script>
+<script src="https://fliegenfuerst.github.io/dmw/gif/GIFEncoder.js"></script>
+<img id="image">
+<script>
+let canvas = document.createElement("CANVAS");
+let width = 500;
+let height = 500;
+canvas.width = width;
+canvas.height = height;
+document.body.append(canvas);
+const ctx = canvas.getContext("2d");
+let center = {x: 0, y: 0};
+let edgeLength = 50;
+ctx.lineWidth = 10;
+//ctx.globalAlpha = 0.0;
+ctx.fillStyle = "rgb(0,0,255)";  
+ctx.fillStyle = "blue";
+ctx.strokeStyle = "white";
+ctx.fillRect (0, 0, width, height);  
+//ctx.fillStyle = "white";
+ctx.translate(width / 2, height - 10);
+let index = 3;
+var gifEncoder = new GIFEncoder();
+//gifEncoder.setTransparent('rgba(0,0,0,0)');
+gifEncoder.setRepeat(0); //auto-loop
+gifEncoder.setDelay(500);
+gifEncoder.start();
+while(index < 5){
+    drawPolygon(getVertexCoordinates(index++, edgeLength));
+}
+gifEncoder.finish();
+document.getElementById('image').src = 'data:image/gif;base64,'+encode64(gifEncoder.getByteArray().getData());
+console.log("hui");
+function drawPolygon(polygon){
+  ctx.beginPath();
+  ctx.moveTo(polygon[0].x, polygon[0].y);
+  for(let i = 1; i < polygon.length; i++){
+    ctx.lineTo(polygon[i].x, polygon[i].y);
+  }
+  ctx.closePath();
+  ctx.stroke();
+    //gifEncoder.addCanvasFrame(ctx);
+    gifEncoder.addFrame(ctx);//, false);
+}
+function getInRadius(amountOfEdges, edgeLength){
+    return edgeLength * (1 / Math.tan(Math.PI / amountOfEdges));
+}
+function getRadius(amountOfEdges, edgeLength){
+    return edgeLength * (1 / Math.sin(Math.PI / amountOfEdges));
+}
+function getVertexCoordinates(amountOfEdges, edgeLength){
+    let radius = getRadius(amountOfEdges, edgeLength),
+        twoPIdividedByEdges = 2 * Math.PI / amountOfEdges,
+        offsetAngleRadians = twoPIdividedByEdges / 2 + Math.PI / 180 * 90,
+        offsetY = - getInRadius(amountOfEdges, edgeLength),//.multipliedBy(2),
+        vertices = [];
+    for (i = 0; i < amountOfEdges; i++) {
+      vertices.push({x: radius * Math.cos(2 * Math.PI * i / amountOfEdges + offsetAngleRadians), y: radius * Math.sin(2 * Math.PI * i / amountOfEdges + offsetAngleRadians) + offsetY});
+    }
+    return vertices;
+}
+function getVertexAngle(amountOfEdges){
+    return 2 * (amountOfEdges - 2) * 90 / amountOfEdges / 2;
+}
+console.log(ctx.canvas);
+
+
+</script>
+</body>
+</html>
