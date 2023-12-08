@@ -120,7 +120,6 @@ class GIFEncoder{
 	 */
 	setTransparent(c) {
 		this.transparent = c;
-		this.setDispose(2);
 	}
 	/**
 	 * Sets the comment for the block comment
@@ -198,16 +197,15 @@ class GIFEncoder{
 	 */
 	finish() {
 		if (!this.hasStarted) return false;
-		let ok = true;
 		this.hasStarted = false;
 		try {
 			this.outputByteArray.writeByte(0x3b); // gif trailer
-			this.closeStream=true;
+			this.closeStream = true;
 		} catch (e) {
 			console.log(e);
-			ok = false;
+			return false;
 		}
-		return ok;
+		return true;
 	}
 	/**
 	 * The addFrame method takes an incoming BitmapData object to create each frames
@@ -224,15 +222,15 @@ class GIFEncoder{
 				if (!this.isSizeSet) this.setSize(im.canvas.width, im.canvas.height);
 			} else {
 				if(im instanceof ImageData) {
-					this.image = im.data;
-					if(!this.sizeset || this.width!=im.width || this.height!=im.height) {
-						this.setSize(im.width,im.height);
+					this.currentFrame = im.data;
+					if(!this.sizeset || this.width != im.width || this.height != im.height) {
+						this.setSize(im.width, im.height);
 					} else {
 						
 					}
 				} else if(im instanceof Uint8ClampedArray) {
-					if(im.length==(this.width*this.height*4)) {
-						this.image=im;
+					if(im.length==(this.width * this.height * 4)) {
+						this.currentFrame = im;
 					} else {
 						console.log("Please set the correct size: ImageData length mismatch");
 						return false;
