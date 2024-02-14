@@ -59,6 +59,13 @@ class DigimonSave{
 		this.name = this.readStringExclusive(0x0, 0x1E);
 		this.screenName = "";
 	}
+	setMember(member){
+		this.member = member;
+		this.updatePlayerName(member.tamerName);
+		this.registerDigimonfromLinkData(member.digi);
+		this.updateSaveName(member.tamerName, digimonStats[member.digi.type].name);
+		this.setScreenName(member.screenName);
+	}
 	updateSaveName(tamerName, digimonType){
 		this.name = "               ";
 		this.name = tamerName;
