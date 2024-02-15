@@ -1,0 +1,50 @@
+<!Doctype html>
+<html>
+<head>
+<meta http-equiv="Cache-control" content="no-cache">
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+</head>
+<title>Digimon World Memory Card Data Viewer</title>
+<body>
+<button class="onlyAvailableWhenGroupable" onclick="getEntriesSpreadSheetString(this)" disabled="true">copy entries spreadsheet values</button>
+<button class="onlyAvailableWhenGrouped" onclick="getKlixuzSpreadSheetListString(this)" disabled="true">copy klixuz spreadsheet list values</button>
+<button class="onlyAvailableWhenGrouped" onclick="getKlixuzSpreadSheetGroupString(this)" disabled="true">copy klixuz spreadsheet group values</button>
+<div>
+<textarea id="entryInputTextArea" style="width: 900px; height: 400px">
+
+</textarea>
+</div>
+<button onclick="addEntriesToParticipantTable(this)">parse entries</button>
+<button class="onlyAvailableWhenGroupable" id="groupParticipantsButton" onclick="groupParticipants(this)" disabled="true">group entries</button>
+<span id="groupSizesCheckBoxesSpan"></span>
+<table class="hidden" id="participantTable">
+	<th>screen name</th>
+	<th>tamer name</th>
+	<th>digi name</th>
+	<th>digi type</th>
+	<th>HP</th>
+	<th>MP</th>
+	<th>Offense</th>
+	<th>Defense</th>
+	<th>Speed</th>
+	<th>Brains</th>
+	<th>Move1</th>
+	<th>Move2</th>
+	<th>Move3</th>
+	<th>set group</th>
+</table>
+<div id="container"></div>
+<footer>v.0.3</footer>
+<script type="text/javascript" src="js/data/digimonStats.js"></script>
+<script type="text/javascript" src="js/data/moves.js"></script>
+<script type="text/javascript" src="js/data/digimonAlphabetical.js"></script>
+<script type="text/javascript" src="js/classes/Helper.js"></script>
+<script type="text/javascript" src="js/classes/DigimonSave.js"></script>
+<script type="text/javascript" src="js/classes/MemoryCardReader.js"></script>
+<script type="text/javascript" src="js/classes/customElements.js"></script>
+<script type="text/javascript" src="js/registerCustomElements.js"></script>
+<script type="text/javascript" src="js/classes/BlobBuilder.js"></script>
+<script type="text/javascript" src="js/classes/GUI3.js"></script>
+<script type="text/javascript" src="js/main3.js"></script>
+</body>
+</html>
