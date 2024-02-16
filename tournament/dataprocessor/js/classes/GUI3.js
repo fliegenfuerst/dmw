@@ -3,19 +3,14 @@ function allowDrop(event) {
 }
 
 function drag(event){
-	console.log(order);
-	event.dataTransfer.setData("text", event.target.id);
+	order.currentlyDragging = event.target.member;
 }
 function drop(event) {
-	let data = event.dataTransfer.getData("text");
-	if(!event.target.disabled && !(data == event.target.id)){
-	console.log("dropped");
-		console.log(order);
-	console.log("dropped");
-		event.preventDefault();
-
-		order.swapParticipants(document.getElementById(data).member, event.target.member);
+	event.preventDefault();
+	if(!event.target.disabled && !(event.target.member == order.currentlyDragging)){
+		order.swapParticipants(order.currentlyDragging, event.target.member);
 	}
+	order.currentlyDragging = -1;
 }
 
 class GUI{
