@@ -66,7 +66,7 @@ class MaxCombinedStatsNumberInput extends HTMLInputElement{
 		this.value = maxCombinedStats;
 		this.id = "max-combined-stats-number-input";
 		this.min = 0;
-		this.max = 137622;
+		this.max = 196602;
 		this.step = 1;
 		this.style.float = "right";
 		this.style.backgroundColor = "coral";
