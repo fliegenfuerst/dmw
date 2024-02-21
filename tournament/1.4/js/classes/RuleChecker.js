@@ -3,15 +3,15 @@ const statNames = ["hp", "mp", "offense", "defense", "speed", "brains"];
 const simpleRuleTypes = ["maxHp", "maxMP", "maxOffense", "maxDefense", "maxSpeed", "maxBrains", "maxBuffMoves", "effectChanceCeiling"];
 const pointBrackets = { 
 	0: [1, "0-999"],
-	1: [1, "1000-1999"],
-	2: [1, "2000-2999"],
-	3: [1, "3000-3999"],
-	4: [1, "4000-4999"],
-	5: [1, "5000-5999"],
-	6: [1, "6000-6999"],
-	7: [1, "7000-7999"],
-	8: [1, "8000-8999"],
-	9: [1, "9000-9999"]
+	1: [2, "1000-1999"],
+	2: [2, "2000-2999"],
+	3: [3, "3000-3999"],
+	4: [3, "4000-4999"],
+	5: [4, "5000-5999"],
+	6: [4, "6000-6999"],
+	7: [5, "7000-7999"],
+	8: [5, "8000-8999"],
+	9: [6, "9000-9999"]
 };
 
 function getPointsAndString(stat){
@@ -90,19 +90,19 @@ function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 	return aboveCeilingMoves;
 }
 const moveRules = [
-	{"name": "Mass Morph", "reduceTotalStatsBy": 450, "maxOffense": 4750, "maxDefense": 2500, "maxSpeed": 900},
-	{"name": "Aqua Magic", "reduceTotalStatsBy": 220, "maxOffense": 4000, "maxDefense": 4000, "maxSpeed": 900},
-	{"name": "War Cry", "reduceTotalStatsBy": 300, "maxOffense": 3750, "maxDefense": 4000, "maxSpeed": 900},
-	{"name": "Muscle Charge", "reduceTotalStatsBy": 750, "maxOffense": 1750, "maxDefense": 4500},
-	{"name": "Full Potential", "reduceTotalStatsBy": 999, "maxOffense": 2050, "maxDefense": 3000, "maxSpeed": 900},
-	{"name": "Ice Statue", "maxOffense": 3640, "maxSpeed": 640, "effectChanceCeiling": 40},
-	{"name": "Megalo Spark", "maxOffense": 3700, "maxSpeed": 795},
-	{"name": "Insect Plague", "maxDefense": 3640, "maxSpeed": 750},
-	{"name": "Poison Powder", "maxDefense": 3760, "maxSpeed": 890},
-	{"name": "Thunder Justice", "maxOffense": 3600, "maxSpeed": 825},
-	{"name": "Wind Cutter", "maxSpeed": 870},
-	{"name": "Meltdown", "maxSpeed": 870},
-	{"name": "Bug", "maxSpeed": 570},
+	{"name": "Mass Morph", "reduceTotalStatsBy": 150, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
+	{"name": "Aqua Magic", "reduceTotalStatsBy": 100, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
+	{"name": "War Cry", "reduceTotalStatsBy": 120, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
+	{"name": "Muscle Charge", "reduceTotalStatsBy": 350, "maxOffense": 9999, "maxDefense": 9999},
+	{"name": "Full Potential", "reduceTotalStatsBy": 500, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
+	{"name": "Ice Statue", "maxOffense": 1595, "maxSpeed": 190, "effectChanceCeiling": 40},
+	{"name": "Megalo Spark", "maxOffense": 1620, "maxSpeed": 240},
+	{"name": "Insect Plague", "maxDefense": 1595, "maxSpeed": 250},
+	{"name": "Poison Powder", "maxDefense": 1645, "maxSpeed": 290},
+	{"name": "Thunder Justice", "maxOffense": 1575, "maxSpeed": 275},
+	{"name": "Wind Cutter", "maxSpeed": 290},
+	{"name": "Meltdown", "maxSpeed": 290},
+	{"name": "Bug", "maxSpeed": 190},
 	{"name": "Counter", "isBanned": true}
 ];
 const combinedMoveRules = [
@@ -119,9 +119,9 @@ class Rules{
 		this.maxHpReason = false;
 		this.maxMP = 30000;
 		this.maxMPReason = false;
-		this.maxOffense = 5000;
+		this.maxOffense = 9999;
 		this.maxOffenseReason = false;
-		this.maxDefense = 5000;
+		this.maxDefense = 9999;
 		this.maxDefenseReason = false;
 		this.maxSpeed = 2000;
 		this.maxSpeedReason = false;
@@ -161,7 +161,7 @@ class Rules{
 			}
 		}
 		if(this.moves.length == 2){
-			this.minBrains = 750;
+			this.minBrains = 400;
 			this.minBrainsReason = "only two moves";
 			this.maxBuffMoves = 0;
 			this.maxBuffMovesReason = "only two moves";
@@ -252,8 +252,8 @@ class Rules{
 			}else if(brainSteps > 4){
 				brainSteps = 4;
 			}
-			this.reduceTotalStatsBy += brainSteps * 200;
-			this.reduceTotalStatsByReason.unshift(`${brainSteps} possible buff uses (stat point limit reduced by ${brainSteps * 200})`);
+			this.reduceTotalStatsBy += brainSteps * 50;
+			this.reduceTotalStatsByReason.unshift(`${brainSteps} possible buff uses (stat point limit reduced by ${brainSteps * 50})`);
 		}
 		if(brainsSpeedRule != "ruleFulfilled"){
 			retArr.push(brainsSpeedRule);
