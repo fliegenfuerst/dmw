@@ -2135,7 +2135,7 @@ function findFinisherByName(name){
 		}
 	}
 }
-
+/*
 for(let i = 0; i < movesFull.length; i++){
 	movesFull[i].mp = movesFull[i].mp*3;
 	switch(movesFull[i].name){
@@ -2159,3 +2159,4 @@ for(let i = 0; i < movesFull.length; i++){
 			break;
 	}
 }
+*/
