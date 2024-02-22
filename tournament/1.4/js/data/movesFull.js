@@ -2135,9 +2135,9 @@ function findFinisherByName(name){
 		}
 	}
 }
-/*
+
 for(let i = 0; i < movesFull.length; i++){
-	movesFull[i].mp = movesFull[i].mp*3;
+	//movesFull[i].mp = movesFull[i].mp*3;
 	switch(movesFull[i].name){
 		case "Bug":
 			movesFull[i].accuracy = 45;
@@ -2159,4 +2159,4 @@ for(let i = 0; i < movesFull.length; i++){
 			break;
 	}
 }
-*/
+
