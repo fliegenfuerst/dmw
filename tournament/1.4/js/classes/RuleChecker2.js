@@ -54,9 +54,9 @@ function getPointsAndString(stat, statName){
             stat -= 1000;
             costIndex++;
         }
-        pointsUsed += stat * pointBrackets[statName]pointBrackets[costIndex][0];
+        pointsUsed += stat * pointBrackets[statName][costIndex][0];
     }else{
-        pointsUsed = stat * pointBrackets[statName]pointBrackets[costIndex][0];
+        pointsUsed = stat * pointBrackets[statName][costIndex][0];
     }
   return pointsUsed;
 }
