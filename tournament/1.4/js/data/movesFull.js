@@ -2145,7 +2145,7 @@ for(let i = 0; i < movesFull.length; i++){
 			break;
 
 		case "Ice Statue":
-			movesFull[i].power = 494
+			//movesFull[i].power = 494
 			movesFull[i].accuracy = 59;
 			movesFull[i].effect.chance = 13;
 
