@@ -50,7 +50,7 @@ function getPointsAndString(stat, statName){
         pointsUsed = 999 * pointBrackets[statName][costIndex++][0];
         stat -= 999;
         while(stat > 1000){
-            pointsUsed += 1000 * pointBrackets[statName]pointBrackets[costIndex][0];
+            pointsUsed += 1000 * pointBrackets[statName][costIndex][0];
             stat -= 1000;
             costIndex++;
         }
