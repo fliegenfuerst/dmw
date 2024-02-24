@@ -64,7 +64,7 @@ function countCombinedStats(digi){
     let sum = getPointsAndString(Math.round(digi.hp.value / 10), "hp");
     sum += getPointsAndString(Math.round(digi.mp.value / 10), "mp");
     sum += getPointsAndString(digi.offense.value, "offense");
-    sum += getPointsAndString(digi.defense.value, "defense);
+    sum += getPointsAndString(digi.defense.value, "defense");
     sum += getPointsAndString(digi.speed.value, "speed");
     sum += getPointsAndString(digi.brains.value, "brains");
     return sum;
