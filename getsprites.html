@@ -27,7 +27,6 @@ class Sprite{
 		this.blob = blob;
 	}
 }
-
 function downloadBlob(blob, filename){
 	let link = document.createElement('a');
 	link.style.display = 'none';
@@ -175,11 +174,9 @@ class SpriteDownloader{
 		}
 		this.digiSelect.selectedIndex = 1;
 		this.idle1RadioButton.checked = true;
-		this.drawDigi();
+		this.updateAnimationState();
 		return this.container;
-		console.log(this.context);
 	}
-	
 	showSelectedDigi(event){
 		let lastAvailableAnimationState = -1;
 		let changeState = true;
@@ -267,7 +264,6 @@ class SpriteDownloader{
 		}
 		this.drawDigi();
 	}
-
 	drawDigi(digi){
 		if(this.hasBackground){
 			this.canvas.width = 18 * this.scaleBy;
