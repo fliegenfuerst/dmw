@@ -159,11 +159,11 @@ class Rules{
         this.maxHpReason = false;
         this.maxMP = 30000;
         this.maxMPReason = false;
-        this.maxOffense = 9999;
+        this.maxOffense = 1500;
         this.maxOffenseReason = false;
-        this.maxDefense = 9999;
+        this.maxDefense = 1500;
         this.maxDefenseReason = false;
-        this.maxSpeed = 2000;
+        this.maxSpeed = 1500;
         this.maxSpeedReason = false;
         this.maxBrains = 1000;
         this.maxBrainsReason = false;
