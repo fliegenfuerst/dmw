@@ -384,7 +384,7 @@ class Rules{
             retArr.push(`You need to unequip one status effect move, you may only equip two different types of status effect.`);
             this.isValid = false;
         }
-        /*if(this.aboveCeilingMoves.length != 0){
+        if(this.aboveCeilingMoves.length != 0){
             tempStr = `You need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
             if(this.effectChanceCeilingReason != false){
                 tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
@@ -396,7 +396,7 @@ class Rules{
             }
             retArr.push(tempStr);
             this.isValid = false;
-        }*/
+        }
         return retArr;
     }
 }
