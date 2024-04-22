@@ -388,11 +388,11 @@ class Rules{
             tempStr = `You need to unequip ${helper.getAndSentenceFromMoveArr(this.aboveCeilingMoves)}`;
             if(this.effectChanceCeilingReason != false){
                 tempStr += ` because you have ${this.effectChanceCeilingReason} equipped`;
-                if(this.statusEffects.POISON != undefined){
+                /*if(this.statusEffects.POISON != undefined){
                     tempStr += `, the non-poison moves must have an effect-chance of ${this.effectChanceCeiling}% or less.`;
-                }else{
+                }else{*/
                     tempStr += `, other status effect moves must have an effect-chance of ${this.effectChanceCeiling}% or less.`;
-                }
+                //}
             }
             retArr.push(tempStr);
             this.isValid = false;
