@@ -207,10 +207,10 @@ class Rules{
             this.maxBuffMovesReason = "only two moves";
         }
         this.statusEffects = filterStatusEffects(this.moves);
-        if(this.statusEffects.POISON != undefined){
+        /*if(this.statusEffects.POISON != undefined){
             this.effectChanceCeiling = 30;
             this.effectChanceCeilingReason = "a poison move";
-        }
+        }*/
         this.buffMovesEquipped = filterBuffMoves(this.moves);
         for(let move of this.moves){
             for(let moveRule of moveRules){
