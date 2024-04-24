@@ -336,7 +336,7 @@ class Order{
 	}
 }
 const possibleGroupSizes = [4, 5, 6];
-const possibleTournamentSizes = [8, 10, 12, 15, 16, 18, 20, 24, 25, 28, 30, 32, 35, 36, 40, 42];
+const possibleTournamentSizes = [8, 10, 12, 15, 16, 18, 20, 24, 25, 28, 30, 32, 35, 36, 40, 42, 48];
 function groupParticipants(){
 	container.innerHTML = "";
 	order = new Order(participants, selectedGroupSize);
