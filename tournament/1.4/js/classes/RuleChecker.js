@@ -297,6 +297,7 @@ class Rules{
         }
         if(brainsSpeedRule != "ruleFulfilled"){
             retArr.push(brainsSpeedRule);
+            this.isValid = false;
         }
         let tempStr = "";
         let statsDifference = maxCombinedStats - this.reduceTotalStatsBy - countCombinedStats(digi);
