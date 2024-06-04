@@ -131,8 +131,8 @@ function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
 }
 const moveRules = [
     {"name": "Mass Morph", "reduceTotalStatsBy": 150, "maxOffense": 9999, "maxDefense": 9999},//, "maxSpeed": 900},
-    {"name": "Aqua Magic", "reduceTotalStatsBy": 100, "maxOffense": 9999, "maxDefense": 9999,//, "maxSpeed": 900},
-    {"name": "War Cry", "reduceTotalStatsBy": 120, "maxOffense": 9999, "maxDefense": 9999,//, "maxSpeed": 900},
+    {"name": "Aqua Magic", "reduceTotalStatsBy": 100, "maxOffense": 9999, "maxDefense": 9999},//, "maxSpeed": 900},
+    {"name": "War Cry", "reduceTotalStatsBy": 120, "maxOffense": 9999, "maxDefense": 9999},//, "maxSpeed": 900},
     {"name": "Muscle Charge", "reduceTotalStatsBy": 350, "maxOffense": 9999, "maxDefense": 9999},
     {"name": "Full Potential", "reduceTotalStatsBy": 500, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
     {"name": "Ice Statue", "maxOffense": 1595, "maxSpeed": 190, "effectChanceCeiling": 40},
