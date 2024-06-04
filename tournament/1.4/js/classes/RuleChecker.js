@@ -81,7 +81,7 @@ function countCombinedStats(digi){
     return sum;
 }
 function checkBrainsToSpeedRatio(digi){
-    let difference = Math.round(digi.speed.value / 2) - digi.brains.value;
+    let difference = Math.round(digi.speed.value / 3) - digi.brains.value;
     if(difference <= 0){
         return "ruleFulfilled";
     }else if(difference > 0){
@@ -130,9 +130,9 @@ function filterNonPoisonAboveEffectChanceCeilingMoves(moves, ceiling){
     return aboveCeilingMoves;
 }
 const moveRules = [
-    {"name": "Mass Morph", "reduceTotalStatsBy": 150, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
-    {"name": "Aqua Magic", "reduceTotalStatsBy": 100, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
-    {"name": "War Cry", "reduceTotalStatsBy": 120, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
+    {"name": "Mass Morph", "reduceTotalStatsBy": 150, "maxOffense": 9999, "maxDefense": 9999},//, "maxSpeed": 900},
+    {"name": "Aqua Magic", "reduceTotalStatsBy": 100, "maxOffense": 9999, "maxDefense": 9999,//, "maxSpeed": 900},
+    {"name": "War Cry", "reduceTotalStatsBy": 120, "maxOffense": 9999, "maxDefense": 9999,//, "maxSpeed": 900},
     {"name": "Muscle Charge", "reduceTotalStatsBy": 350, "maxOffense": 9999, "maxDefense": 9999},
     {"name": "Full Potential", "reduceTotalStatsBy": 500, "maxOffense": 9999, "maxDefense": 9999, "maxSpeed": 900},
     {"name": "Ice Statue", "maxOffense": 1595, "maxSpeed": 190, "effectChanceCeiling": 40},
@@ -163,7 +163,7 @@ class Rules{
         this.maxOffenseReason = false;
         this.maxDefense = 2000;
         this.maxDefenseReason = false;
-        this.maxSpeed = 1500;
+        this.maxSpeed = 2000;
         this.maxSpeedReason = false;
         this.maxBrains = 1000;
         this.maxBrainsReason = false;
@@ -292,7 +292,7 @@ class Rules{
             }else if(brainSteps > 4){
                 brainSteps = 4;
             }
-            this.reduceTotalStatsBy += brainSteps * 50;
+            this.reduceTotalStatsBy += brainSteps * 100;
             this.reduceTotalStatsByReason.unshift(`${brainSteps} possible buff uses (stat point limit reduced by ${brainSteps * 50})`);
         }
         if(brainsSpeedRule != "ruleFulfilled"){
