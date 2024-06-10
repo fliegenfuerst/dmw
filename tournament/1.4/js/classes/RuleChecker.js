@@ -293,7 +293,7 @@ class Rules{
                 brainSteps = 4;
             }
             this.reduceTotalStatsBy += brainSteps * 100;
-            this.reduceTotalStatsByReason.unshift(`${brainSteps} possible buff uses (stat point limit reduced by ${brainSteps * 50})`);
+            this.reduceTotalStatsByReason.unshift(`${brainSteps} possible buff uses (stat point limit reduced by ${brainSteps * 100})`);
         }
         if(brainsSpeedRule != "ruleFulfilled"){
             retArr.push(brainsSpeedRule);
@@ -311,7 +311,7 @@ class Rules{
             retArr.push(`<div style="margin-left: -6px; padding-left: 3px;border: solid; border-color: red">Your stat point limit is reduced to ${maxCombinedStats - this.reduceTotalStatsBy} because you have ${helper.getAndSentenceFromStringArr(this.reduceTotalStatsByReason)} equipped.</div>`);
         }
         if(this.moves.length == 1){
-            retArr.push(`You need to equip at least one more move.`);
+            retArr.push(`You need to equip at least one more move and raise your brains to 400 OR equip two more moves.`);
             this.isValid = false;
         }
         retArr.push(...this.getMinStrings(digi));
