@@ -1,0 +1,57 @@
+
+<html>
+<head>
+<style>
+	canvas {
+		border: 1px solid black;
+	}
+</style
+
+</head>
+<body>
+
+    <canvas id="glCanvas"></canvas>
+	<div id="controls">
+    <div class="control">
+        <label for="cameraX">Camera X:</label>
+        <input type="range" id="cameraX" min="-25" max="25" step="0.1" value="0">
+        <input type="number" id="cameraXValue" value="0" step="0.1">
+    </div>
+    <div class="control">
+        <label for="cameraY">Camera Y:</label>
+        <input type="range" id="cameraY" min="-25" max="25" step="0.1" value="1">
+        <input type="number" id="cameraYValue" value="1" step="0.1">
+    </div>
+    <div class="control">
+        <label for="cameraZ">Camera Z:</label>
+        <input type="range" id="cameraZ" min="-25" max="25" step="0.1" value="1">
+        <input type="number" id="cameraZValue" value="1" step="0.1">
+    </div>
+<div class="control">
+    <label for="pitch">Camera Pitch (X-axis):</label>
+    <input type="range" id="pitch" min="-180" max="180" step="1" value="0">
+    <input type="number" id="pitchValue" value="0" step="1">
+</div>
+<div class="control">
+    <label for="yaw">Camera Yaw (Y-axis):</label>
+    <input type="range" id="yaw" min="-180" max="180" step="1" value="0">
+    <input type="number" id="yawValue" value="0" step="1">
+</div>
+<div class="control">
+    <label for="roll">Camera Roll (Z-axis):</label>
+    <input type="range" id="roll" min="-180" max="180" step="1" value="0">
+    <input type="number" id="rollValue" value="0" step="1">
+</div>
+	<select id="digiSelect"></select>
+	<select id="animationStateSelect"></select>
+	    <label>
+        <input type="checkbox" id="idleAnimationCheckbox" checked>
+        Show Idle Animation
+    </label>
+	</div>
+</body>
+	<script src="digiNames.js"></script>
+    <script src="Stuff3D.js"></script>
+    <script src="Pixel3DObject.js"></script>
+	<script src="main.js"></script>
+</html>
