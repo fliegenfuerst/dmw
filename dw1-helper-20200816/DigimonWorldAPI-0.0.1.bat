@@ -1,0 +1,1 @@
+java -jar DigimonWorldAPI-0.0.1-SNAPSHOT.jar
